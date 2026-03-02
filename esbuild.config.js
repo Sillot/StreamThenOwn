@@ -6,6 +6,11 @@ const isWatch = process.argv.includes("--watch");
 
 /** @type {import('esbuild').BuildOptions} */
 const buildOptions = {
+  define: {
+    __STO_AMAZON_AFFILIATE_TAG__: JSON.stringify(process.env.STO_AMAZON_AFFILIATE_TAG || ""),
+    __STO_AWIN_AFFILIATE_ID__: JSON.stringify(process.env.STO_AWIN_AFFILIATE_ID || ""),
+    __STO_AWIN_MERCHANT_ID__: JSON.stringify(process.env.STO_AWIN_MERCHANT_ID || ""),
+  },
   entryPoints: {
     "content/index": "src/content/index.ts",
     "background/service-worker": "src/background/service-worker.ts",

@@ -26,6 +26,8 @@ export interface StoreLinksResult {
 export interface StoreQuery {
   artist: string;
   album?: string;
+  /** Browser locale (e.g. "fr", "en-US") for adapting store URLs. */
+  locale?: string;
 }
 
 /** MusicBrainz external URLs extracted from release relations. */
@@ -33,4 +35,6 @@ export interface ExternalUrls {
   discogs?: string;
   amazon?: string;
   qobuz?: string;
+  bandcamp?: string;
+  itunes?: string;
 }

@@ -34,7 +34,7 @@ chrome.runtime.onMessage.addListener(
       try {
         // Read user's enabled stores preference
         const { enabledStores } = await chrome.storage.sync.get({
-          enabledStores: ["discogs", "qobuz", "amazon"],
+          enabledStores: ["discogs", "qobuz", "amazon", "bandcamp", "itunes", "fnac"],
         });
         const result = await resolveStoreLinks(message.payload, enabledStores as string[]);
         sendResponse({ success: true, data: result });

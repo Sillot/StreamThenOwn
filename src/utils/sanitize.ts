@@ -20,6 +20,17 @@ const ALLOWED_HOSTS = [
   "amazon.es",
   "amazon.co.jp",
   "amazon.ca",
+  "amazon.com.au",
+  "amazon.com.br",
+  "amazon.com.mx",
+  "amazon.nl",
+  "amazon.se",
+  "amazon.pl",
+  "amazon.com.be",
+  "bandcamp.com",
+  "itunes.apple.com",
+  "music.apple.com",
+  "fnac.com",
   "musicbrainz.org",
 ] as const;
 

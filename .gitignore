@@ -18,6 +18,9 @@ Thumbs.db
 *.swp
 *.swo
 
+# Environment (affiliate IDs etc.)
+.env
+
 # Build artifacts
 metafile.json
 *.zip

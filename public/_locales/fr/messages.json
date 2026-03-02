@@ -29,6 +29,18 @@
     "message": "CD, Vinyle & plus",
     "description": "Format Amazon"
   },
+  "digitalAndPhysical": {
+    "message": "Digital & Physique",
+    "description": "Format Bandcamp"
+  },
+  "digital": {
+    "message": "Digital",
+    "description": "Format iTunes"
+  },
+  "cdAndVinyl": {
+    "message": "CD, Vinyle & plus",
+    "description": "Format Fnac"
+  },
   "ownThisAlbum": {
     "message": "Posséder cet album",
     "description": "En-tête de section sur les pages album"

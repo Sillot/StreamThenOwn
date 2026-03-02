@@ -12,6 +12,9 @@ import { searchRelease, getReleaseUrls } from "./musicbrainz";
 import { resolveDiscogs } from "./discogs";
 import { resolveQobuz } from "./qobuz";
 import { resolveAmazon } from "./amazon";
+import { resolveBandcamp } from "./bandcamp";
+import { resolveItunes } from "./itunes";
+import { resolveFnac } from "./fnac";
 import type { StoreLink, StoreLinksResult, StoreQuery, ExternalUrls } from "./types";
 
 /** In-memory cache keyed by "artist||album" */
@@ -64,6 +67,15 @@ export async function resolveStoreLinks(
 
   const amazon = resolveAmazon(query, externalUrls.amazon);
   allLinks.push(amazon);
+
+  const bandcamp = resolveBandcamp(query, externalUrls.bandcamp);
+  allLinks.push(bandcamp);
+
+  const itunes = resolveItunes(query, externalUrls.itunes);
+  allLinks.push(itunes);
+
+  const fnac = resolveFnac(query);
+  allLinks.push(fnac);
 
   const fullResult: StoreLinksResult = {
     artist: query.artist,

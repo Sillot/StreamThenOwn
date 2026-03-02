@@ -29,6 +29,18 @@
     "message": "CD, Vinyl & more",
     "description": "Amazon format label"
   },
+  "digitalAndPhysical": {
+    "message": "Digital & Physical",
+    "description": "Bandcamp format label"
+  },
+  "digital": {
+    "message": "Digital",
+    "description": "iTunes format label"
+  },
+  "cdAndVinyl": {
+    "message": "CD, Vinyl & more",
+    "description": "Fnac format label"
+  },
   "ownThisAlbum": {
     "message": "Own this album",
     "description": "Section header on album pages"

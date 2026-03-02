@@ -25,6 +25,10 @@ const STORE_ICON_PATHS: Record<string, string> = {
     "M12 3c-4.97 0-9 4.03-9 9v7c0 1.1.9 2 2 2h4v-8H5v-1c0-3.87 3.13-7 7-7s7 3.13 7 7v1h-4v8h4c1.1 0 2-.9 2-2v-7c0-4.97-4.03-9-9-9z",
   amazon:
     "M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-2c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2zm6 16H6V8h2v2c0 .55.45 1 1 1s1-.45 1-1V8h4v2c0 .55.45 1 1 1s1-.45 1-1V8h2v12z",
+  bandcamp: "M22 6L13.2 18H2l8.8-12H22z",
+  itunes:
+    "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.5 14.5c-.83.83-2.17.83-3 0-.83-.83-.83-2.17 0-3 .41-.41.96-.63 1.5-.63V8.5l-5 1.5v5.75c0 .14-.01.27-.04.4-.24 1.3-1.52 2.18-2.84 1.93-1.04-.19-1.81-1.01-2.01-2-.24-1.3.58-2.55 1.84-2.84.42-.1.83-.09 1.23.01L8.17 8.5l.01-.17c.02-.36.16-.68.41-.92.13-.12.28-.22.44-.29l5.84-1.75c.42-.13.86.11.99.53.03.1.04.2.04.3v7.55c.54 0 1.09.21 1.5.63.83.83.83 2.17 0 3z",
+  fnac: "M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H8v-2h4v2zm4-4H8v-2h8v2zm0-4H8V7h8v2z",
 };
 
 /* ------------------------------------------------------------------ */
@@ -33,6 +37,37 @@ const STORE_ICON_PATHS: Record<string, string> = {
 
 let lastMetadataKey = "";
 let currentLinks: StoreLinksResult | null = null;
+let pendingCheck: ReturnType<typeof setTimeout> | null = null;
+
+/**
+ * Wait for an element matching `selector` to appear in the DOM.
+ * Resolves with the element, or `null` after `timeoutMs`.
+ */
+function waitForElement(selector: string, timeoutMs = 6000): Promise<Element | null> {
+  const existing = document.querySelector(selector);
+  if (existing) return Promise.resolve(existing);
+
+  return new Promise((resolve) => {
+    let settled = false;
+    const observer = new MutationObserver(() => {
+      const el = document.querySelector(selector);
+      if (el && !settled) {
+        settled = true;
+        observer.disconnect();
+        resolve(el);
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    setTimeout(() => {
+      if (!settled) {
+        settled = true;
+        observer.disconnect();
+        resolve(null);
+      }
+    }, timeoutMs);
+  });
+}
 
 /* ------------------------------------------------------------------ */
 /*  Main check — called on navigation only                            */
@@ -72,8 +107,13 @@ async function check() {
     `${String(result.links.filter((l) => l.isDirect).length)}/${String(result.links.length)} direct links`,
   );
 
-  // Inject the action button
-  injectActionButton(meta);
+  // Inject the action button — wait for #action-buttons to appear in DOM
+  const actionsRow = await waitForElement("#action-buttons");
+  if (actionsRow) {
+    injectActionButton(meta, actionsRow);
+  } else {
+    console.debug(LOG, "No #action-buttons found after waiting");
+  }
 }
 
 function cleanup() {
@@ -94,7 +134,11 @@ async function requestStoreLinks(meta: MusicMetadata): Promise<StoreLinksResult 
     chrome.runtime.sendMessage(
       {
         type: "SEARCH_STORES",
-        payload: { artist: meta.artist, album: meta.album },
+        payload: {
+          artist: meta.artist,
+          album: meta.album,
+          locale: document.documentElement.lang || navigator.language,
+        },
       },
       (response: { success: boolean; data?: StoreLinksResult; error?: string } | undefined) => {
         if (chrome.runtime.lastError) {
@@ -117,16 +161,9 @@ async function requestStoreLinks(meta: MusicMetadata): Promise<StoreLinksResult 
 /*  Action button — injected next to the "⋮" button                  */
 /* ------------------------------------------------------------------ */
 
-function injectActionButton(meta: MusicMetadata) {
+function injectActionButton(meta: MusicMetadata, actionsRow: Element) {
   // Don't duplicate
   if (document.getElementById(BTN_ID)) return;
-
-  // Target: #action-buttons inside the album header
-  const actionsRow = document.querySelector("#action-buttons");
-  if (!actionsRow) {
-    console.debug(LOG, "No #action-buttons found");
-    return;
-  }
 
   // Create button matching YTM's style
   const btn = document.createElement("button");
@@ -280,22 +317,39 @@ function createMenuItem(link: StoreLink): HTMLAnchorElement {
 /*  Bootstrap — event-driven, no polling                              */
 /* ------------------------------------------------------------------ */
 
+function scheduleCheck(delayMs = 800) {
+  if (pendingCheck) clearTimeout(pendingCheck);
+  pendingCheck = setTimeout(() => {
+    pendingCheck = null;
+    void check();
+  }, delayMs);
+}
+
+function onNavigate() {
+  lastMetadataKey = "";
+  cleanup();
+  scheduleCheck();
+}
+
 function init() {
   console.log(LOG, "Loaded on:", window.location.href);
 
   // Initial check (delayed for DOM to be ready)
-  setTimeout(check, 1500);
+  scheduleCheck(1500);
 
-  // Re-check on YTM SPA navigation
-  document.addEventListener("yt-navigate-finish", () => {
-    lastMetadataKey = "";
-    setTimeout(check, 1000);
-  });
+  // Re-check on YTM SPA navigation events
+  document.addEventListener("yt-navigate-finish", onNavigate);
+  document.addEventListener("yt-page-data-updated", onNavigate);
 
-  document.addEventListener("yt-page-data-updated", () => {
-    lastMetadataKey = "";
-    setTimeout(check, 1000);
+  // Fallback: detect URL changes that events might miss
+  let lastUrl = location.href;
+  const urlObserver = new MutationObserver(() => {
+    if (location.href !== lastUrl) {
+      lastUrl = location.href;
+      onNavigate();
+    }
   });
+  urlObserver.observe(document.body, { childList: true, subtree: true });
 
   // Close menu on scroll
   document.addEventListener("scroll", closeMenu, { passive: true });
