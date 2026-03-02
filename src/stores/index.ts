@@ -59,7 +59,7 @@ export async function resolveStoreLinks(
   // Step 3: Resolve each store
   const allLinks: StoreLink[] = [];
 
-  const discogs = await resolveDiscogs(query, externalUrls.discogs);
+  const discogs = resolveDiscogs(query, externalUrls.discogs);
   allLinks.push(discogs);
 
   const qobuz = resolveQobuz(query, externalUrls.qobuz);

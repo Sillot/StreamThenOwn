@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "default_locale": "en",
   "permissions": ["storage"],
-  "host_permissions": ["https://musicbrainz.org/*", "https://api.discogs.com/*"],
+  "host_permissions": ["https://musicbrainz.org/*"],
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'none'; base-uri 'none'"
   },
