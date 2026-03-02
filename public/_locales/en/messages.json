@@ -1,0 +1,48 @@
+{
+  "extensionName": {
+    "message": "StreamThenOwn",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Stream it. Love it. Own it. — Find purchase links for the music you love on YouTube Music.",
+    "description": "The description of the extension"
+  },
+  "buyOn": {
+    "message": "Buy on $STORE$",
+    "description": "Label for purchase link",
+    "placeholders": {
+      "store": {
+        "content": "$1",
+        "example": "Discogs"
+      }
+    }
+  },
+  "vinyl": {
+    "message": "Vinyl & Physical",
+    "description": "Discogs format label"
+  },
+  "hiResDigital": {
+    "message": "Hi-Res Digital",
+    "description": "Qobuz format label"
+  },
+  "cdAndMore": {
+    "message": "CD, Vinyl & more",
+    "description": "Amazon format label"
+  },
+  "ownThisAlbum": {
+    "message": "Own this album",
+    "description": "Section header on album pages"
+  },
+  "ownThisTrack": {
+    "message": "Own this track's album",
+    "description": "Section header when viewing a song"
+  },
+  "poweredBy": {
+    "message": "Powered by StreamThenOwn",
+    "description": "Footer attribution"
+  },
+  "noLinks": {
+    "message": "No purchase links found",
+    "description": "Shown when no store links are available"
+  }
+}

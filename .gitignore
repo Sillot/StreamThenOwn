@@ -1,0 +1,23 @@
+node_modules/
+dist/
+*.map
+*.tgz
+
+# ESLint cache
+.eslintcache
+
+# Docker
+.docker/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE (settings are committed via .vscode/)
+.idea/
+*.swp
+*.swo
+
+# Build artifacts
+metafile.json
+*.zip

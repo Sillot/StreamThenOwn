@@ -1,0 +1,5 @@
+#!/bin/sh
+# Git pre-commit hook — runs inside Docker
+# Runs lint-staged (lint + format) on staged files
+
+docker compose run --rm -T dev npx lint-staged

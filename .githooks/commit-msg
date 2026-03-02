@@ -1,0 +1,5 @@
+#!/bin/sh
+# Git commit-msg hook — runs inside Docker
+# Validates commit message against Conventional Commits
+
+docker compose run --rm -T dev npx commitlint --edit "$1"

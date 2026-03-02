@@ -1,0 +1,6 @@
+{
+  "$schema": "https://unpkg.com/knip@latest/schema.json",
+  "entry": ["src/content/index.ts", "src/background/service-worker.ts", "src/options/options.ts"],
+  "project": ["src/**/*.ts"],
+  "ignoreDependencies": ["@commitlint/cli", "lint-staged"]
+}

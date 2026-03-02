@@ -1,0 +1,80 @@
+services:
+  # ── Base dev service (shared config) ─────────────────────────────
+  dev:
+    build:
+      context: .
+      target: dev
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    working_dir: /app
+
+  # ── Install / update dependencies ────────────────────────────────
+  install:
+    extends: dev
+    command: npm install
+
+  # ── Production build ─────────────────────────────────────────────
+  build:
+    extends: dev
+    command: npm run build
+
+  # ── Watch mode (rebuild on file changes) ─────────────────────────
+  watch:
+    extends: dev
+    command: npm run watch
+
+  # ── TypeScript type-checking ─────────────────────────────────────
+  typecheck:
+    extends: dev
+    command: npm run typecheck
+
+  # ── Lint ─────────────────────────────────────────────────────────
+  lint:
+    extends: dev
+    command: npm run lint
+
+  lint-fix:
+    extends: dev
+    command: npm run lint:fix
+
+  # ── Format ───────────────────────────────────────────────────────
+  format:
+    extends: dev
+    command: npm run format
+
+  format-check:
+    extends: dev
+    command: npm run format:check
+
+  # ── Dead code detection ──────────────────────────────────────────
+  knip:
+    extends: dev
+    command: npm run knip
+
+  # ── Tests ────────────────────────────────────────────────────────
+  test:
+    extends: dev
+    command: npm run test
+
+  test-watch:
+    extends: dev
+    command: npm run test:watch
+
+  # ── Full validation (CI-like) ────────────────────────────────────
+  validate:
+    extends: dev
+    command: npm run validate
+
+  # ── Security audit ───────────────────────────────────────────────
+  audit:
+    extends: dev
+    command: npm audit --audit-level=moderate
+
+  # ── Package extension for Chrome Web Store ───────────────────────
+  zip:
+    extends: dev
+    command: npm run zip
+
+volumes:
+  node_modules:

@@ -1,0 +1,65 @@
+{
+  "name": "streamthenown",
+  "version": "1.0.0",
+  "description": "Stream, then own — find purchase links for music on YouTube Music.",
+  "private": true,
+  "scripts": {
+    "build": "node esbuild.config.js",
+    "watch": "node esbuild.config.js --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "knip": "knip",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "audit": "npm audit --audit-level=moderate",
+    "validate": "npm run typecheck && npm run lint && npm run format:check && npm run knip && npm run audit && npm run test && npm run build",
+    "zip": "npm run build && sh scripts/zip.sh",
+    "prepare": "git rev-parse --git-dir > /dev/null 2>&1 && git config core.hooksPath .githooks || true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sillot/StreamThenOwn.git"
+  },
+  "keywords": [
+    "chrome-extension",
+    "youtube-music",
+    "music"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Sillot/StreamThenOwn/issues"
+  },
+  "homepage": "https://github.com/Sillot/StreamThenOwn#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "@eslint/js": "^9.22.0",
+    "@types/chrome": "^0.1.37",
+    "esbuild": "^0.27.3",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-no-unsanitized": "^4.1.2",
+    "jsdom": "^28.1.0",
+    "knip": "^5.47.0",
+    "lint-staged": "^16.0.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.28.0",
+    "vitest": "^3.1.0"
+  },
+  "lint-staged": {
+    "*.{ts,mts,cts}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  }
+}

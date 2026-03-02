@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker compose build dev
+
+      - name: Install dependencies
+        run: docker compose run --rm install
+
+      - name: TypeScript type-check
+        run: docker compose run --rm typecheck
+
+      - name: ESLint
+        run: docker compose run --rm lint
+
+      - name: Prettier check
+        run: docker compose run --rm format-check
+
+      - name: Dead code (Knip)
+        run: docker compose run --rm knip
+
+      - name: Security audit
+        run: docker compose run --rm dev npm audit --audit-level=moderate
+
+      - name: Tests
+        run: docker compose run --rm test
+
+      - name: Production build
+        run: docker compose run --rm build
+
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: extension-dist
+          path: dist/
+          retention-days: 7
+
+      - name: Cleanup
+        if: always()
+        run: docker compose down -v --remove-orphans

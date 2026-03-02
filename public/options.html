@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>StreamThenOwn — Options</title>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Google Sans", Roboto, Arial, sans-serif;
+        background: #1b1b1b;
+        color: #e8eaed;
+        padding: 32px;
+        min-width: 420px;
+      }
+      h1 {
+        font-size: 22px;
+        font-weight: 500;
+        margin-bottom: 4px;
+      }
+      .subtitle {
+        font-size: 13px;
+        color: #aaa;
+        margin-bottom: 24px;
+      }
+      .store-list {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        background: #282828;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .store-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 16px;
+        cursor: pointer;
+        transition: background 0.1s;
+        user-select: none;
+      }
+      .store-item:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+      .store-item input[type="checkbox"] {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 18px;
+        height: 18px;
+        border: 2px solid #aaa;
+        border-radius: 3px;
+        background: transparent;
+        cursor: pointer;
+        flex-shrink: 0;
+        position: relative;
+      }
+      .store-item input[type="checkbox"]:checked {
+        background: #fff;
+        border-color: #fff;
+      }
+      .store-item input[type="checkbox"]:checked::after {
+        content: "";
+        position: absolute;
+        left: 4px;
+        top: 1px;
+        width: 5px;
+        height: 9px;
+        border: solid #1b1b1b;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+      .store-icon {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+        color: #e8eaed;
+      }
+      .store-info {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+      .store-name {
+        font-size: 14px;
+        font-weight: 500;
+        color: #e8eaed;
+      }
+      .store-desc {
+        font-size: 12px;
+        color: #aaa;
+        margin-top: 1px;
+      }
+      .saved {
+        margin-top: 16px;
+        font-size: 13px;
+        color: #4caf50;
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      .saved.visible {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>StreamThenOwn</h1>
+    <p class="subtitle" id="subtitle">Choose which stores to show when purchasing music.</p>
+    <div class="store-list" id="store-list"></div>
+    <p class="saved" id="saved">✓ Saved</p>
+    <script src="options/options.js"></script>
+  </body>
+</html>
