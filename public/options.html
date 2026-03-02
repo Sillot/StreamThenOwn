@@ -42,12 +42,34 @@
         align-items: center;
         gap: 14px;
         padding: 14px 16px;
-        cursor: pointer;
+        cursor: default;
         transition: background 0.1s;
         user-select: none;
       }
       .store-item:hover {
         background: rgba(255, 255, 255, 0.06);
+      }
+      .store-item.dragging {
+        opacity: 0.4;
+      }
+      .store-item.drag-over {
+        border-top: 2px solid #fff;
+        padding-top: 12px;
+      }
+      .drag-handle {
+        cursor: grab;
+        color: #666;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        padding: 4px 0;
+        transition: color 0.1s;
+      }
+      .drag-handle:hover {
+        color: #aaa;
+      }
+      .drag-handle:active {
+        cursor: grabbing;
       }
       .store-item input[type="checkbox"] {
         appearance: none;
@@ -111,7 +133,7 @@
   </head>
   <body>
     <h1>StreamThenOwn</h1>
-    <p class="subtitle" id="subtitle">Choose which stores to show when purchasing music.</p>
+    <p class="subtitle" id="subtitle">Choose which stores to show and drag to reorder.</p>
     <div class="store-list" id="store-list"></div>
     <p class="saved" id="saved">✓ Saved</p>
     <script src="options/options.js"></script>

@@ -32,11 +32,22 @@ chrome.runtime.onMessage.addListener(
     // Async handler — must return true to keep the message channel open.
     void (async () => {
       try {
-        // Read user's enabled stores preference
-        const { enabledStores } = await chrome.storage.sync.get({
-          enabledStores: ["discogs", "qobuz", "amazon", "bandcamp", "itunes", "fnac"],
+        // Read user's enabled stores + display order preferences
+        const defaultOrder = ["discogs", "qobuz", "amazon", "bandcamp", "itunes", "fnac"];
+        const { enabledStores, storeOrder } = await chrome.storage.sync.get({
+          enabledStores: defaultOrder,
+          storeOrder: defaultOrder,
         });
         const result = await resolveStoreLinks(message.payload, enabledStores as string[]);
+
+        // Sort links by user-defined order
+        const order = storeOrder as string[];
+        result.links.sort((a, b) => {
+          const ai = order.indexOf(a.store);
+          const bi = order.indexOf(b.store);
+          return (ai === -1 ? Infinity : ai) - (bi === -1 ? Infinity : bi);
+        });
+
         sendResponse({ success: true, data: result });
       } catch (err: unknown) {
         console.error("[StreamThenOwn] Store resolution failed:", err);

@@ -93,7 +93,7 @@ export class YtmMetadataExtractor implements MetadataExtractor {
     // Strategy 1: subtitle/strapline links
     for (const sel of ARTIST_LINK_SELECTORS) {
       const link = header.querySelector<HTMLAnchorElement>(sel);
-      const text = link?.textContent?.trim();
+      const text = link?.textContent.trim();
       if (text !== undefined && text.length > 0 && text.length < 200) {
         return text;
       }
@@ -102,7 +102,7 @@ export class YtmMetadataExtractor implements MetadataExtractor {
     // Strategy 2: subtitle/strapline full text split
     for (const sel of ARTIST_TEXT_SELECTORS) {
       const el = header.querySelector<HTMLElement>(sel);
-      const raw = el?.textContent?.trim() ?? "";
+      const raw = el?.textContent.trim() ?? "";
       if (raw) {
         const parts = raw.split(/[•·\n]/);
         const candidate = parts[0] ?? "";
@@ -119,7 +119,7 @@ export class YtmMetadataExtractor implements MetadataExtractor {
     const anyArtistLink = header.querySelector<HTMLAnchorElement>(
       'a[href*="/channel/"], a[href*="browse/UC"]',
     );
-    if (anyArtistLink?.textContent?.trim()) {
+    if (anyArtistLink?.textContent.trim()) {
       return anyArtistLink.textContent.trim();
     }
 
@@ -135,7 +135,7 @@ export class YtmMetadataExtractor implements MetadataExtractor {
     // Strategy 1: byline text
     for (const sel of BYLINE_SELECTORS) {
       const el = playerBar.querySelector<HTMLElement>(sel);
-      const text = el?.textContent?.trim();
+      const text = el?.textContent.trim();
       if (text) {
         const segments = text.split(/\s*[•·]\s*/);
         const artist = (segments[0] ?? "").trim();
@@ -151,7 +151,7 @@ export class YtmMetadataExtractor implements MetadataExtractor {
       '.content-info-wrapper a[href*="channel"], .content-info-wrapper a[href*="browse"], .content-info-wrapper a',
     );
     for (const link of links) {
-      const text = link.textContent?.trim();
+      const text = link.textContent.trim();
       if (text && text.length > 0 && text.length < 200) {
         return { artist: text, source: "song" };
       }
@@ -159,7 +159,7 @@ export class YtmMetadataExtractor implements MetadataExtractor {
 
     // Strategy 3: span.subtitle inside player bar
     const subtitle = playerBar.querySelector<HTMLElement>("span.subtitle, .subtitle");
-    if (subtitle?.textContent?.trim()) {
+    if (subtitle?.textContent.trim()) {
       const segments = subtitle.textContent.trim().split(/\s*[•·]\s*/);
       const artist = (segments[0] ?? "").trim();
       if (artist) {
@@ -183,16 +183,10 @@ export class YtmMetadataExtractor implements MetadataExtractor {
 function extractText(root: Element, selectors: string[]): string | undefined {
   for (const sel of selectors) {
     const el = root.querySelector<HTMLElement>(sel);
-    const text = el?.textContent?.trim();
+    const text = el?.textContent.trim();
     if (text && text.length > 0) {
       return text;
     }
   }
   return undefined;
 }
-
-/**
- * Exported header selectors for the debug helper.
- * @internal
- */
-export const HEADER_SELECTORS_DEBUG = HEADER_SELECTORS;

@@ -54,9 +54,11 @@ async function check(): Promise<void> {
   if (!result) return;
 
   platform.ui.setLinks(result);
+  const direct = result.links.filter((l) => l.isDirect).length;
+  const total = result.links.length;
   console.log(
     LOG,
-    `${String(result.links.filter((l) => l.isDirect).length)}/${String(result.links.length)} direct links`,
+    `${String(total)} links (${String(direct)} direct, ${String(total - direct)} search)`,
   );
 
   await platform.ui.injectButton(meta);

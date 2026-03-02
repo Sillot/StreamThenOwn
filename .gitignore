@@ -21,6 +21,9 @@ Thumbs.db
 # Environment (affiliate IDs etc.)
 .env
 
+# Local docs (personal notes, checklists…)
+docs-local/
+
 # Build artifacts
 metafile.json
 *.zip

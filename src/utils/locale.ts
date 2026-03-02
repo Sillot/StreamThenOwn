@@ -51,7 +51,7 @@ const LANG_TO_COUNTRY: Record<string, string> = {
  * Extract the country code (lowercase ISO 3166-1 alpha-2) from a locale string.
  * Falls back to "us" if no known mapping exists.
  */
-export function getCountryCode(locale: string): string {
+function getCountryCode(locale: string): string {
   const lower = locale.toLowerCase();
   // Try exact match first (e.g. "en-gb")
   const exact = LANG_TO_COUNTRY[lower];
@@ -73,7 +73,7 @@ export function getCountryCode(locale: string): string {
  * Get the primary language code from a locale string.
  * e.g. "fr-FR" → "fr", "en-US" → "en"
  */
-export function getLanguageCode(locale: string): string {
+function getLanguageCode(locale: string): string {
   return locale.toLowerCase().split("-")[0] ?? "en";
 }
 
