@@ -2,7 +2,9 @@
 
 ## Project Overview
 
-StreamThenOwn (STO) is a **Chrome extension** (Manifest V3) for **YouTube Music** that injects purchase links (Discogs, Qobuz, Amazon) next to album/song pages. It resolves links via the MusicBrainz API and falls back to search URLs when no direct match is found.
+StreamThenOwn (STO) is a **Chrome extension** (Manifest V3) that injects purchase links (Discogs, Qobuz, Amazon, Bandcamp, iTunes, Fnac) next to album/song pages on **streaming music services**. It resolves links via the MusicBrainz API and falls back to search URLs when no direct match is found.
+
+Currently supported streaming platform: **YouTube Music**. The architecture is designed to support additional platforms (Spotify, Deezer, Tidal…) via a pluggable adapter system.
 
 - **Repository**: <https://github.com/Sillot/StreamThenOwn>
 - **Target browser**: Chromium-based (Chrome 116+)
@@ -61,25 +63,60 @@ When you need to run a lint check, a build, tests, or any tooling command, alway
 src/
 ├── background/          # Chrome service worker (message listener)
 │   └── service-worker.ts
-├── content/             # Content script injected into YouTube Music
-│   └── index.ts
+├── content/             # Content script — platform-agnostic entry point
+│   └── index.ts         # Bootstrap: detects platform → delegates to adapter
 ├── i18n/                # Thin wrapper around chrome.i18n.getMessage
 │   └── index.ts
 ├── options/             # Extension options page
 │   └── options.ts
+├── platforms/           # Platform adapter layer (pluggable per streaming service)
+│   ├── types.ts         # Interfaces: MusicMetadata, MetadataExtractor, UIInjector, PlatformAdapter
+│   ├── index.ts         # Dispatcher: detectPlatform() picks adapter by hostname
+│   └── ytm/             # YouTube Music adapter
+│       ├── index.ts     # YtmAdapter (combines metadata + UI + navigation)
+│       ├── metadata.ts  # YtmMetadataExtractor — DOM scraping for artist/album
+│       └── ui.ts        # YtmUIInjector — action button + dropdown menu
 ├── stores/              # Store link resolution (orchestrator + per-store modules)
 │   ├── index.ts         # Orchestrator: MB lookup → resolve each store → cache
 │   ├── types.ts         # Shared interfaces (StoreLink, StoreQuery, ExternalUrls…)
 │   ├── musicbrainz.ts   # MusicBrainz search + release URL extraction
 │   ├── discogs.ts       # Discogs resolution
 │   ├── qobuz.ts         # Qobuz resolution
-│   └── amazon.ts        # Amazon resolution
+│   ├── amazon.ts        # Amazon resolution
+│   ├── bandcamp.ts      # Bandcamp resolution
+│   ├── itunes.ts        # iTunes / Apple Music resolution
+│   └── fnac.ts          # Fnac resolution
 ├── styles/              # Shared CSS (injected via manifest)
 └── utils/
-    └── metadata.ts      # YouTube Music DOM scraping for artist/album
+    ├── dom.ts           # Shared DOM utilities (waitForElement…)
+    ├── locale.ts        # Locale detection & per-store URL localisation
+    ├── metadata.ts      # [DEPRECATED] Legacy metadata — use platforms/ytm/metadata.ts
+    └── sanitize.ts      # URL sanitisation & allowed-host validation
 ```
 
-**Data flow**: Content script extracts metadata from the YTM DOM → sends `SEARCH_STORES` message to background → background calls the stores orchestrator → orchestrator queries MusicBrainz, resolves each store, caches result → response sent back to content script → UI updated.
+### Platform Adapter Pattern
+
+The content script is **platform-agnostic**. Each streaming service is supported via a `PlatformAdapter` (defined in `src/platforms/types.ts`) that provides:
+
+- **`MetadataExtractor`** — scrapes artist/album from the service's DOM
+- **`UIInjector`** — injects the STO button & dropdown, styled to match the service's UI
+- **`observeNavigation()`** — listens for SPA navigation events specific to the service
+
+The dispatcher (`src/platforms/index.ts`) maps `location.hostname` → adapter factory. The content script (`src/content/index.ts`) calls `detectPlatform()` and delegates all platform-specific work to the returned adapter.
+
+**Data flow**: Content script calls `platform.metadata.extract()` → sends `SEARCH_STORES` message to background → background calls the stores orchestrator → orchestrator queries MusicBrainz, resolves each store, caches result → response sent back to content script → `platform.ui.setLinks()` + `platform.ui.injectButton()`.
+
+## Adding a New Streaming Platform
+
+Follow this pattern:
+
+1. **Create** `src/platforms/<platform>/metadata.ts` implementing `MetadataExtractor`.
+2. **Create** `src/platforms/<platform>/ui.ts` implementing `UIInjector`.
+3. **Create** `src/platforms/<platform>/index.ts` implementing `PlatformAdapter`.
+4. **Register** the hostname in `PLATFORM_MAP` in `src/platforms/index.ts`.
+5. **Add** the match pattern to `content_scripts.matches` in `public/manifest.json`.
+6. **Add** platform-specific CSS (either in `sto.css` or in a separate `<platform>.css`).
+7. **Write tests** in `src/platforms/<platform>/*.test.ts`.
 
 ## Adding a New Store
 
@@ -89,7 +126,7 @@ Follow this pattern:
 2. **Add** the store key to `ExternalUrls` in `src/stores/types.ts` if MusicBrainz may provide a direct URL.
 3. **Register** the resolver call in `src/stores/index.ts` orchestrator (parallel with other stores).
 4. **Add** a `StoreLink` entry with a unique `store` identifier, `label`, and `format`.
-5. **Add** the store icon in the `STORE_ICONS` record in `src/content/index.ts`.
+5. **Add** the store icon in the `STORE_ICON_PATHS` record in `src/platforms/ytm/ui.ts` (and in any future platform UI).
 6. **Provide a search fallback URL** when no direct/API match is found — every store must return a valid link.
 7. **Write tests** in `src/stores/<storename>.test.ts`.
 
@@ -102,7 +139,7 @@ Follow this pattern:
 
 ## Security
 
-This is a Chrome extension with content scripts running on `music.youtube.com`. Security is critical.
+This is a Chrome extension with content scripts running on streaming music services. Security is critical.
 
 - **Never use `innerHTML`**, `outerHTML`, `insertAdjacentHTML`, or `document.write`. Use `document.createElement` + `textContent` / `setAttribute` instead.
 - The ESLint plugin `no-unsanitized` enforces this — do not disable its rules.
