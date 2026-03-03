@@ -1,0 +1,99 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build & Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Full history for changelog generation
+
+      - name: Build Docker image
+        run: docker compose build dev
+
+      - name: Install dependencies
+        run: docker compose run --rm install
+
+      - name: Full validation
+        run: docker compose run --rm validate
+
+      - name: Package extension (.zip)
+        run: docker compose run --rm zip
+
+      - name: Generate changelog
+        id: changelog
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          # Find the previous tag (immediate predecessor)
+          PREV_TAG=$(git tag --sort=-v:refname | grep -E '^v' | sed -n '2p')
+
+          if [ -z "$PREV_TAG" ]; then
+            echo "First release — listing all commits."
+            RANGE="$TAG"
+          else
+            RANGE="${PREV_TAG}..${TAG}"
+          fi
+
+          echo "Generating changelog for ${RANGE}"
+
+          # Collect commits grouped by conventional-commit type
+          generate_section() {
+            local prefix="$1"
+            local emoji="$2"
+            local title="$3"
+            local commits
+            commits=$(git log "$RANGE" --pretty=format:"%s (%h)" --no-merges \
+              | grep -iE "^${prefix}(\(.+\))?:" \
+              | sed -E "s/^${prefix}(\([^)]*\))?: //" \
+              || true)
+            if [ -n "$commits" ]; then
+              echo ""
+              echo "### ${emoji} ${title}"
+              echo ""
+              echo "$commits" | while IFS= read -r line; do echo "- ${line}"; done
+            fi
+          }
+
+          {
+            echo "## What's Changed"
+            generate_section "feat"     "🚀" "Features"
+            generate_section "fix"      "🐛" "Bug Fixes"
+            generate_section "refactor" "♻️"  "Refactors"
+            generate_section "perf"     "⚡"  "Performance"
+            generate_section "docs"     "📝" "Documentation"
+            generate_section "style"    "🎨" "Styles"
+            generate_section "test"     "🧪" "Tests"
+            generate_section "build"    "🔨" "Build"
+            generate_section "ci"       "🔄" "CI"
+            generate_section "chore"    "🧹" "Chores"
+            echo ""
+            if [ -n "$PREV_TAG" ]; then
+              echo "**Full diff**: https://github.com/${{ github.repository }}/compare/${PREV_TAG}...${TAG}"
+            fi
+          } > RELEASE_NOTES.md
+
+          cat RELEASE_NOTES.md
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            streamthenown-*.zip \
+            --title "Release $GITHUB_REF_NAME" \
+            --notes-file RELEASE_NOTES.md
+
+      - name: Cleanup
+        if: always()
+        run: docker compose down -v --remove-orphans
