@@ -35,7 +35,7 @@ export function resolveQobuz(query: StoreQuery, mbUrl?: string): StoreLink {
 
   // Search URL fallback — locale-aware
   const qobuzLocale = getQobuzLocale(locale);
-  const q = encodeURIComponent(query.album ?? query.artist);
+  const q = encodeURIComponent(query.album ? `${query.artist} ${query.album}` : query.artist);
   return makeLink(wrapAwinUrl(`https://www.qobuz.com/${qobuzLocale}/search/albums/${q}`), false);
 }
 
