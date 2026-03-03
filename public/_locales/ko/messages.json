@@ -33,10 +33,6 @@
     "message": "디지털 & 피지컬",
     "description": "Bandcamp format label"
   },
-  "cdAndVinyl": {
-    "message": "CD, 바이닐 외",
-    "description": "Fnac format label"
-  },
   "ownThisAlbum": {
     "message": "이 앨범 소유하기",
     "description": "Section header on album pages"

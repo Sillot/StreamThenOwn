@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-StreamThenOwn (STO) is a **Chrome extension** (Manifest V3) that injects purchase links (Discogs, Qobuz, Amazon, Bandcamp, iTunes, Fnac) next to album/song pages on **streaming music services**. It resolves links via the MusicBrainz API and falls back to search URLs when no direct match is found.
+StreamThenOwn (STO) is a **Chrome extension** (Manifest V3) that injects purchase links (Discogs, Qobuz, Amazon, Bandcamp) next to album/song pages on **streaming music services**. It resolves links via the MusicBrainz API and falls back to search URLs when no direct match is found.
 
 Currently supported streaming platform: **YouTube Music**. The architecture is designed to support additional platforms (Spotify, Deezer, Tidal…) via a pluggable adapter system.
 
@@ -83,9 +83,7 @@ src/
 │   ├── discogs.ts       # Discogs resolution
 │   ├── qobuz.ts         # Qobuz resolution
 │   ├── amazon.ts        # Amazon resolution
-│   ├── bandcamp.ts      # Bandcamp resolution
-│   ├── itunes.ts        # iTunes / Apple Music resolution
-│   └── fnac.ts          # Fnac resolution
+│   └── bandcamp.ts      # Bandcamp resolution
 ├── styles/              # Shared CSS (injected via manifest)
 └── utils/
     ├── dom.ts           # Shared DOM utilities (waitForElement…)

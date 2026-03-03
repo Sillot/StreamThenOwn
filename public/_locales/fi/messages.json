@@ -33,10 +33,6 @@
     "message": "Digitaalinen & Fyysinen",
     "description": "Bandcamp format label"
   },
-  "cdAndVinyl": {
-    "message": "CD, Vinyyli & muuta",
-    "description": "Fnac format label"
-  },
   "ownThisAlbum": {
     "message": "Omista tämä albumi",
     "description": "Section header on album pages"

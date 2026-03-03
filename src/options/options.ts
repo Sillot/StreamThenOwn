@@ -43,12 +43,6 @@ const ALL_STORES: StoreDef[] = [
     description: "Digital & physical \u2014 support artists directly",
     enabledByDefault: true,
   },
-  {
-    id: "fnac",
-    name: "Fnac",
-    description: "CD, Vinyle & plus \u2014 France",
-    enabledByDefault: false,
-  },
 ];
 
 /** Default store display order (all store IDs). */

@@ -33,10 +33,6 @@
     "message": "Digital & Physical",
     "description": "Bandcamp format label"
   },
-  "cdAndVinyl": {
-    "message": "CD, Vinyl & more",
-    "description": "Fnac format label"
-  },
   "ownThisAlbum": {
     "message": "Own this album",
     "description": "Section header on album pages"

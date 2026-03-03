@@ -33,10 +33,6 @@
     "message": "デジタル・フィジカル",
     "description": "Bandcamp format label"
   },
-  "cdAndVinyl": {
-    "message": "CD・レコード 他",
-    "description": "Fnac format label"
-  },
   "ownThisAlbum": {
     "message": "このアルバムを手に入れる",
     "description": "Section header on album pages"

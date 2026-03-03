@@ -33,10 +33,6 @@
     "message": "Digitaal & Fysiek",
     "description": "Bandcamp format label"
   },
-  "cdAndVinyl": {
-    "message": "CD, Vinyl & meer",
-    "description": "Fnac format label"
-  },
   "ownThisAlbum": {
     "message": "Dit album bezitten",
     "description": "Section header on album pages"

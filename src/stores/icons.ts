@@ -11,7 +11,6 @@ const STORE_ICON_FILES: Readonly<Record<string, string>> = {
   discogs: "discogs.svg",
   qobuz: "qobuz.svg",
   amazon: "amazon.svg",
-  fnac: "fnac.svg",
 };
 
 /** Main STO button icon — Material Design shopping bag path. */
