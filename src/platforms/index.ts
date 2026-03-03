@@ -17,6 +17,7 @@ import { YtmAdapter } from "./ytm";
 import { SpotifyAdapter } from "./spotify";
 import { AppleAdapter } from "./apple";
 import { DeezerAdapter } from "./deezer";
+import { AmazonMusicAdapter } from "./amazon-music";
 
 /** Map of hostname → adapter factory. */
 const PLATFORM_MAP: Record<string, () => PlatformAdapter> = {
@@ -24,6 +25,7 @@ const PLATFORM_MAP: Record<string, () => PlatformAdapter> = {
   "open.spotify.com": () => new SpotifyAdapter(),
   "music.apple.com": () => new AppleAdapter(),
   "www.deezer.com": () => new DeezerAdapter(),
+  "music.amazon.com": () => new AmazonMusicAdapter(),
 };
 
 /**
@@ -32,5 +34,12 @@ const PLATFORM_MAP: Record<string, () => PlatformAdapter> = {
  */
 export function detectPlatform(): PlatformAdapter | null {
   const factory = PLATFORM_MAP[location.hostname];
-  return factory ? factory() : null;
+  if (factory) return factory();
+
+  // Amazon Music uses regional domains (music.amazon.de, music.amazon.fr…)
+  if (location.hostname.startsWith("music.amazon.")) {
+    return new AmazonMusicAdapter();
+  }
+
+  return null;
 }

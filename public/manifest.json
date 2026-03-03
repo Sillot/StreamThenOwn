@@ -45,6 +45,25 @@
       "js": ["content/index.js"],
       "css": ["styles/sto.css", "styles/deezer.css"],
       "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://music.amazon.com/*",
+        "*://music.amazon.co.uk/*",
+        "*://music.amazon.de/*",
+        "*://music.amazon.fr/*",
+        "*://music.amazon.it/*",
+        "*://music.amazon.es/*",
+        "*://music.amazon.co.jp/*",
+        "*://music.amazon.in/*",
+        "*://music.amazon.com.br/*",
+        "*://music.amazon.com.au/*",
+        "*://music.amazon.ca/*",
+        "*://music.amazon.com.mx/*"
+      ],
+      "js": ["content/index.js"],
+      "css": ["styles/sto.css", "styles/amazon-music.css"],
+      "run_at": "document_idle"
     }
   ],
   "background": {
@@ -61,7 +80,19 @@
         "*://music.youtube.com/*",
         "*://open.spotify.com/*",
         "*://music.apple.com/*",
-        "*://www.deezer.com/*"
+        "*://www.deezer.com/*",
+        "*://music.amazon.com/*",
+        "*://music.amazon.co.uk/*",
+        "*://music.amazon.de/*",
+        "*://music.amazon.fr/*",
+        "*://music.amazon.it/*",
+        "*://music.amazon.es/*",
+        "*://music.amazon.co.jp/*",
+        "*://music.amazon.in/*",
+        "*://music.amazon.com.br/*",
+        "*://music.amazon.com.au/*",
+        "*://music.amazon.ca/*",
+        "*://music.amazon.com.mx/*"
       ]
     }
   ]
