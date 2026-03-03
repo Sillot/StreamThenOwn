@@ -16,12 +16,14 @@ import type { PlatformAdapter } from "./types";
 import { YtmAdapter } from "./ytm";
 import { SpotifyAdapter } from "./spotify";
 import { AppleAdapter } from "./apple";
+import { DeezerAdapter } from "./deezer";
 
 /** Map of hostname → adapter factory. */
 const PLATFORM_MAP: Record<string, () => PlatformAdapter> = {
   "music.youtube.com": () => new YtmAdapter(),
   "open.spotify.com": () => new SpotifyAdapter(),
   "music.apple.com": () => new AppleAdapter(),
+  "www.deezer.com": () => new DeezerAdapter(),
 };
 
 /**

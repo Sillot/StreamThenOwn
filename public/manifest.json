@@ -39,6 +39,12 @@
       "js": ["content/index.js"],
       "css": ["styles/sto.css", "styles/apple.css"],
       "run_at": "document_idle"
+    },
+    {
+      "matches": ["*://www.deezer.com/*"],
+      "js": ["content/index.js"],
+      "css": ["styles/sto.css", "styles/deezer.css"],
+      "run_at": "document_idle"
     }
   ],
   "background": {
@@ -51,7 +57,12 @@
   "web_accessible_resources": [
     {
       "resources": ["icons/*"],
-      "matches": ["*://music.youtube.com/*", "*://open.spotify.com/*", "*://music.apple.com/*"]
+      "matches": [
+        "*://music.youtube.com/*",
+        "*://open.spotify.com/*",
+        "*://music.apple.com/*",
+        "*://www.deezer.com/*"
+      ]
     }
   ]
 }
