@@ -146,7 +146,7 @@ function createMenuItem(link: StoreLink): HTMLAnchorElement {
   a.rel = "noopener noreferrer";
   a.className = "sto-am-menu__item";
 
-  a.appendChild(createStoreIcon(link.store, 20, "sto-am-menu__item-icon"));
+  a.appendChild(createStoreIcon(link.store, 18, "sto-am-menu__item-icon"));
 
   const label = document.createElement("span");
   label.className = "sto-am-menu__item-label";
