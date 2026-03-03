@@ -84,5 +84,21 @@
   "aboutPrivacyLink": {
     "message": "プライバシーポリシー",
     "description": "Link text for the privacy policy page"
+  },
+  "popupSettings": {
+    "message": "設定",
+    "description": "Label for the settings link in the popup"
+  },
+  "popupNoMusic": {
+    "message": "音楽が検出されませんでした",
+    "description": "Shown in the popup when no music metadata is available"
+  },
+  "popupNoMusicDesc": {
+    "message": "音楽を再生または閲覧して購入リンクを表示します。",
+    "description": "Description shown in the popup when no music is detected"
+  },
+  "popupUnsupported": {
+    "message": "YouTube Music、Spotify、Apple Music、Deezer、Amazon Musicにアクセスして購入リンクを確認してください。",
+    "description": "Shown in the popup when the current page is not a supported streaming service"
   }
 }

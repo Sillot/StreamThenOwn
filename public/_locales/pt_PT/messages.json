@@ -84,5 +84,21 @@
   "aboutPrivacyLink": {
     "message": "Política de privacidade",
     "description": "Link text for the privacy policy page"
+  },
+  "popupSettings": {
+    "message": "Definições",
+    "description": "Label for the settings link in the popup"
+  },
+  "popupNoMusic": {
+    "message": "Nenhuma música detetada",
+    "description": "Shown in the popup when no music metadata is available"
+  },
+  "popupNoMusicDesc": {
+    "message": "Reproduza ou navegue por música para ver links de compra.",
+    "description": "Description shown in the popup when no music is detected"
+  },
+  "popupUnsupported": {
+    "message": "Visite o YouTube Music, Spotify, Apple Music, Deezer ou Amazon Music para ver links de compra.",
+    "description": "Shown in the popup when the current page is not a supported streaming service"
   }
 }

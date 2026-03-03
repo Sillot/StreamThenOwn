@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>StreamThenOwn</title>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Google Sans", Roboto, Arial, sans-serif;
+        background: #1b1b1b;
+        color: #e8eaed;
+        width: 320px;
+        padding: 0;
+      }
+
+      /* ---- Header ---- */
+      .sto-popup__header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 16px 16px 12px;
+      }
+      .sto-popup__logo {
+        width: 28px;
+        height: 28px;
+        flex-shrink: 0;
+      }
+      .sto-popup__title {
+        font-size: 15px;
+        font-weight: 500;
+      }
+
+      /* ---- Now playing ---- */
+      .sto-popup__now-playing {
+        padding: 0 16px 12px;
+        font-size: 13px;
+        color: #aaa;
+        line-height: 1.4;
+      }
+      .sto-popup__artist {
+        color: #e8eaed;
+        font-weight: 500;
+      }
+      .sto-popup__album {
+        color: #ccc;
+      }
+
+      /* ---- Link list ---- */
+      .sto-popup__links {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        background: #282828;
+      }
+      .sto-popup__link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        text-decoration: none;
+        color: #e8eaed;
+        transition: background 0.1s;
+      }
+      .sto-popup__link:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .sto-popup__link-icon {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+        filter: brightness(0) invert(0.9);
+      }
+      .sto-popup__link-icon--svg {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+        color: #e8eaed;
+      }
+      .sto-popup__link-info {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+      .sto-popup__link-label {
+        font-size: 13px;
+        font-weight: 500;
+      }
+
+      /* ---- Empty state ---- */
+      .sto-popup__empty {
+        padding: 24px 16px;
+        text-align: center;
+      }
+      .sto-popup__empty-icon {
+        font-size: 32px;
+        margin-bottom: 8px;
+        opacity: 0.5;
+      }
+      .sto-popup__empty-title {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 4px;
+      }
+      .sto-popup__empty-desc {
+        font-size: 12px;
+        color: #aaa;
+        line-height: 1.4;
+      }
+
+      /* ---- Footer (settings link) ---- */
+      .sto-popup__footer {
+        border-top: 1px solid #333;
+        padding: 10px 16px;
+      }
+      .sto-popup__settings {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #aaa;
+        text-decoration: none;
+        font-size: 13px;
+        transition: color 0.1s;
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-family: inherit;
+      }
+      .sto-popup__settings:hover {
+        color: #e8eaed;
+      }
+      .sto-popup__settings-icon {
+        width: 16px;
+        height: 16px;
+      }
+
+      /* ---- Loading ---- */
+      .sto-popup__loading {
+        padding: 32px 16px;
+        text-align: center;
+        font-size: 13px;
+        color: #aaa;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="popup-root"></div>
+    <script src="popup/popup.js"></script>
+  </body>
+</html>

@@ -84,5 +84,21 @@
   "aboutPrivacyLink": {
     "message": "Privacybeleid",
     "description": "Link text for the privacy policy page"
+  },
+  "popupSettings": {
+    "message": "Instellingen",
+    "description": "Label for the settings link in the popup"
+  },
+  "popupNoMusic": {
+    "message": "Geen muziek gedetecteerd",
+    "description": "Shown in the popup when no music metadata is available"
+  },
+  "popupNoMusicDesc": {
+    "message": "Speel of blader door muziek om aankooplinks te zien.",
+    "description": "Description shown in the popup when no music is detected"
+  },
+  "popupUnsupported": {
+    "message": "Bezoek YouTube Music, Spotify, Apple Music, Deezer of Amazon Music om aankooplinks te zien.",
+    "description": "Shown in the popup when the current page is not a supported streaming service"
   }
 }

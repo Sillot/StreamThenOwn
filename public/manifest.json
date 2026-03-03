@@ -19,31 +19,32 @@
       "16": "icons/icon16.png",
       "48": "icons/icon48.png"
     },
-    "default_title": "StreamThenOwn"
+    "default_title": "StreamThenOwn",
+    "default_popup": "popup.html"
   },
   "content_scripts": [
     {
       "matches": ["*://music.youtube.com/*"],
       "js": ["content/index.js"],
-      "css": ["styles/sto.css", "styles/youtube.css"],
+      "css": ["styles/youtube.css"],
       "run_at": "document_idle"
     },
     {
       "matches": ["*://open.spotify.com/*"],
       "js": ["content/index.js"],
-      "css": ["styles/sto.css", "styles/spotify.css"],
+      "css": ["styles/spotify.css"],
       "run_at": "document_idle"
     },
     {
       "matches": ["*://music.apple.com/*"],
       "js": ["content/index.js"],
-      "css": ["styles/sto.css", "styles/apple.css"],
+      "css": ["styles/apple.css"],
       "run_at": "document_idle"
     },
     {
       "matches": ["*://www.deezer.com/*"],
       "js": ["content/index.js"],
-      "css": ["styles/sto.css", "styles/deezer.css"],
+      "css": ["styles/deezer.css"],
       "run_at": "document_idle"
     },
     {
@@ -62,7 +63,7 @@
         "*://music.amazon.com.mx/*"
       ],
       "js": ["content/index.js"],
-      "css": ["styles/sto.css", "styles/amazon-music.css"],
+      "css": ["styles/amazon-music.css"],
       "run_at": "document_idle"
     }
   ],

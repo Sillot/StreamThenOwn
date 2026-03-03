@@ -84,5 +84,21 @@
   "aboutPrivacyLink": {
     "message": "Tietosuojakäytäntö",
     "description": "Link text for the privacy policy page"
+  },
+  "popupSettings": {
+    "message": "Asetukset",
+    "description": "Label for the settings link in the popup"
+  },
+  "popupNoMusic": {
+    "message": "Musiikkia ei havaittu",
+    "description": "Shown in the popup when no music metadata is available"
+  },
+  "popupNoMusicDesc": {
+    "message": "Toista tai selaa musiikkia nähdäksesi ostolinkit.",
+    "description": "Description shown in the popup when no music is detected"
+  },
+  "popupUnsupported": {
+    "message": "Käy YouTube Musicissa, Spotifyssa, Apple Musicissa, Deezerissä tai Amazon Musicissa nähdäksesi ostolinkit.",
+    "description": "Shown in the popup when the current page is not a supported streaming service"
   }
 }

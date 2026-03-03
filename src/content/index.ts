@@ -24,6 +24,10 @@ let pendingCheck: ReturnType<typeof setTimeout> | null = null;
 let platform: PlatformAdapter | null = null;
 let remainingRetries = 0;
 
+/** Current state exposed to the popup via GET_CURRENT_LINKS message. */
+let currentMetadata: MusicMetadata | null = null;
+let currentLinks: StoreLinksResult | null = null;
+
 /* ------------------------------------------------------------------ */
 /*  Core logic                                                        */
 /* ------------------------------------------------------------------ */
@@ -46,6 +50,8 @@ async function check(retries = 3): Promise<void> {
     }
     platform.ui.cleanup();
     lastMetadataKey = "";
+    currentMetadata = null;
+    currentLinks = null;
     platform.ui.setLinks(null);
     return;
   }
@@ -60,6 +66,9 @@ async function check(retries = 3): Promise<void> {
 
   const result = await requestStoreLinks(meta);
   if (!result) return;
+
+  currentMetadata = meta;
+  currentLinks = result;
 
   platform.ui.setLinks(result);
   const direct = result.links.filter((l) => l.isDirect).length;
@@ -120,6 +129,8 @@ function scheduleCheck(delayMs = 800): void {
 function onNavigate(): void {
   lastMetadataKey = "";
   remainingRetries = 3;
+  currentMetadata = null;
+  currentLinks = null;
   platform?.ui.cleanup();
   scheduleCheck();
 }
@@ -136,6 +147,27 @@ function init(): void {
   }
 
   console.log(LOG, `Loaded on ${platform.name}:`, window.location.href);
+
+  // Notify background so it enables the action icon for this tab.
+  chrome.runtime.sendMessage({ type: "CONTENT_SCRIPT_READY" }, () => {
+    // Ignore errors (e.g. service worker not yet ready).
+    void chrome.runtime.lastError;
+  });
+
+  // Respond to popup requests for current store links.
+  chrome.runtime.onMessage.addListener(
+    (
+      message: { type: string },
+      _sender: chrome.runtime.MessageSender,
+      sendResponse: (response: unknown) => void,
+    ): boolean | undefined => {
+      if (message.type === "GET_CURRENT_LINKS") {
+        sendResponse({ metadata: currentMetadata, links: currentLinks });
+        return;
+      }
+      return;
+    },
+  );
 
   // Initial check (delayed for DOM to be ready, with retries for SPA)
   remainingRetries = 5;

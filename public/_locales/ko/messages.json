@@ -84,5 +84,21 @@
   "aboutPrivacyLink": {
     "message": "개인정보 처리방침",
     "description": "Link text for the privacy policy page"
+  },
+  "popupSettings": {
+    "message": "설정",
+    "description": "Label for the settings link in the popup"
+  },
+  "popupNoMusic": {
+    "message": "음악이 감지되지 않았습니다",
+    "description": "Shown in the popup when no music metadata is available"
+  },
+  "popupNoMusicDesc": {
+    "message": "음악을 재생하거나 탐색하여 구매 링크를 확인하세요.",
+    "description": "Description shown in the popup when no music is detected"
+  },
+  "popupUnsupported": {
+    "message": "YouTube Music, Spotify, Apple Music, Deezer 또는 Amazon Music을 방문하여 구매 링크를 확인하세요.",
+    "description": "Shown in the popup when the current page is not a supported streaming service"
   }
 }

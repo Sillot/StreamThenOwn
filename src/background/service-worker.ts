@@ -68,9 +68,27 @@ chrome.runtime.onMessage.addListener(
   },
 );
 
-// Open options page when clicking the extension icon
-chrome.action.onClicked.addListener(() => {
-  void chrome.runtime.openOptionsPage();
+/* ------------------------------------------------------------------ */
+/*  Action icon — disabled by default, enabled per tab by content script */
+/* ------------------------------------------------------------------ */
+
+// Disable the action icon globally; content scripts re-enable it on supported tabs.
+void chrome.action.disable();
+
+chrome.runtime.onMessage.addListener(
+  (message: { type: string }, sender: chrome.runtime.MessageSender): undefined => {
+    if (message.type === "CONTENT_SCRIPT_READY" && sender.tab?.id !== undefined) {
+      void chrome.action.enable(sender.tab.id);
+    }
+    return undefined;
+  },
+);
+
+// When a tab starts loading a new page, disable the action until a content script re-enables it.
+chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
+  if (changeInfo.status === "loading") {
+    void chrome.action.disable(tabId);
+  }
 });
 
 console.log("[StreamThenOwn] Service worker loaded");

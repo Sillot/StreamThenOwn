@@ -84,5 +84,21 @@
   "aboutPrivacyLink": {
     "message": "Privatlivspolitik",
     "description": "Link text for the privacy policy page"
+  },
+  "popupSettings": {
+    "message": "Indstillinger",
+    "description": "Label for the settings link in the popup"
+  },
+  "popupNoMusic": {
+    "message": "Ingen musik fundet",
+    "description": "Shown in the popup when no music metadata is available"
+  },
+  "popupNoMusicDesc": {
+    "message": "Afspil eller gennemse musik for at se købslinks.",
+    "description": "Description shown in the popup when no music is detected"
+  },
+  "popupUnsupported": {
+    "message": "Besøg YouTube Music, Spotify, Apple Music, Deezer eller Amazon Music for at se købslinks.",
+    "description": "Shown in the popup when the current page is not a supported streaming service"
   }
 }
