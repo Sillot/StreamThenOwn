@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Streame es. Liebe es. Besitze es. — Finde Kauflinks für die Musik, die du liebst, auf YouTube Music, Spotify und Apple Music.",
+    "message": "Streame es. Liebe es. Besitze es. — Finde Kauflinks für die Musik, die du liebst, auf YouTube Music, Spotify, Apple Music, Deezer und Amazon Music.",
     "description": "The description of the extension"
   },
   "buyOn": {
@@ -76,10 +76,6 @@
   "aboutDescription": {
     "message": "StreamThenOwn zeigt Kauflinks für Musik an, die du auf Streaming-Diensten hörst. Unterstütze Künstler, indem du die Musik besitzt, die du liebst.",
     "description": "General description of what the extension does, shown in the about section"
-  },
-  "aboutAffiliate": {
-    "message": "Einige Links zu Shops enthalten Affiliate-Kennungen, die die Entwicklung dieser Erweiterung unterstützen — ohne zusätzliche Kosten für dich.",
-    "description": "Affiliate disclosure notice shown in the about section"
   },
   "aboutPrivacyLink": {
     "message": "Datenschutzrichtlinie",

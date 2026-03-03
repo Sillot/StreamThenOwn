@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Strøm det. Elsk det. Eie det. — Finn kjøpslenker for musikken du elsker på YouTube Music, Spotify og Apple Music.",
+    "message": "Strøm det. Elsk det. Eie det. — Finn kjøpslenker for musikken du elsker på YouTube Music, Spotify, Apple Music, Deezer og Amazon Music.",
     "description": "The description of the extension"
   },
   "buyOn": {
@@ -76,10 +76,6 @@
   "aboutDescription": {
     "message": "StreamThenOwn viser kjøpslenker for musikk du lytter til på strømmetjenester. Støtt artister ved å eie musikken du elsker.",
     "description": "General description of what the extension does, shown in the about section"
-  },
-  "aboutAffiliate": {
-    "message": "Noen lenker til butikker inneholder tilknyttede identifikatorer som bidrar til å støtte utviklingen av denne utvidelsen, uten ekstra kostnad for deg.",
-    "description": "Affiliate disclosure notice shown in the about section"
   },
   "aboutPrivacyLink": {
     "message": "Personvernerklæring",

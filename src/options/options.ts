@@ -438,7 +438,6 @@ async function save(): Promise<void> {
 /** Populate the "About" section with i18n strings. */
 function renderAbout(): void {
   const descEl = document.getElementById("about-description");
-  const affiliateEl = document.getElementById("about-affiliate");
   const privacyEl = document.getElementById("about-privacy");
   const versionEl = document.getElementById("about-version");
   const aboutTitleEl = document.getElementById("about-title");
@@ -451,8 +450,6 @@ function renderAbout(): void {
   if (customDescEl) customDescEl.textContent = t("optionsCustomDesc");
   if (aboutTitleEl) aboutTitleEl.textContent = t("aboutTitle");
   if (descEl) descEl.textContent = t("aboutDescription");
-  if (affiliateEl) affiliateEl.textContent = t("aboutAffiliate");
-
   if (privacyEl) {
     const link = document.createElement("a");
     link.href = "https://github.com/Sillot/StreamThenOwn/blob/main/PRIVACY_POLICY.md";

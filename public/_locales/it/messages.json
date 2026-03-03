@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Ascoltalo. Amalo. Possiedilo. — Trova link per acquistare la musica che ami su YouTube Music, Spotify e Apple Music.",
+    "message": "Ascoltalo. Amalo. Possiedilo. — Trova link per acquistare la musica che ami su YouTube Music, Spotify, Apple Music, Deezer e Amazon Music.",
     "description": "The description of the extension"
   },
   "buyOn": {
@@ -76,10 +76,6 @@
   "aboutDescription": {
     "message": "StreamThenOwn mostra link di acquisto per la musica che ascolti sui servizi di streaming. Sostieni gli artisti possedendo la musica che ami.",
     "description": "General description of what the extension does, shown in the about section"
-  },
-  "aboutAffiliate": {
-    "message": "Alcuni link ai negozi contengono identificatori di affiliazione che contribuiscono allo sviluppo di questa estensione, senza costi aggiuntivi per te.",
-    "description": "Affiliate disclosure notice shown in the about section"
   },
   "aboutPrivacyLink": {
     "message": "Informativa sulla privacy",

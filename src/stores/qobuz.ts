@@ -7,7 +7,6 @@
 
 import type { StoreLink, StoreQuery } from "./types";
 import { isAllowedStoreHost } from "../utils/sanitize";
-import { wrapAwinUrl } from "../config/affiliate";
 import { getQobuzLocale } from "../utils/locale";
 
 /**
@@ -30,13 +29,13 @@ export function resolveQobuz(query: StoreQuery, mbUrl?: string): StoreLink {
   const locale = query.locale ?? "en";
 
   if (mbUrl && isAllowedStoreHost(mbUrl)) {
-    return makeLink(wrapAwinUrl(localizeQobuzUrl(mbUrl, locale)), true);
+    return makeLink(localizeQobuzUrl(mbUrl, locale), true);
   }
 
   // Search URL fallback — locale-aware
   const qobuzLocale = getQobuzLocale(locale);
   const q = encodeURIComponent(query.album ? `${query.artist} ${query.album}` : query.artist);
-  return makeLink(wrapAwinUrl(`https://www.qobuz.com/${qobuzLocale}/search/albums/${q}`), false);
+  return makeLink(`https://www.qobuz.com/${qobuzLocale}/search/albums/${q}`, false);
 }
 
 function makeLink(url: string, isDirect: boolean): StoreLink {

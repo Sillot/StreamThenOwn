@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Streama. Älska. Äg. — Hitta köplänkar för musiken du älskar på YouTube Music, Spotify och Apple Music.",
+    "message": "Streama. Älska. Äg. — Hitta köplänkar för musiken du älskar på YouTube Music, Spotify, Apple Music, Deezer och Amazon Music.",
     "description": "The description of the extension"
   },
   "buyOn": {
@@ -76,10 +76,6 @@
   "aboutDescription": {
     "message": "StreamThenOwn visar köplänkar för musik du lyssnar på via streamingtjänster. Stöd artister genom att äga musiken du älskar.",
     "description": "General description of what the extension does, shown in the about section"
-  },
-  "aboutAffiliate": {
-    "message": "Vissa länkar till butiker innehåller affiliate-identifierare som stödjer utvecklingen av detta tillägg, utan extra kostnad för dig.",
-    "description": "Affiliate disclosure notice shown in the about section"
   },
   "aboutPrivacyLink": {
     "message": "Integritetspolicy",

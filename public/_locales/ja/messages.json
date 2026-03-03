@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "聴こう。好きになろう。手に入れよう。— YouTube Music、Spotify、Apple Musicで好きな音楽の購入リンクを見つけよう。",
+    "message": "聴こう。好きになろう。手に入れよう。— YouTube Music、Spotify、Apple Music、Deezer、Amazon Musicで好きな音楽の購入リンクを見つけよう。",
     "description": "The description of the extension"
   },
   "buyOn": {
@@ -76,10 +76,6 @@
   "aboutDescription": {
     "message": "StreamThenOwnは、ストリーミングサービスで聴いている音楽の購入リンクを表示します。好きな音楽を所有してアーティストを応援しましょう。",
     "description": "General description of what the extension does, shown in the about section"
-  },
-  "aboutAffiliate": {
-    "message": "一部のストアへのリンクには、この拡張機能の開発を支援するアフィリエイト識別子が含まれています。追加料金は一切かかりません。",
-    "description": "Affiliate disclosure notice shown in the about section"
   },
   "aboutPrivacyLink": {
     "message": "プライバシーポリシー",

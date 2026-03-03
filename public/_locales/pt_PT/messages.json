@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Ouve. Ama. Possui. — Encontra links de compra para a música que adoras no YouTube Music, Spotify e Apple Music.",
+    "message": "Ouve. Ama. Possui. — Encontra links de compra para a música que adoras no YouTube Music, Spotify, Apple Music, Deezer e Amazon Music.",
     "description": "The description of the extension"
   },
   "buyOn": {
@@ -76,10 +76,6 @@
   "aboutDescription": {
     "message": "O StreamThenOwn apresenta links de compra para a música que ouves em serviços de streaming. Apoia os artistas ao possuíres a música que adoras.",
     "description": "General description of what the extension does, shown in the about section"
-  },
-  "aboutAffiliate": {
-    "message": "Alguns links para lojas contêm identificadores de afiliação que ajudam a apoiar o desenvolvimento desta extensão, sem qualquer custo adicional para ti.",
-    "description": "Affiliate disclosure notice shown in the about section"
   },
   "aboutPrivacyLink": {
     "message": "Política de privacidade",

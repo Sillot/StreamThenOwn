@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Kuuntele. Rakasta. Omista. — Löydä ostolinkkejä musiikkiin, josta pidät YouTube Musicissa, Spotifyssa ja Apple Musicissa.",
+    "message": "Kuuntele. Rakasta. Omista. — Löydä ostolinkkejä musiikkiin, josta pidät YouTube Musicissa, Spotifyssa, Apple Musicissa, Deezerissä ja Amazon Musicissa.",
     "description": "The description of the extension"
   },
   "buyOn": {
@@ -76,10 +76,6 @@
   "aboutDescription": {
     "message": "StreamThenOwn näyttää ostolinkkejä musiikkiin, jota kuuntelet suoratoistopalveluissa. Tue artisteja omistamalla musiikki, josta pidät.",
     "description": "General description of what the extension does, shown in the about section"
-  },
-  "aboutAffiliate": {
-    "message": "Jotkin linkit kauppoihin sisältävät kumppanuustunnisteita, jotka tukevat tämän laajennuksen kehitystä ilman lisäkustannuksia sinulle.",
-    "description": "Affiliate disclosure notice shown in the about section"
   },
   "aboutPrivacyLink": {
     "message": "Tietosuojakäytäntö",

@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Stream it. Love it. Own it. — Find purchase links for the music you love on YouTube Music, Spotify, and Apple Music.",
+    "message": "Stream it. Love it. Own it. — Find purchase links for the music you love on YouTube Music, Spotify, Apple Music, Deezer, and Amazon Music.",
     "description": "The description of the extension"
   },
   "buyOn": {
@@ -76,10 +76,6 @@
   "aboutDescription": {
     "message": "StreamThenOwn displays purchase links for music you listen to on streaming services. Support artists by owning the music you love.",
     "description": "General description of what the extension does, shown in the about section"
-  },
-  "aboutAffiliate": {
-    "message": "Some links to stores contain affiliate identifiers that help support the development of this extension, at no extra cost to you.",
-    "description": "Affiliate disclosure notice shown in the about section"
   },
   "aboutPrivacyLink": {
     "message": "Privacy policy",

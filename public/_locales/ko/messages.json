@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "듣고. 좋아하고. 소유하세요. — YouTube Music, Spotify, Apple Music에서 좋아하는 음악의 구매 링크를 찾아보세요.",
+    "message": "듣고. 좋아하고. 소유하세요. — YouTube Music, Spotify, Apple Music, Deezer, Amazon Music에서 좋아하는 음악의 구매 링크를 찾아보세요.",
     "description": "The description of the extension"
   },
   "buyOn": {
@@ -76,10 +76,6 @@
   "aboutDescription": {
     "message": "StreamThenOwn은 스트리밍 서비스에서 듣는 음악의 구매 링크를 표시합니다. 좋아하는 음악을 소유하여 아티스트를 응원하세요.",
     "description": "General description of what the extension does, shown in the about section"
-  },
-  "aboutAffiliate": {
-    "message": "일부 스토어 링크에는 이 확장 프로그램의 개발을 지원하는 제휴 식별자가 포함되어 있으며, 추가 비용은 발생하지 않습니다.",
-    "description": "Affiliate disclosure notice shown in the about section"
   },
   "aboutPrivacyLink": {
     "message": "개인정보 처리방침",

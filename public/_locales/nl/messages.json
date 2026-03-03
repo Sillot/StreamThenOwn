@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Stream het. Hou ervan. Bezit het. — Vind aankooplinks voor de muziek waar je van houdt op YouTube Music, Spotify en Apple Music.",
+    "message": "Stream het. Hou ervan. Bezit het. — Vind aankooplinks voor de muziek waar je van houdt op YouTube Music, Spotify, Apple Music, Deezer en Amazon Music.",
     "description": "The description of the extension"
   },
   "buyOn": {
@@ -76,10 +76,6 @@
   "aboutDescription": {
     "message": "StreamThenOwn toont aankooplinks voor muziek die je beluistert op streamingdiensten. Steun artiesten door de muziek te bezitten waar je van houdt.",
     "description": "General description of what the extension does, shown in the about section"
-  },
-  "aboutAffiliate": {
-    "message": "Sommige links naar winkels bevatten affiliate-identificaties die de ontwikkeling van deze extensie ondersteunen, zonder extra kosten voor jou.",
-    "description": "Affiliate disclosure notice shown in the about section"
   },
   "aboutPrivacyLink": {
     "message": "Privacybeleid",

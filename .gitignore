@@ -18,7 +18,7 @@ Thumbs.db
 *.swp
 *.swo
 
-# Environment (affiliate IDs etc.)
+# Environment variables
 .env
 
 # Local docs (personal notes, checklists…)
