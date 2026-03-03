@@ -7,7 +7,6 @@
 
 import type { StoreLink, StoreQuery } from "./types";
 import { isAllowedStoreHost } from "../utils/sanitize";
-import { appendAmazonTag } from "../config/affiliate";
 import { getAmazonDomain } from "../utils/locale";
 
 /**
@@ -31,13 +30,13 @@ export function resolveAmazon(query: StoreQuery, mbUrl?: string): StoreLink {
   const locale = query.locale ?? "en";
 
   if (mbUrl && isAllowedStoreHost(mbUrl)) {
-    return makeLink(appendAmazonTag(localizeAmazonUrl(mbUrl, locale)), true);
+    return makeLink(localizeAmazonUrl(mbUrl, locale), true);
   }
 
   // Search URL fallback — locale-aware Amazon search
   const domain = getAmazonDomain(locale);
   const q = encodeURIComponent(query.album ? `${query.artist} ${query.album}` : query.artist);
-  return makeLink(appendAmazonTag(`https://${domain}/s?k=${q}&i=music`), false);
+  return makeLink(`https://${domain}/s?k=${q}&i=music`, false);
 }
 
 function makeLink(url: string, isDirect: boolean): StoreLink {
