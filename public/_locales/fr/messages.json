@@ -33,10 +33,6 @@
     "message": "Digital & Physique",
     "description": "Format Bandcamp"
   },
-  "digital": {
-    "message": "Digital",
-    "description": "Format iTunes"
-  },
   "cdAndVinyl": {
     "message": "CD, Vinyle & plus",
     "description": "Format Fnac"

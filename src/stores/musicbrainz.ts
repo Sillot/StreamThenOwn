@@ -110,11 +110,6 @@ export async function getReleaseUrls(releaseId: string): Promise<ExternalUrls> {
       urls.qobuz = href;
     } else if (href.includes("bandcamp.com") && isAllowedStoreHost(href)) {
       urls.bandcamp = href;
-    } else if (
-      (href.includes("itunes.apple.com") || href.includes("music.apple.com")) &&
-      isAllowedStoreHost(href)
-    ) {
-      urls.itunes = href;
     }
   }
 

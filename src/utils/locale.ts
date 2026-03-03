@@ -78,14 +78,6 @@ function getLanguageCode(locale: string): string {
 }
 
 /**
- * Apple Music country path segment.
- * e.g. "fr" → "/fr/", "en-US" → "/us/"
- */
-export function getAppleMusicLocale(locale: string): string {
-  return getCountryCode(locale);
-}
-
-/**
  * Qobuz locale path segment (format: "{country}-{language}").
  * e.g. "fr" → "fr-fr", "en-GB" → "gb-en", "de" → "de-de"
  */

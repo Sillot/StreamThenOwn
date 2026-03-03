@@ -36,5 +36,4 @@ export interface ExternalUrls {
   amazon?: string;
   qobuz?: string;
   bandcamp?: string;
-  itunes?: string;
 }
