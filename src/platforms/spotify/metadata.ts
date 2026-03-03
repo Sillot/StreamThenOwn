@@ -13,7 +13,7 @@ import type { MetadataExtractor, MusicMetadata } from "../types";
 
 /** Spotify may prefix paths with a locale segment, e.g. /intl-fr/album/… */
 function pathWithoutLocale(): string {
-  return location.pathname.replace(/^\/intl-[a-z]{2}(-[a-z]{2})?/i, "");
+  return location.pathname.replace(/^\/intl-[a-z]{2}(?:-[a-z]{2})?/i, "");
 }
 
 /**

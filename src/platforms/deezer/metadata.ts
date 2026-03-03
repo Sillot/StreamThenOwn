@@ -21,7 +21,7 @@ import type { MetadataExtractor, MusicMetadata } from "../types";
  * Strip it to get a canonical path like /album/…
  */
 function pathWithoutLocale(): string {
-  return location.pathname.replace(/^\/[a-z]{2}(-[a-z]{2})?(?=\/)/i, "");
+  return location.pathname.replace(/^\/[a-z]{2}(?:-[a-z]{2})?(?=\/)/i, "");
 }
 
 /**

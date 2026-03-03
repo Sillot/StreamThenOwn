@@ -16,24 +16,58 @@ const USER_AGENT = "StreamThenOwn/1.0.0 (browser-extension)";
 let lastRequestTime = 0;
 const MIN_INTERVAL = 1100; // respect 1 req/sec
 
+/** Default timeout for MusicBrainz API requests (ms). */
+const FETCH_TIMEOUT = 10_000;
+
+/**
+ * In-flight request deduplication map.
+ * Prevents duplicate concurrent requests to the same MusicBrainz path.
+ */
+const inflight = new Map<string, Promise<unknown>>();
+
 async function mbFetch<T>(path: string): Promise<T> {
+  // Deduplicate: if the same path is already in-flight, reuse the promise
+  const existing = inflight.get(path) as Promise<T> | undefined;
+  if (existing) return existing;
+
+  const request = mbFetchInternal<T>(path);
+  inflight.set(path, request);
+
+  try {
+    return await request;
+  } finally {
+    inflight.delete(path);
+  }
+}
+
+async function mbFetchInternal<T>(path: string): Promise<T> {
   const now = Date.now();
   const wait = Math.max(0, MIN_INTERVAL - (now - lastRequestTime));
   if (wait > 0) await delay(wait);
   lastRequestTime = Date.now();
 
-  const res = await fetch(`${MB_BASE}${path}`, {
-    headers: {
-      Accept: "application/json",
-      "User-Agent": USER_AGENT,
-    },
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => {
+    controller.abort();
+  }, FETCH_TIMEOUT);
 
-  if (!res.ok) {
-    throw new Error(`MusicBrainz ${String(res.status)}: ${res.statusText}`);
+  try {
+    const res = await fetch(`${MB_BASE}${path}`, {
+      headers: {
+        Accept: "application/json",
+        "User-Agent": USER_AGENT,
+      },
+      signal: controller.signal,
+    });
+
+    if (!res.ok) {
+      throw new Error(`MusicBrainz ${String(res.status)}: ${res.statusText}`);
+    }
+
+    return (await res.json()) as T;
+  } finally {
+    clearTimeout(timeout);
   }
-
-  return res.json() as Promise<T>;
 }
 
 function delay(ms: number): Promise<void> {

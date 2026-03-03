@@ -2,6 +2,7 @@ import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
 import eslintConfigPrettier from "eslint-config-prettier";
 import noUnsanitized from "eslint-plugin-no-unsanitized";
+import regexpPlugin from "eslint-plugin-regexp";
 
 export default tseslint.config(
   // ── Global ignores ────────────────────────────────────────────────
@@ -77,6 +78,9 @@ export default tseslint.config(
       "no-unsanitized/property": "error",
     },
   },
+
+  // ── Regexp safety (ReDoS prevention) ──────────────────────────────
+  regexpPlugin.configs["flat/recommended"],
 
   // ── Prettier compat (must be last) ────────────────────────────────
   eslintConfigPrettier,

@@ -88,5 +88,15 @@ services:
     extends: dev
     command: npm run zip
 
+  # ── Lockfile validation (supply-chain security) ──────────────────
+  lockfile-lint:
+    extends: dev
+    command: npm run lockfile-lint
+
+  # ── SBOM generation ──────────────────────────────────────────────
+  sbom:
+    extends: dev
+    command: npm run sbom
+
 volumes:
   node_modules:

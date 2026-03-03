@@ -30,7 +30,7 @@ function extractLocaleFromPath(): string | undefined {
 }
 
 function pathWithoutLocale(): string {
-  return location.pathname.replace(/^\/[a-z]{2}(-[a-z]{2})?/i, "");
+  return location.pathname.replace(/^\/[a-z]{2}(?:-[a-z]{2})?/i, "");
 }
 
 function isAlbumPage(): boolean {

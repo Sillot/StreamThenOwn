@@ -108,7 +108,7 @@ export class YtmMetadataExtractor implements MetadataExtractor {
         const candidate = parts[0] ?? "";
         const trimmed = candidate.trim();
         if (trimmed.length > 0 && trimmed.length < 200) {
-          if (!/^\d{4}$/.test(trimmed) && !/^\d+ (song|titre|chanson)/i.test(trimmed)) {
+          if (!/^\d{4}$/.test(trimmed) && !/^\d+ (?:song|titre|chanson)/i.test(trimmed)) {
             return trimmed;
           }
         }

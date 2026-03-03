@@ -1,4 +1,4 @@
-.PHONY: help install build watch typecheck lint lint-fix stylelint stylelint-fix format format-check knip test test-watch validate audit zip clean shell
+.PHONY: help install build watch typecheck lint lint-fix stylelint stylelint-fix format format-check knip test test-watch validate audit lockfile-lint sbom zip clean shell
 
 COMPOSE = docker compose
 
@@ -49,6 +49,12 @@ validate: ## Full validation (typecheck + lint + format + knip + audit + test + 
 
 audit: ## Security audit of npm dependencies
 	$(COMPOSE) run --rm audit
+
+lockfile-lint: ## Validate lockfile integrity (supply-chain security)
+	$(COMPOSE) run --rm lockfile-lint
+
+sbom: ## Generate Software Bill of Materials (CycloneDX)
+	$(COMPOSE) run --rm sbom
 
 zip: ## Package extension for Chrome Web Store
 	$(COMPOSE) run --rm zip

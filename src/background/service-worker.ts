@@ -23,9 +23,11 @@ interface SearchResponse {
 chrome.runtime.onMessage.addListener(
   (
     message: SearchMessage,
-    _sender: chrome.runtime.MessageSender,
+    sender: chrome.runtime.MessageSender,
     sendResponse: (response: SearchResponse) => void,
   ): boolean => {
+    // Only accept messages from our own extension
+    if (sender.id !== chrome.runtime.id) return false;
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime messages can have any type
     if (message.type !== "SEARCH_STORES") return false;
 
@@ -77,6 +79,8 @@ void chrome.action.disable();
 
 chrome.runtime.onMessage.addListener(
   (message: { type: string }, sender: chrome.runtime.MessageSender): undefined => {
+    // Only accept messages from our own extension
+    if (sender.id !== chrome.runtime.id) return undefined;
     if (message.type === "CONTENT_SCRIPT_READY" && sender.tab?.id !== undefined) {
       void chrome.action.enable(sender.tab.id);
     }
