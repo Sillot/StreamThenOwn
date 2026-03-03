@@ -33,7 +33,7 @@ chrome.runtime.onMessage.addListener(
     void (async () => {
       try {
         // Read user's enabled stores + display order + custom providers
-        const defaultOrder = ["discogs", "qobuz", "amazon", "bandcamp", "ebay"];
+        const defaultOrder = ["discogs", "qobuz", "amazon", "bandcamp", "ebay", "7digital"];
         const { enabledStores, storeOrder, customProviders } = await chrome.storage.sync.get({
           enabledStores: defaultOrder,
           storeOrder: defaultOrder,

@@ -14,6 +14,7 @@ import { resolveQobuz } from "./qobuz";
 import { resolveAmazon } from "./amazon";
 import { resolveBandcamp } from "./bandcamp";
 import { resolveEbay } from "./ebay";
+import { resolve7digital } from "./sevendigital";
 import type {
   CustomSearchProvider,
   StoreLink,
@@ -80,6 +81,9 @@ export async function resolveStoreLinks(
 
   const ebay = resolveEbay(query);
   allLinks.push(ebay);
+
+  const sevendigital = resolve7digital(query);
+  allLinks.push(sevendigital);
 
   // Step 4: Resolve custom search providers
   if (customProviders) {

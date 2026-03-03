@@ -54,6 +54,12 @@ const ALL_STORES: StoreDef[] = [
     description: "Vinyl, CD & collectibles \u2014 new & used",
     enabledByDefault: false,
   },
+  {
+    id: "7digital",
+    name: "7digital",
+    description: "Hi-Res digital downloads",
+    enabledByDefault: false,
+  },
 ];
 
 /** Default store display order (all store IDs). */

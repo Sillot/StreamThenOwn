@@ -154,6 +154,45 @@ export function getEbayDomain(locale: string): string {
 }
 
 /* ------------------------------------------------------------------ */
+/*  7digital subdomain                                                */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Map a BCP-47 locale to the 7digital country subdomain.
+ *
+ * 7digital uses `{cc}.7digital.com` where `cc` is a 2-letter country code
+ * (except for a few special cases like `uk` for GB).
+ * Falls back to `us` when no mapping exists.
+ */
+export function get7digitalSubdomain(locale: string): string {
+  const country = getCountryCode(locale);
+
+  const COUNTRY_TO_SUBDOMAIN: Record<string, string> = {
+    gb: "uk",
+    us: "us",
+    fr: "fr",
+    de: "de",
+    es: "es",
+    it: "it",
+    nl: "nl",
+    se: "se",
+    no: "no",
+    fi: "fi",
+    at: "at",
+    pt: "pt",
+    ie: "ie",
+    ca: "ca",
+    br: "br",
+    jp: "us", // No Japanese 7digital — use US
+    kr: "us", // No Korean 7digital — use US
+    dk: "us", // No Danish 7digital — use US
+    pl: "us", // No Polish 7digital — use US
+  };
+
+  return COUNTRY_TO_SUBDOMAIN[country] ?? "us";
+}
+
+/* ------------------------------------------------------------------ */
 /*  Country code → BCP-47 locale                                      */
 /* ------------------------------------------------------------------ */
 
