@@ -70,7 +70,53 @@ describe("AmazonMusicMetadataExtractor", () => {
   });
 
   describe("album page", () => {
-    it("extracts album + artist from music-detail-header attributes", () => {
+    it("extracts album + artist from real Amazon Music DOM", () => {
+      setLocation("/albums/B0XXXXXXXXX");
+      setDOM(
+        buildFragment([
+          {
+            tag: "div",
+            attrs: { id: "detailHeaderContainer" },
+            children: [
+              {
+                tag: "header",
+                children: [
+                  {
+                    tag: "h1",
+                    attrs: { title: "The Life of a Showgirl" },
+                    text: "The Life of a Showgirl",
+                  },
+                  {
+                    tag: "p",
+                    children: [
+                      {
+                        tag: "music-link",
+                        children: [
+                          {
+                            tag: "a",
+                            attrs: { href: "/artists/B00157GJ20/taylor-swift" },
+                            text: "Taylor Swift",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ]),
+      );
+
+      const meta = extractor.extract();
+      expect(meta).toEqual({
+        album: "The Life of a Showgirl",
+        artist: "Taylor Swift",
+        source: "album",
+      });
+    });
+
+    it("falls back to music-detail-header attributes", () => {
       setLocation("/albums/B0XXXXXXXXX");
       setDOM(
         buildFragment([
@@ -80,7 +126,6 @@ describe("AmazonMusicMetadataExtractor", () => {
               headline: "Random Access Memories",
               "primary-text": "Daft Punk",
             },
-            children: [{ tag: "div", attrs: { slot: "icons" } }],
           },
         ]),
       );
@@ -93,33 +138,25 @@ describe("AmazonMusicMetadataExtractor", () => {
       });
     });
 
-    it("falls back to artist link inside header", () => {
-      setLocation("/albums/B0XXXXXXXXX");
-      setDOM(
-        buildFragment([
-          {
-            tag: "music-detail-header",
-            attrs: { headline: "Discovery" },
-            children: [{ tag: "a", attrs: { href: "/artists/B001234" }, text: "Daft Punk" }],
-          },
-        ]),
-      );
-
-      const meta = extractor.extract();
-      expect(meta).toEqual({
-        album: "Discovery",
-        artist: "Daft Punk",
-        source: "album",
-      });
-    });
-
     it("falls back to any artist link on the page", () => {
       setLocation("/albums/B0XXXXXXXXX");
       setDOM(
         buildFragment([
           {
-            tag: "music-detail-header",
-            attrs: { headline: "Homework" },
+            tag: "div",
+            attrs: { id: "detailHeaderContainer" },
+            children: [
+              {
+                tag: "header",
+                children: [
+                  {
+                    tag: "h1",
+                    attrs: { title: "Homework" },
+                    text: "Homework",
+                  },
+                ],
+              },
+            ],
           },
           { tag: "a", attrs: { href: "/artists/B001234" }, text: "Daft Punk" },
         ]),
@@ -138,11 +175,26 @@ describe("AmazonMusicMetadataExtractor", () => {
       setDOM(
         buildFragment([
           {
-            tag: "music-detail-header",
-            attrs: {
-              headline: "Random Access Memories",
-              "primary-text": "Daft Punk",
-            },
+            tag: "div",
+            attrs: { id: "detailHeaderContainer" },
+            children: [
+              {
+                tag: "header",
+                children: [
+                  { tag: "h1", text: "Random Access Memories" },
+                  {
+                    tag: "p",
+                    children: [
+                      {
+                        tag: "a",
+                        attrs: { href: "/artists/B001234" },
+                        text: "Daft Punk",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
           },
         ]),
       );
@@ -161,11 +213,26 @@ describe("AmazonMusicMetadataExtractor", () => {
       setDOM(
         buildFragment([
           {
-            tag: "music-detail-header",
-            attrs: {
-              headline: "Découverte",
-              "primary-text": "Daft Punk",
-            },
+            tag: "div",
+            attrs: { id: "detailHeaderContainer" },
+            children: [
+              {
+                tag: "header",
+                children: [
+                  { tag: "h1", text: "Découverte" },
+                  {
+                    tag: "p",
+                    children: [
+                      {
+                        tag: "a",
+                        attrs: { href: "/artists/B001234" },
+                        text: "Daft Punk",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
           },
         ]),
       );
@@ -179,20 +246,32 @@ describe("AmazonMusicMetadataExtractor", () => {
       });
     });
 
-    it("returns null when no header found", () => {
+    it("returns null when no container found", () => {
       setLocation("/albums/B0XXXXXXXXX");
       setDOM(buildFragment([{ tag: "div" }]));
 
       expect(extractor.extract()).toBeNull();
     });
 
-    it("returns null when no headline attribute", () => {
+    it("returns null when no h1 title", () => {
       setLocation("/albums/B0XXXXXXXXX");
       setDOM(
         buildFragment([
           {
-            tag: "music-detail-header",
-            attrs: { "primary-text": "Daft Punk" },
+            tag: "div",
+            attrs: { id: "detailHeaderContainer" },
+            children: [
+              {
+                tag: "header",
+                children: [
+                  {
+                    tag: "a",
+                    attrs: { href: "/artists/B001234" },
+                    text: "Daft Punk",
+                  },
+                ],
+              },
+            ],
           },
         ]),
       );
@@ -205,8 +284,14 @@ describe("AmazonMusicMetadataExtractor", () => {
       setDOM(
         buildFragment([
           {
-            tag: "music-detail-header",
-            attrs: { headline: "Some Album" },
+            tag: "div",
+            attrs: { id: "detailHeaderContainer" },
+            children: [
+              {
+                tag: "header",
+                children: [{ tag: "h1", text: "Some Album" }],
+              },
+            ],
           },
         ]),
       );

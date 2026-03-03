@@ -2,9 +2,18 @@
  * Amazon Music metadata extractor.
  *
  * Scrapes artist/album info from Amazon Music's web player DOM.
- * Amazon Music uses web components (`<music-detail-header>`,
- * `<music-horizontal-item>`) with data stored in element attributes
- * (`headline`, `primary-text`, `secondary-text`).
+ *
+ * Album page structure (`#detailHeaderContainer`):
+ *   <div id="detailHeaderContainer">
+ *     <header>
+ *       <h1 title="Album Name">Album Name</h1>
+ *       <p><music-link><a href="/artists/B…/artist-name">Artist</a></music-link></p>
+ *     </header>
+ *   </div>
+ *
+ * Now-playing bar (`music-horizontal-item` inside `#transport` / footer):
+ *   primary-text  = track name
+ *   secondary-text = artist name
  *
  * URL patterns:
  *   music.amazon.com/albums/B0xxxxx    → album page
@@ -59,13 +68,16 @@ export class AmazonMusicMetadataExtractor implements MetadataExtractor {
   /* ---- Album page (/albums/:id) ---- */
 
   private extractAlbumPage(): MusicMetadata | null {
-    const header = document.querySelector("music-detail-header");
-    if (!header) return null;
+    // The detail header container wraps a <header> with <h1> + artist <a>
+    const container =
+      document.querySelector("#detailHeaderContainer") ??
+      document.querySelector("music-detail-header");
+    if (!container) return null;
 
-    const album = header.getAttribute("headline")?.trim();
-    if (!album || album.length === 0 || album.length >= 200) return null;
+    const album = this.extractAlbumTitle(container);
+    if (!album) return null;
 
-    const artist = this.extractArtistFromHeader(header);
+    const artist = this.extractArtistFromHeader(container);
     if (!artist) return null;
 
     const locale = extractLocale();
@@ -118,18 +130,45 @@ export class AmazonMusicMetadataExtractor implements MetadataExtractor {
 
   /* ---- Shared helpers ---- */
 
-  private extractArtistFromHeader(header: Element): string | undefined {
-    // Strategy 1: primary-text attribute on music-detail-header
-    const primaryText = header.getAttribute("primary-text")?.trim();
-    if (primaryText && primaryText.length > 0 && primaryText.length < 200) {
-      return primaryText;
+  /**
+   * Extract album title from the detail header.
+   * Real DOM: `<h1 title="…">Album Name</h1>` inside `#detailHeaderContainer header`.
+   * Fallback: `headline` attribute on `<music-detail-header>`.
+   */
+  private extractAlbumTitle(container: Element): string | undefined {
+    // Strategy 1: <h1> inside the header (real Amazon Music DOM)
+    const h1 = container.querySelector<HTMLElement>("h1");
+    const h1Text = h1?.textContent.trim();
+    if (h1Text && h1Text.length > 0 && h1Text.length < 200) {
+      return h1Text;
     }
 
-    // Strategy 2: artist links inside the header
-    const artistLink = header.querySelector<HTMLAnchorElement>('a[href*="/artists/"]');
+    // Strategy 2: headline attribute on <music-detail-header> (legacy/fallback)
+    const headline = container.getAttribute("headline")?.trim();
+    if (headline && headline.length > 0 && headline.length < 200) {
+      return headline;
+    }
+
+    return undefined;
+  }
+
+  /**
+   * Extract artist name from the detail header.
+   * Real DOM: `<a href="/artists/…">Artist</a>` inside a `<music-link>`.
+   * Fallback: `primary-text` attribute on `<music-detail-header>`.
+   */
+  private extractArtistFromHeader(container: Element): string | undefined {
+    // Strategy 1: artist link inside the header
+    const artistLink = container.querySelector<HTMLAnchorElement>('a[href*="/artists/"]');
     const linkText = artistLink?.textContent.trim();
     if (linkText && linkText.length > 0 && linkText.length < 200) {
       return linkText;
+    }
+
+    // Strategy 2: primary-text attribute (legacy/fallback)
+    const primaryText = container.getAttribute("primary-text")?.trim();
+    if (primaryText && primaryText.length > 0 && primaryText.length < 200) {
+      return primaryText;
     }
 
     // Strategy 3: any artist link on the page
