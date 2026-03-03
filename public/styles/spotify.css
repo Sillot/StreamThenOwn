@@ -1,0 +1,165 @@
+/*
+ * StreamThenOwn — styles matching Spotify's design system.
+ *
+ * Spotify uses:
+ *   - Background: #121212 / #181818 / #282828
+ *   - Text: #fff (primary), #a7a7a7 / #b3b3b3 (secondary)
+ *   - Accent: #1db954 (green)
+ *   - Font: "Spotify Mix", "CircularSp", Helvetica, Arial, sans-serif
+ *   - Border radius: 4–8px for cards, 50% for buttons
+ *   - Button size: 32px for action row buttons
+ */
+
+/* ------------------------------------------------------------------ */
+/*  Action button — matches Spotify icon-button row (save, more, …)   */
+/* ------------------------------------------------------------------ */
+
+.sto-sp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #b3b3b3;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  transition:
+    color 0.2s ease,
+    transform 0.1s ease;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  box-shadow: none;
+  vertical-align: middle;
+  line-height: 0;
+}
+
+.sto-sp-btn:hover {
+  color: #fff;
+  transform: scale(1.04);
+}
+
+.sto-sp-btn:active {
+  color: #b3b3b3;
+  transform: scale(0.96);
+}
+
+.sto-sp-btn__icon {
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Dropdown menu — matches Spotify's context menu style              */
+/* ------------------------------------------------------------------ */
+
+.sto-sp-menu {
+  position: fixed;
+  z-index: 10000;
+  background: #282828;
+  border-radius: 4px;
+  padding: 4px;
+  box-shadow:
+    0 16px 24px rgba(0, 0, 0, 0.3),
+    0 6px 8px rgba(0, 0, 0, 0.2);
+  font-family: "Spotify Mix", "CircularSp", Helvetica, Arial, sans-serif;
+  color: #e8eaed;
+  overflow: hidden;
+  animation: sto-sp-menu-in 0.15s ease-out;
+}
+
+@keyframes sto-sp-menu-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Menu items — matches Spotify context menu items                   */
+/* ------------------------------------------------------------------ */
+
+.sto-sp-menu__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  height: 40px;
+  border-radius: 2px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  transition: background 0.1s;
+  position: relative;
+}
+
+.sto-sp-menu__item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  color: #fff;
+}
+
+.sto-sp-menu__item:active {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.sto-sp-menu__item-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.sto-sp-menu__item:hover .sto-sp-menu__item-icon {
+  color: #fff;
+}
+
+.sto-sp-menu__item-label {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: normal;
+  color: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+/* ------------------------------------------------------------------ */
+/*  "Direct" badge — small green pill                                 */
+/* ------------------------------------------------------------------ */
+
+.sto-sp-menu__item-badge {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #1db954;
+  background: rgba(29, 185, 84, 0.12);
+  border-radius: 2px;
+  padding: 2px 6px;
+  line-height: 14px;
+  flex-shrink: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Empty state                                                       */
+/* ------------------------------------------------------------------ */
+
+.sto-sp-menu__empty {
+  padding: 16px 12px;
+  font-size: 13px;
+  color: #a7a7a7;
+  text-align: center;
+}

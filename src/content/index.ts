@@ -22,6 +22,7 @@ const LOG = "[STO]";
 let lastMetadataKey = "";
 let pendingCheck: ReturnType<typeof setTimeout> | null = null;
 let platform: PlatformAdapter | null = null;
+let remainingRetries = 0;
 
 /* ------------------------------------------------------------------ */
 /*  Core logic                                                        */
@@ -31,11 +32,18 @@ function metadataKey(meta: MusicMetadata): string {
   return `${meta.artist}||${meta.album ?? ""}||${meta.source}`;
 }
 
-async function check(): Promise<void> {
+async function check(retries = 3): Promise<void> {
   if (!platform) return;
 
   const meta = platform.metadata.extract();
   if (!meta) {
+    // Retry: SPA frameworks (React) may not have rendered the DOM yet
+    if (retries > 0) {
+      console.log(LOG, `No metadata yet, retrying (${String(retries)} left)…`);
+      remainingRetries = retries - 1;
+      scheduleCheck(1500);
+      return;
+    }
     platform.ui.cleanup();
     lastMetadataKey = "";
     platform.ui.setLinks(null);
@@ -102,14 +110,16 @@ async function requestStoreLinks(meta: MusicMetadata): Promise<StoreLinksResult 
 
 function scheduleCheck(delayMs = 800): void {
   if (pendingCheck) clearTimeout(pendingCheck);
+  const retries = remainingRetries;
   pendingCheck = setTimeout(() => {
     pendingCheck = null;
-    void check();
+    void check(retries);
   }, delayMs);
 }
 
 function onNavigate(): void {
   lastMetadataKey = "";
+  remainingRetries = 3;
   platform?.ui.cleanup();
   scheduleCheck();
 }
@@ -127,7 +137,8 @@ function init(): void {
 
   console.log(LOG, `Loaded on ${platform.name}:`, window.location.href);
 
-  // Initial check (delayed for DOM to be ready)
+  // Initial check (delayed for DOM to be ready, with retries for SPA)
+  remainingRetries = 5;
   scheduleCheck(1500);
 
   // Observe platform-specific navigation

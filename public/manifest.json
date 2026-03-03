@@ -25,7 +25,13 @@
     {
       "matches": ["*://music.youtube.com/*"],
       "js": ["content/index.js"],
-      "css": ["styles/sto.css"],
+      "css": ["styles/sto.css", "styles/youtube.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["*://open.spotify.com/*"],
+      "js": ["content/index.js"],
+      "css": ["styles/sto.css", "styles/spotify.css"],
       "run_at": "document_idle"
     }
   ],
@@ -39,7 +45,7 @@
   "web_accessible_resources": [
     {
       "resources": ["icons/*"],
-      "matches": ["*://music.youtube.com/*"]
+      "matches": ["*://music.youtube.com/*", "*://open.spotify.com/*"]
     }
   ]
 }
