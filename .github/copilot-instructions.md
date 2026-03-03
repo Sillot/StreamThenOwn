@@ -135,14 +135,13 @@ Follow this pattern:
 - **MusicBrainz**: rate-limited to **1 request per second**. Always send a descriptive `User-Agent` header. Handle 503 responses with exponential backoff.
 - **Discogs**: respect `X-Discogs-Ratelimit-Remaining` headers. Authenticate if possible.
 - **General**: all API calls must handle errors gracefully — never let a single store failure crash the whole resolution. Return a search-fallback URL instead.
-- Avoid `any` — every API response must be typed.
+- Avoid `any` — every API response must be typed (see [TS instructions](.github/instructions/typescript.instructions.md) for details).
 
 ## Security
 
 This is a Chrome extension with content scripts running on streaming music services. Security is critical.
 
-- **Never use `innerHTML`**, `outerHTML`, `insertAdjacentHTML`, or `document.write`. Use `document.createElement` + `textContent` / `setAttribute` instead.
-- The ESLint plugin `no-unsanitized` enforces this — do not disable its rules.
+- DOM security rules (`innerHTML` ban, `no-unsanitized`, `createElement`-only) are detailed in the [TS instructions file](.github/instructions/typescript.instructions.md).
 - Respect the strict **Content Security Policy** (`script-src 'self'; object-src 'none'; base-uri 'none'`).
 - Never use `eval`, `new Function()`, or inline event handlers.
 - Sanitize all data coming from external APIs before rendering in the DOM.
@@ -150,12 +149,7 @@ This is a Chrome extension with content scripts running on streaming music servi
 
 ## TypeScript Guidelines
 
-- **Strict mode** is enabled with extra strictness flags (`noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, etc.).
-- Use `type` imports: `import type { Foo } from "./bar"` (enforced by ESLint rule `consistent-type-imports`).
-- Prefix unused parameters with `_`.
-- All exported functions must have explicit return types (`explicit-module-boundary-types`).
-- Prefer `??` over `||` for nullish coalescing (enforced).
-- Never leave floating promises — always `await` or explicitly `void` them.
+See [`.github/instructions/typescript.instructions.md`](.github/instructions/typescript.instructions.md) for detailed TS/JS coding standards with examples. That file is auto-applied to all `*.{ts,js,mts,mjs}` files.
 
 ## Testing
 
