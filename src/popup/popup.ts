@@ -6,6 +6,7 @@
  */
 
 import { t } from "../i18n";
+import { createStoreIcon } from "../stores/icons";
 import type { MusicMetadata } from "../platforms/types";
 import type { StoreLink, StoreLinksResult } from "../stores/types";
 
@@ -20,22 +21,6 @@ interface CurrentLinksResponse {
 
 /** Sentinel: content script is not available (unsupported page). */
 const UNSUPPORTED = Symbol("unsupported");
-
-/* ------------------------------------------------------------------ */
-/*  Store icon registry (mirrors src/stores/icons.ts for popup)       */
-/* ------------------------------------------------------------------ */
-
-const STORE_ICON_FILES: Readonly<Record<string, string>> = {
-  discogs: "discogs.svg",
-  qobuz: "qobuz.svg",
-  amazon: "amazon.svg",
-  ebay: "ebay.svg",
-  "7digital": "7digital.svg",
-};
-
-const BANDCAMP_PATH = "M22 6L13.2 18H2l8.8-12H22z";
-const SEARCH_ICON_PATH =
-  "M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z";
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                           */
@@ -56,28 +41,13 @@ function createSvgIcon(pathData: string, size: number, cssClass: string): SVGSVG
 }
 
 function createStoreIconElement(storeId: string): Element {
-  const fileName = STORE_ICON_FILES[storeId];
-  if (fileName) {
-    const img = document.createElement("img");
-    img.src = chrome.runtime.getURL(`icons/${fileName}`);
-    img.alt = "";
-    img.width = 20;
-    img.height = 20;
-    img.className = "sto-popup__link-icon";
-    return img;
+  const icon = createStoreIcon(storeId, 20, "sto-popup__link-icon");
+  // SVG icons need the --svg modifier class instead
+  if (icon instanceof SVGSVGElement) {
+    icon.classList.remove("sto-popup__link-icon");
+    icon.classList.add("sto-popup__link-icon--svg");
   }
-
-  if (storeId === "bandcamp") {
-    return createSvgIcon(BANDCAMP_PATH, 20, "sto-popup__link-icon--svg");
-  }
-
-  if (storeId.startsWith("custom_")) {
-    return createSvgIcon(SEARCH_ICON_PATH, 20, "sto-popup__link-icon--svg");
-  }
-
-  const fallback = document.createElement("span");
-  fallback.className = "sto-popup__link-icon";
-  return fallback;
+  return icon;
 }
 
 /** Material Design "settings" gear icon path. */

@@ -41,6 +41,7 @@ export class SpotifyUIInjector implements UIInjector {
 
     const btn = document.createElement("button");
     btn.id = BTN_ID;
+    btn.type = "button";
     btn.className = "sto-sp-btn";
     btn.title = meta.source === "album" ? t("ownThisAlbum") : t("ownThisTrack");
     btn.setAttribute("aria-label", btn.title);
@@ -70,6 +71,7 @@ export class SpotifyUIInjector implements UIInjector {
     const existing = document.getElementById(MENU_ID);
     if (existing) {
       existing.remove();
+      anchor.classList.remove("sto-sp-btn--open");
       return;
     }
 
@@ -93,11 +95,13 @@ export class SpotifyUIInjector implements UIInjector {
 
     document.body.appendChild(menu);
     positionMenu(menu, anchor);
+    anchor.classList.add("sto-sp-btn--open");
 
     // Close on click outside
     const onClickOutside = (e: MouseEvent) => {
       if (!menu.contains(e.target as Node) && e.target !== anchor) {
         menu.remove();
+        anchor.classList.remove("sto-sp-btn--open");
         document.removeEventListener("click", onClickOutside, true);
       }
     };
@@ -109,6 +113,7 @@ export class SpotifyUIInjector implements UIInjector {
     const onEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         menu.remove();
+        anchor.classList.remove("sto-sp-btn--open");
         document.removeEventListener("keydown", onEsc, true);
       }
     };
@@ -152,14 +157,6 @@ function createMenuItem(link: StoreLink): HTMLAnchorElement {
   label.className = "sto-sp-menu__item-label";
   label.textContent = t("buyOn", link.label);
   a.appendChild(label);
-
-  // Show "direct" badge when link is API-resolved
-  if (link.isDirect) {
-    const badge = document.createElement("span");
-    badge.className = "sto-sp-menu__item-badge";
-    badge.textContent = "direct";
-    a.appendChild(badge);
-  }
 
   return a;
 }

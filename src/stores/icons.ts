@@ -11,6 +11,7 @@ const STORE_ICON_FILES: Readonly<Record<string, string>> = {
   discogs: "discogs.svg",
   qobuz: "qobuz.svg",
   amazon: "amazon.svg",
+  bandcamp: "bandcamp.svg",
   ebay: "ebay.svg",
   "7digital": "7digital.svg",
 };
@@ -19,13 +20,7 @@ const STORE_ICON_FILES: Readonly<Record<string, string>> = {
 const BUTTON_ICON_PATH =
   "M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-2c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2zm6 16H6V8h2v2c0 .55.45 1 1 1s1-.45 1-1V8h4v2c0 .55.45 1 1 1s1-.45 1-1V8h2v12z";
 
-/**
- * Bandcamp SVG path data — no dedicated icon file available.
- * Used as a fallback with inline SVG rendering.
- */
-const BANDCAMP_ICON_PATH = "M22 6L13.2 18H2l8.8-12H22z";
-
-/** Material Design "search" icon — used for custom search providers. */
+/** Material Design \"search\" icon — used for custom search providers. */
 const CUSTOM_SEARCH_ICON_PATH =
   "M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z";
 
@@ -49,11 +44,6 @@ export function createStoreIcon(storeId: string, size: number, cssClass: string)
     img.height = size;
     img.className = cssClass;
     return img;
-  }
-
-  // Fallback: bandcamp uses inline SVG path
-  if (storeId === "bandcamp") {
-    return createInlineSvgIcon(BANDCAMP_ICON_PATH, size, cssClass);
   }
 
   // Custom search providers (id starts with "custom_") → search icon

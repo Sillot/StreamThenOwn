@@ -168,13 +168,5 @@ function createMenuItem(link: StoreLink): HTMLAnchorElement {
   label.textContent = t("buyOn", link.label);
   a.appendChild(label);
 
-  // Show "direct" badge when link is API-resolved
-  if (link.isDirect) {
-    const badge = document.createElement("span");
-    badge.className = "sto-am-menu__item-badge";
-    badge.textContent = "direct";
-    a.appendChild(badge);
-  }
-
   return a;
 }

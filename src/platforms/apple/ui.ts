@@ -18,8 +18,8 @@ import { waitForElement } from "../../utils/dom";
 /*  Constants                                                         */
 /* ------------------------------------------------------------------ */
 
-const BTN_ID = "sto-am-action-btn";
-const MENU_ID = "sto-am-dropdown-menu";
+const BTN_ID = "sto-apl-action-btn";
+const MENU_ID = "sto-apl-dropdown-menu";
 
 /* ------------------------------------------------------------------ */
 /*  Implementation                                                    */
@@ -41,10 +41,10 @@ export class AppleUIInjector implements UIInjector {
 
     const btn = document.createElement("button");
     btn.id = BTN_ID;
-    btn.className = "sto-am-btn";
+    btn.className = "sto-apl-btn";
     btn.title = meta.source === "album" ? t("ownThisAlbum") : t("ownThisTrack");
     btn.setAttribute("aria-label", btn.title);
-    btn.appendChild(createButtonIcon(16, "sto-am-btn__icon"));
+    btn.appendChild(createButtonIcon(16, "sto-apl-btn__icon"));
 
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -77,7 +77,7 @@ export class AppleUIInjector implements UIInjector {
 
     const menu = document.createElement("div");
     menu.id = MENU_ID;
-    menu.className = "sto-am-menu";
+    menu.className = "sto-apl-menu";
 
     const availableLinks = this.currentLinks.links.filter((l) => l.url && l.url.length > 0);
     for (const link of availableLinks) {
@@ -86,7 +86,7 @@ export class AppleUIInjector implements UIInjector {
 
     if (availableLinks.length === 0) {
       const empty = document.createElement("div");
-      empty.className = "sto-am-menu__empty";
+      empty.className = "sto-apl-menu__empty";
       empty.textContent = t("noLinks");
       menu.appendChild(empty);
     }
@@ -144,22 +144,14 @@ function createMenuItem(link: StoreLink): HTMLAnchorElement {
   a.href = sanitizeUrl(link.url);
   a.target = "_blank";
   a.rel = "noopener noreferrer";
-  a.className = "sto-am-menu__item";
+  a.className = "sto-apl-menu__item";
 
-  a.appendChild(createStoreIcon(link.store, 18, "sto-am-menu__item-icon"));
+  a.appendChild(createStoreIcon(link.store, 18, "sto-apl-menu__item-icon"));
 
   const label = document.createElement("span");
-  label.className = "sto-am-menu__item-label";
+  label.className = "sto-apl-menu__item-label";
   label.textContent = t("buyOn", link.label);
   a.appendChild(label);
-
-  // Show "direct" badge when link is API-resolved
-  if (link.isDirect) {
-    const badge = document.createElement("span");
-    badge.className = "sto-am-menu__item-badge";
-    badge.textContent = "direct";
-    a.appendChild(badge);
-  }
 
   return a;
 }

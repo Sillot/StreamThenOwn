@@ -37,6 +37,7 @@ const HOSTNAME_LOCALE: Readonly<Record<string, string>> = {
   "music.amazon.it": "it",
   "music.amazon.es": "es",
   "music.amazon.co.jp": "ja",
+  "music.amazon.in": "en",
   "music.amazon.com.br": "pt",
   "music.amazon.nl": "nl",
   "music.amazon.se": "sv",

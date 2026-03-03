@@ -38,6 +38,7 @@ export class YtmUIInjector implements UIInjector {
 
     const btn = document.createElement("button");
     btn.id = BTN_ID;
+    btn.type = "button";
     btn.className = "sto-action-btn";
     btn.title = meta.source === "album" ? t("ownThisAlbum") : t("ownThisTrack");
     btn.setAttribute("aria-label", btn.title);
@@ -66,6 +67,7 @@ export class YtmUIInjector implements UIInjector {
     const existing = document.getElementById(MENU_ID);
     if (existing) {
       existing.remove();
+      anchor.classList.remove("sto-action-btn--open");
       return;
     }
 
@@ -89,11 +91,13 @@ export class YtmUIInjector implements UIInjector {
 
     document.body.appendChild(menu);
     positionMenu(menu, anchor);
+    anchor.classList.add("sto-action-btn--open");
 
     // Close on click outside
     const onClickOutside = (e: MouseEvent) => {
       if (!menu.contains(e.target as Node) && e.target !== anchor) {
         menu.remove();
+        anchor.classList.remove("sto-action-btn--open");
         document.removeEventListener("click", onClickOutside, true);
       }
     };
@@ -105,6 +109,7 @@ export class YtmUIInjector implements UIInjector {
     const onEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         menu.remove();
+        anchor.classList.remove("sto-action-btn--open");
         document.removeEventListener("keydown", onEsc, true);
       }
     };

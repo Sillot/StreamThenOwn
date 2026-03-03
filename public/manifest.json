@@ -60,7 +60,10 @@
         "*://music.amazon.com.br/*",
         "*://music.amazon.com.au/*",
         "*://music.amazon.ca/*",
-        "*://music.amazon.com.mx/*"
+        "*://music.amazon.com.mx/*",
+        "*://music.amazon.nl/*",
+        "*://music.amazon.se/*",
+        "*://music.amazon.pl/*"
       ],
       "js": ["content/index.js"],
       "css": ["styles/amazon-music.css"],
@@ -94,7 +97,10 @@
         "*://music.amazon.com.br/*",
         "*://music.amazon.com.au/*",
         "*://music.amazon.ca/*",
-        "*://music.amazon.com.mx/*"
+        "*://music.amazon.com.mx/*",
+        "*://music.amazon.nl/*",
+        "*://music.amazon.se/*",
+        "*://music.amazon.pl/*"
       ]
     }
   ]

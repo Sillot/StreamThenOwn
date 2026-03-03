@@ -50,10 +50,10 @@ describe("AppleUIInjector", () => {
 
       await ui.injectButton({ artist: "Muse", album: "Blackhole", source: "album" });
 
-      const btn = document.getElementById("sto-am-action-btn");
+      const btn = document.getElementById("sto-apl-action-btn");
       expect(btn).not.toBeNull();
       expect(btn?.title).toBe("Own this album");
-      expect(btn?.className).toBe("sto-am-btn");
+      expect(btn?.className).toBe("sto-apl-btn");
 
       // Verify button is before cloud-buttons
       const cloudBtns = document.querySelector('[data-testid="cloud-buttons"]');
@@ -66,7 +66,7 @@ describe("AppleUIInjector", () => {
       await ui.injectButton({ artist: "Muse", album: "Blackhole", source: "album" });
       await ui.injectButton({ artist: "Muse", album: "Blackhole", source: "album" });
 
-      const buttons = document.querySelectorAll("#sto-am-action-btn");
+      const buttons = document.querySelectorAll("#sto-apl-action-btn");
       expect(buttons).toHaveLength(1);
     });
 
@@ -75,7 +75,7 @@ describe("AppleUIInjector", () => {
 
       await ui.injectButton({ artist: "Muse", source: "song" });
 
-      const btn = document.getElementById("sto-am-action-btn");
+      const btn = document.getElementById("sto-apl-action-btn");
       expect(btn?.title).toBe("Own this track");
     });
   });
@@ -85,10 +85,10 @@ describe("AppleUIInjector", () => {
       setupDOM();
 
       await ui.injectButton({ artist: "Test", source: "album" });
-      expect(document.getElementById("sto-am-action-btn")).not.toBeNull();
+      expect(document.getElementById("sto-apl-action-btn")).not.toBeNull();
 
       ui.cleanup();
-      expect(document.getElementById("sto-am-action-btn")).toBeNull();
+      expect(document.getElementById("sto-apl-action-btn")).toBeNull();
     });
   });
 
@@ -118,14 +118,14 @@ describe("AppleUIInjector", () => {
 
       await ui.injectButton({ artist: "Muse", album: "Blackhole", source: "album" });
 
-      const btn = document.getElementById("sto-am-action-btn");
+      const btn = document.getElementById("sto-apl-action-btn");
       btn?.click();
 
-      const menu = document.getElementById("sto-am-dropdown-menu");
+      const menu = document.getElementById("sto-apl-dropdown-menu");
       expect(menu).not.toBeNull();
-      expect(menu?.className).toBe("sto-am-menu");
+      expect(menu?.className).toBe("sto-apl-menu");
 
-      const items = menu?.querySelectorAll(".sto-am-menu__item");
+      const items = menu?.querySelectorAll(".sto-apl-menu__item");
       expect(items).toHaveLength(2);
     });
 
@@ -135,11 +135,11 @@ describe("AppleUIInjector", () => {
 
       await ui.injectButton({ artist: "Test", album: "Album", source: "album" });
 
-      const btn = document.getElementById("sto-am-action-btn");
+      const btn = document.getElementById("sto-apl-action-btn");
       btn?.click();
 
-      const menu = document.getElementById("sto-am-dropdown-menu");
-      const empty = menu?.querySelector(".sto-am-menu__empty");
+      const menu = document.getElementById("sto-apl-dropdown-menu");
+      const empty = menu?.querySelector(".sto-apl-menu__empty");
       expect(empty?.textContent).toBe("No links found");
     });
 
@@ -161,12 +161,12 @@ describe("AppleUIInjector", () => {
 
       await ui.injectButton({ artist: "Test", album: "Album", source: "album" });
 
-      const btn = document.getElementById("sto-am-action-btn");
+      const btn = document.getElementById("sto-apl-action-btn");
       btn?.click();
-      expect(document.getElementById("sto-am-dropdown-menu")).not.toBeNull();
+      expect(document.getElementById("sto-apl-dropdown-menu")).not.toBeNull();
 
       btn?.click();
-      expect(document.getElementById("sto-am-dropdown-menu")).toBeNull();
+      expect(document.getElementById("sto-apl-dropdown-menu")).toBeNull();
     });
   });
 });
