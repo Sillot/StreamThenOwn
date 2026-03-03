@@ -46,6 +46,11 @@
   background-color: rgb(255 255 255 / 30%);
 }
 
+/* Highlight when dropdown is open */
+.sto-action-btn--open {
+  background-color: rgb(255 255 255 / 20%);
+}
+
 .sto-action-btn__icon {
   width: 24px;
   height: 24px;
@@ -141,6 +146,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  flex: 1;
 }
 
 /* ------------------------------------------------------------------ */

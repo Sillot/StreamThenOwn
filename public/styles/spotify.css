@@ -50,6 +50,11 @@
   transform: scale(0.96);
 }
 
+/* Highlight when dropdown is open */
+.sto-sp-btn--open {
+  color: #fff;
+}
+
 .sto-sp-btn__icon {
   width: 24px;
   height: 24px;
@@ -140,25 +145,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   flex: 1;
-}
-
-/* ------------------------------------------------------------------ */
-
-/*  "Direct" badge — small green pill                                 */
-
-/* ------------------------------------------------------------------ */
-
-.sto-sp-menu__item-badge {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #1db954;
-  background: rgb(29 185 84 / 12%);
-  border-radius: 2px;
-  padding: 2px 6px;
-  line-height: 14px;
-  flex-shrink: 0;
 }
 
 /* ------------------------------------------------------------------ */

@@ -16,7 +16,7 @@
 
 /* ------------------------------------------------------------------ */
 
-.sto-am-btn {
+.sto-apl-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -41,19 +41,19 @@
   line-height: 0;
 }
 
-.sto-am-btn:hover {
+.sto-apl-btn:hover {
   background: hsl(0deg 0% 100% / 10%);
   color: #ff4f57;
   transform: scale(1.04);
 }
 
-.sto-am-btn:active {
+.sto-apl-btn:active {
   background: hsl(0deg 0% 100% / 4%);
   color: #e0353c;
   transform: scale(0.96);
 }
 
-.sto-am-btn__icon {
+.sto-apl-btn__icon {
   width: 16px;
   height: 16px;
   pointer-events: none;
@@ -65,7 +65,7 @@
 
 /* ------------------------------------------------------------------ */
 
-.sto-am-menu {
+.sto-apl-menu {
   position: fixed;
   z-index: 10000;
   background: rgb(50 50 52 / 82%);
@@ -78,10 +78,10 @@
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro", "Helvetica Neue", Arial, sans-serif;
   color: #f5f5f7;
   overflow: hidden;
-  animation: sto-am-menu-in 0.18s ease-out;
+  animation: sto-apl-menu-in 0.18s ease-out;
 }
 
-@keyframes sto-am-menu-in {
+@keyframes sto-apl-menu-in {
   from {
     opacity: 0;
     transform: scale(0.95) translateY(-4px);
@@ -99,7 +99,7 @@
 
 /* ------------------------------------------------------------------ */
 
-.sto-am-menu__item {
+.sto-apl-menu__item {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -113,17 +113,17 @@
   position: relative;
 }
 
-.sto-am-menu__item:hover {
+.sto-apl-menu__item:hover {
   background: rgb(255 255 255 / 10%);
   text-decoration: none;
   color: #fff;
 }
 
-.sto-am-menu__item:active {
+.sto-apl-menu__item:active {
   background: rgb(255 255 255 / 15%);
 }
 
-.sto-am-menu__item-icon {
+.sto-apl-menu__item-icon {
   flex-shrink: 0;
   width: 18px;
   height: 18px;
@@ -131,12 +131,12 @@
   opacity: 0.8;
 }
 
-.sto-am-menu__item:hover .sto-am-menu__item-icon {
+.sto-apl-menu__item:hover .sto-apl-menu__item-icon {
   filter: brightness(0) invert(1);
   opacity: 1;
 }
 
-.sto-am-menu__item-label {
+.sto-apl-menu__item-label {
   font-size: 13px;
   font-weight: 400;
   line-height: 18px;
@@ -150,30 +150,11 @@
 
 /* ------------------------------------------------------------------ */
 
-/*  "Direct" badge — small red pill (Apple Music accent)              */
-
-/* ------------------------------------------------------------------ */
-
-.sto-am-menu__item-badge {
-  font-size: 10px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #fc3c44;
-  background: rgb(252 60 68 / 15%);
-  border-radius: 4px;
-  padding: 2px 6px;
-  line-height: 14px;
-  flex-shrink: 0;
-}
-
-/* ------------------------------------------------------------------ */
-
 /*  Empty state                                                       */
 
 /* ------------------------------------------------------------------ */
 
-.sto-am-menu__empty {
+.sto-apl-menu__empty {
   padding: 14px 12px;
   font-size: 13px;
   color: #a1a1a6;

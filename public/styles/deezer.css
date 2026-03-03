@@ -168,25 +168,6 @@
 
 /* ------------------------------------------------------------------ */
 
-/*  "Direct" badge — small purple pill (Deezer accent)                 */
-
-/* ------------------------------------------------------------------ */
-
-.sto-dz-menu__item-badge {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #a238ff;
-  background: rgb(162 56 255 / 15%);
-  border-radius: 6px;
-  padding: 2px 8px;
-  line-height: 14px;
-  flex-shrink: 0;
-}
-
-/* ------------------------------------------------------------------ */
-
 /*  Empty state                                                        */
 
 /* ------------------------------------------------------------------ */
