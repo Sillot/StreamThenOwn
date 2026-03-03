@@ -13,7 +13,14 @@ import { resolveDiscogs } from "./discogs";
 import { resolveQobuz } from "./qobuz";
 import { resolveAmazon } from "./amazon";
 import { resolveBandcamp } from "./bandcamp";
-import type { StoreLink, StoreLinksResult, StoreQuery, ExternalUrls } from "./types";
+import { resolveEbay } from "./ebay";
+import type {
+  CustomSearchProvider,
+  StoreLink,
+  StoreLinksResult,
+  StoreQuery,
+  ExternalUrls,
+} from "./types";
 
 /** In-memory cache keyed by "artist||album" */
 const cache = new Map<string, StoreLinksResult>();
@@ -25,10 +32,12 @@ function cacheKey(q: StoreQuery): string {
 /**
  * Resolve purchase links for a given artist + album.
  * Only resolves stores listed in `enabledStores`. Defaults to all.
+ * Custom search providers are appended after built-in stores.
  */
 export async function resolveStoreLinks(
   query: StoreQuery,
   enabledStores?: string[],
+  customProviders?: CustomSearchProvider[],
 ): Promise<StoreLinksResult> {
   const key = cacheKey(query);
   const cached = cache.get(key);
@@ -69,6 +78,16 @@ export async function resolveStoreLinks(
   const bandcamp = resolveBandcamp(query, externalUrls.bandcamp);
   allLinks.push(bandcamp);
 
+  const ebay = resolveEbay(query);
+  allLinks.push(ebay);
+
+  // Step 4: Resolve custom search providers
+  if (customProviders) {
+    for (const provider of customProviders) {
+      allLinks.push(resolveCustomProvider(query, provider));
+    }
+  }
+
   const fullResult: StoreLinksResult = {
     artist: query.artist,
     album: query.album ?? "",
@@ -83,4 +102,28 @@ export async function resolveStoreLinks(
     return { ...fullResult, links: allLinks.filter((l) => enabledStores.includes(l.store)) };
   }
   return fullResult;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Custom search provider resolution                                 */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Build a `StoreLink` from a user-defined custom search provider.
+ * Always produces a search-fallback URL (never a direct link).
+ */
+function resolveCustomProvider(query: StoreQuery, provider: CustomSearchProvider): StoreLink {
+  const artist = encodeURIComponent(query.artist);
+  const album = encodeURIComponent(query.album ?? "");
+  const url = provider.searchUrlTemplate
+    .replaceAll("{artist}", artist)
+    .replaceAll("{album}", album);
+
+  return {
+    store: provider.id,
+    label: provider.label,
+    format: "customSearch",
+    url,
+    isDirect: false,
+  };
 }

@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Stream det. Elsk det. Ej det. — Find købslinks til den musik, du elsker, på YouTube Music.",
+    "message": "Stream det. Elsk det. Ej det. — Find købslinks til den musik, du elsker, på YouTube Music, Spotify og Apple Music.",
     "description": "The description of the extension"
   },
   "buyOn": {
@@ -48,5 +48,41 @@
   "noLinks": {
     "message": "Ingen købslinks fundet",
     "description": "Shown when no store links are available"
+  },
+  "customSearch": {
+    "message": "Tilpasset søgning",
+    "description": "Format label for user-defined custom search providers"
+  },
+  "vinylAndCD": {
+    "message": "Vinyl, CD & samleobjekter",
+    "description": "eBay format label — vinyl, CD and collectibles"
+  },
+  "optionsSubtitle": {
+    "message": "Vælg hvilke butikker der skal vises, og træk for at ændre rækkefølgen.",
+    "description": "Subtitle text on the options page explaining store configuration"
+  },
+  "optionsCustomTitle": {
+    "message": "Tilpassede søgeudbydere",
+    "description": "Heading for the custom search providers section on the options page"
+  },
+  "optionsCustomDesc": {
+    "message": "Tilføj dine egne søgeudbydere. Brug {artist} og {album} som pladsholdere i URL'en — de erstattes med det aktuelle artist- og albumnavn.",
+    "description": "Description explaining how to add custom search providers with URL placeholders"
+  },
+  "aboutTitle": {
+    "message": "Om",
+    "description": "Heading for the about section on the options page"
+  },
+  "aboutDescription": {
+    "message": "StreamThenOwn viser købslinks til musik, du lytter til på streamingtjenester. Støt kunstnere ved at eje den musik, du elsker.",
+    "description": "General description of what the extension does, shown in the about section"
+  },
+  "aboutAffiliate": {
+    "message": "Nogle links til butikker indeholder affiliate-identifikatorer, der hjælper med at støtte udviklingen af denne udvidelse, uden ekstra omkostninger for dig.",
+    "description": "Affiliate disclosure notice shown in the about section"
+  },
+  "aboutPrivacyLink": {
+    "message": "Privatlivspolitik",
+    "description": "Link text for the privacy policy page"
   }
 }

@@ -4,7 +4,7 @@
     "description": "Le nom de l'extension"
   },
   "extensionDescription": {
-    "message": "Écoute-le. Aime-le. Possède-le. — Trouvez des liens d'achat pour la musique que vous aimez sur YouTube Music.",
+    "message": "Écoute-le. Aime-le. Possède-le. — Trouvez des liens d'achat pour la musique que vous aimez sur YouTube Music, Spotify et Apple Music.",
     "description": "La description de l'extension"
   },
   "buyOn": {
@@ -48,5 +48,41 @@
   "noLinks": {
     "message": "Aucun lien d'achat trouvé",
     "description": "Affiché quand aucun lien n'est disponible"
+  },
+  "customSearch": {
+    "message": "Recherche personnalisée",
+    "description": "Format label for user-defined custom search providers"
+  },
+  "vinylAndCD": {
+    "message": "Vinyle, CD & collectors",
+    "description": "eBay format label — vinyl, CD and collectibles"
+  },
+  "optionsSubtitle": {
+    "message": "Choisissez les magasins à afficher et glissez pour réorganiser.",
+    "description": "Subtitle text on the options page explaining store configuration"
+  },
+  "optionsCustomTitle": {
+    "message": "Fournisseurs de recherche personnalisés",
+    "description": "Heading for the custom search providers section on the options page"
+  },
+  "optionsCustomDesc": {
+    "message": "Ajoutez vos propres fournisseurs de recherche. Utilisez {artist} et {album} comme variables dans l'URL — ils seront remplacés par le nom de l'artiste et de l'album en cours.",
+    "description": "Description explaining how to add custom search providers with URL placeholders"
+  },
+  "aboutTitle": {
+    "message": "À propos",
+    "description": "Heading for the about section on the options page"
+  },
+  "aboutDescription": {
+    "message": "StreamThenOwn affiche des liens d'achat pour la musique que vous écoutez sur les services de streaming. Soutenez les artistes en possédant la musique que vous aimez.",
+    "description": "General description of what the extension does, shown in the about section"
+  },
+  "aboutAffiliate": {
+    "message": "Certains liens vers les magasins contiennent des identifiants d'affiliation qui contribuent au développement de cette extension, sans aucun coût supplémentaire pour vous.",
+    "description": "Affiliate disclosure notice shown in the about section"
+  },
+  "aboutPrivacyLink": {
+    "message": "Politique de confidentialité",
+    "description": "Link text for the privacy policy page"
   }
 }

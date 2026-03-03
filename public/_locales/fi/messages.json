@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Kuuntele. Rakasta. Omista. — Löydä ostolinkkejä musiikkiin, josta pidät YouTube Musicissa.",
+    "message": "Kuuntele. Rakasta. Omista. — Löydä ostolinkkejä musiikkiin, josta pidät YouTube Musicissa, Spotifyssa ja Apple Musicissa.",
     "description": "The description of the extension"
   },
   "buyOn": {
@@ -48,5 +48,41 @@
   "noLinks": {
     "message": "Ostolinkkejä ei löytynyt",
     "description": "Shown when no store links are available"
+  },
+  "customSearch": {
+    "message": "Mukautettu haku",
+    "description": "Format label for user-defined custom search providers"
+  },
+  "vinylAndCD": {
+    "message": "Vinyyli, CD & keräilykohteet",
+    "description": "eBay format label — vinyl, CD and collectibles"
+  },
+  "optionsSubtitle": {
+    "message": "Valitse näytettävät kaupat ja vedä järjestääksesi uudelleen.",
+    "description": "Subtitle text on the options page explaining store configuration"
+  },
+  "optionsCustomTitle": {
+    "message": "Mukautetut hakupalvelut",
+    "description": "Heading for the custom search providers section on the options page"
+  },
+  "optionsCustomDesc": {
+    "message": "Lisää omia hakupalveluita. Käytä {artist} ja {album} paikkamerkkeinä URL-osoitteessa — ne korvataan nykyisen artistin ja albumin nimillä.",
+    "description": "Description explaining how to add custom search providers with URL placeholders"
+  },
+  "aboutTitle": {
+    "message": "Tietoja",
+    "description": "Heading for the about section on the options page"
+  },
+  "aboutDescription": {
+    "message": "StreamThenOwn näyttää ostolinkkejä musiikkiin, jota kuuntelet suoratoistopalveluissa. Tue artisteja omistamalla musiikki, josta pidät.",
+    "description": "General description of what the extension does, shown in the about section"
+  },
+  "aboutAffiliate": {
+    "message": "Jotkin linkit kauppoihin sisältävät kumppanuustunnisteita, jotka tukevat tämän laajennuksen kehitystä ilman lisäkustannuksia sinulle.",
+    "description": "Affiliate disclosure notice shown in the about section"
+  },
+  "aboutPrivacyLink": {
+    "message": "Tietosuojakäytäntö",
+    "description": "Link text for the privacy policy page"
   }
 }

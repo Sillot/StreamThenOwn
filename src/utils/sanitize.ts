@@ -69,3 +69,30 @@ export function isAllowedStoreHost(url: string): boolean {
     return false;
   }
 }
+
+/**
+ * Validate a custom search provider URL template.
+ *
+ * Rules:
+ *  - Must use `https:` protocol.
+ *  - Must contain the `{artist}` placeholder.
+ *  - Must be a parseable URL once placeholders are substituted with dummy values.
+ *
+ * @returns `true` if the template is valid.
+ */
+export function isValidSearchUrlTemplate(template: string): boolean {
+  // Must contain at least {artist}
+  if (!template.includes("{artist}")) return false;
+
+  // Substitute placeholders with safe dummy values for URL parsing
+  const testUrl = template
+    .replaceAll("{artist}", "test-artist")
+    .replaceAll("{album}", "test-album");
+
+  try {
+    const parsed = new URL(testUrl);
+    return parsed.protocol === "https:";
+  } catch {
+    return false;
+  }
+}

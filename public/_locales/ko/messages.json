@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "듣고. 좋아하고. 소유하세요. — YouTube Music에서 좋아하는 음악의 구매 링크를 찾아보세요.",
+    "message": "듣고. 좋아하고. 소유하세요. — YouTube Music, Spotify, Apple Music에서 좋아하는 음악의 구매 링크를 찾아보세요.",
     "description": "The description of the extension"
   },
   "buyOn": {
@@ -48,5 +48,41 @@
   "noLinks": {
     "message": "구매 링크를 찾을 수 없습니다",
     "description": "Shown when no store links are available"
+  },
+  "customSearch": {
+    "message": "사용자 정의 검색",
+    "description": "Format label for user-defined custom search providers"
+  },
+  "vinylAndCD": {
+    "message": "바이닐, CD & 수집품",
+    "description": "eBay format label — vinyl, CD and collectibles"
+  },
+  "optionsSubtitle": {
+    "message": "표시할 스토어를 선택하고 드래그하여 순서를 변경하세요.",
+    "description": "Subtitle text on the options page explaining store configuration"
+  },
+  "optionsCustomTitle": {
+    "message": "사용자 정의 검색 제공자",
+    "description": "Heading for the custom search providers section on the options page"
+  },
+  "optionsCustomDesc": {
+    "message": "나만의 검색 제공자를 추가하세요. URL에 {artist}와 {album}을 자리 표시자로 사용하면 현재 아티스트와 앨범 이름으로 대체됩니다.",
+    "description": "Description explaining how to add custom search providers with URL placeholders"
+  },
+  "aboutTitle": {
+    "message": "소개",
+    "description": "Heading for the about section on the options page"
+  },
+  "aboutDescription": {
+    "message": "StreamThenOwn은 스트리밍 서비스에서 듣는 음악의 구매 링크를 표시합니다. 좋아하는 음악을 소유하여 아티스트를 응원하세요.",
+    "description": "General description of what the extension does, shown in the about section"
+  },
+  "aboutAffiliate": {
+    "message": "일부 스토어 링크에는 이 확장 프로그램의 개발을 지원하는 제휴 식별자가 포함되어 있으며, 추가 비용은 발생하지 않습니다.",
+    "description": "Affiliate disclosure notice shown in the about section"
+  },
+  "aboutPrivacyLink": {
+    "message": "개인정보 처리방침",
+    "description": "Link text for the privacy policy page"
   }
 }

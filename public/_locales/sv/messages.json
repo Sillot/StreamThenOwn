@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Streama. Älska. Äg. — Hitta köplänkar för musiken du älskar på YouTube Music.",
+    "message": "Streama. Älska. Äg. — Hitta köplänkar för musiken du älskar på YouTube Music, Spotify och Apple Music.",
     "description": "The description of the extension"
   },
   "buyOn": {
@@ -48,5 +48,41 @@
   "noLinks": {
     "message": "Inga köplänkar hittades",
     "description": "Shown when no store links are available"
+  },
+  "customSearch": {
+    "message": "Anpassad sökning",
+    "description": "Format label for user-defined custom search providers"
+  },
+  "vinylAndCD": {
+    "message": "Vinyl, CD & samlarobjekt",
+    "description": "eBay format label — vinyl, CD and collectibles"
+  },
+  "optionsSubtitle": {
+    "message": "Välj vilka butiker som ska visas och dra för att ändra ordning.",
+    "description": "Subtitle text on the options page explaining store configuration"
+  },
+  "optionsCustomTitle": {
+    "message": "Anpassade sökleverantörer",
+    "description": "Heading for the custom search providers section on the options page"
+  },
+  "optionsCustomDesc": {
+    "message": "Lägg till egna sökleverantörer. Använd {artist} och {album} som platshållare i URL:en — de ersätts med aktuellt artistnamn och albumnamn.",
+    "description": "Description explaining how to add custom search providers with URL placeholders"
+  },
+  "aboutTitle": {
+    "message": "Om",
+    "description": "Heading for the about section on the options page"
+  },
+  "aboutDescription": {
+    "message": "StreamThenOwn visar köplänkar för musik du lyssnar på via streamingtjänster. Stöd artister genom att äga musiken du älskar.",
+    "description": "General description of what the extension does, shown in the about section"
+  },
+  "aboutAffiliate": {
+    "message": "Vissa länkar till butiker innehåller affiliate-identifierare som stödjer utvecklingen av detta tillägg, utan extra kostnad för dig.",
+    "description": "Affiliate disclosure notice shown in the about section"
+  },
+  "aboutPrivacyLink": {
+    "message": "Integritetspolicy",
+    "description": "Link text for the privacy policy page"
   }
 }

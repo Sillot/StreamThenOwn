@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Stream het. Hou ervan. Bezit het. — Vind aankooplinks voor de muziek waar je van houdt op YouTube Music.",
+    "message": "Stream het. Hou ervan. Bezit het. — Vind aankooplinks voor de muziek waar je van houdt op YouTube Music, Spotify en Apple Music.",
     "description": "The description of the extension"
   },
   "buyOn": {
@@ -48,5 +48,41 @@
   "noLinks": {
     "message": "Geen aankooplinks gevonden",
     "description": "Shown when no store links are available"
+  },
+  "customSearch": {
+    "message": "Aangepast zoeken",
+    "description": "Format label for user-defined custom search providers"
+  },
+  "vinylAndCD": {
+    "message": "Vinyl, CD & verzamelobjecten",
+    "description": "eBay format label — vinyl, CD and collectibles"
+  },
+  "optionsSubtitle": {
+    "message": "Kies welke winkels je wilt tonen en sleep om te herordenen.",
+    "description": "Subtitle text on the options page explaining store configuration"
+  },
+  "optionsCustomTitle": {
+    "message": "Aangepaste zoekaanbieders",
+    "description": "Heading for the custom search providers section on the options page"
+  },
+  "optionsCustomDesc": {
+    "message": "Voeg je eigen zoekaanbieders toe. Gebruik {artist} en {album} als tijdelijke aanduidingen in de URL — ze worden vervangen door de huidige artiest- en albumnamen.",
+    "description": "Description explaining how to add custom search providers with URL placeholders"
+  },
+  "aboutTitle": {
+    "message": "Over",
+    "description": "Heading for the about section on the options page"
+  },
+  "aboutDescription": {
+    "message": "StreamThenOwn toont aankooplinks voor muziek die je beluistert op streamingdiensten. Steun artiesten door de muziek te bezitten waar je van houdt.",
+    "description": "General description of what the extension does, shown in the about section"
+  },
+  "aboutAffiliate": {
+    "message": "Sommige links naar winkels bevatten affiliate-identificaties die de ontwikkeling van deze extensie ondersteunen, zonder extra kosten voor jou.",
+    "description": "Affiliate disclosure notice shown in the about section"
+  },
+  "aboutPrivacyLink": {
+    "message": "Privacybeleid",
+    "description": "Link text for the privacy policy page"
   }
 }

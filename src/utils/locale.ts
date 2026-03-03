@@ -53,7 +53,8 @@ const LANG_TO_COUNTRY: Record<string, string> = {
  * Falls back to "us" if no known mapping exists.
  */
 function getCountryCode(locale: string): string {
-  const lower = locale.toLowerCase();
+  // Normalise: chrome.i18n.getUILanguage() may return "fr_FR" (underscore)
+  const lower = locale.toLowerCase().replace(/_/g, "-");
   // Try exact match first (e.g. "en-gb", "fr", "es")
   const exact = LANG_TO_COUNTRY[lower];
   if (exact) return exact;
@@ -118,6 +119,38 @@ export function getAmazonDomain(locale: string): string {
     ch: "www.amazon.de", // Switzerland → German Amazon
   };
   return COUNTRY_TO_DOMAIN[country] ?? "www.amazon.com";
+}
+
+/**
+ * eBay domain for a given locale.
+ * e.g. "fr" → "www.ebay.fr", "en-GB" → "www.ebay.co.uk", "de" → "www.ebay.de"
+ */
+export function getEbayDomain(locale: string): string {
+  const country = getCountryCode(locale);
+  const COUNTRY_TO_DOMAIN: Record<string, string> = {
+    us: "www.ebay.com",
+    gb: "www.ebay.co.uk",
+    fr: "www.ebay.fr",
+    de: "www.ebay.de",
+    it: "www.ebay.it",
+    es: "www.ebay.es",
+    ca: "www.ebay.ca",
+    jp: "www.ebay.co.jp",
+    au: "www.ebay.com.au",
+    nl: "www.ebay.nl",
+    pl: "www.ebay.pl",
+    be: "www.ebay.be",
+    at: "www.ebay.at",
+    ch: "www.ebay.ch",
+    se: "www.ebay.com", // No Swedish eBay — use global
+    br: "www.ebay.com", // No Brazilian eBay — use global
+    mx: "www.ebay.com", // No Mexican eBay — use global
+    dk: "www.ebay.com", // No Danish eBay — use global
+    no: "www.ebay.com", // No Norwegian eBay — use global
+    fi: "www.ebay.com", // No Finnish eBay — use global
+    kr: "www.ebay.com", // No Korean eBay — use global
+  };
+  return COUNTRY_TO_DOMAIN[country] ?? "www.ebay.com";
 }
 
 /* ------------------------------------------------------------------ */

@@ -6,7 +6,7 @@
  */
 
 import { resolveStoreLinks } from "../stores";
-import type { StoreLinksResult, StoreQuery } from "../stores/types";
+import type { CustomSearchProvider, StoreLinksResult, StoreQuery } from "../stores/types";
 
 /** Message types exchanged between content script ↔ background. */
 interface SearchMessage {
@@ -32,13 +32,19 @@ chrome.runtime.onMessage.addListener(
     // Async handler — must return true to keep the message channel open.
     void (async () => {
       try {
-        // Read user's enabled stores + display order preferences
-        const defaultOrder = ["discogs", "qobuz", "amazon", "bandcamp"];
-        const { enabledStores, storeOrder } = await chrome.storage.sync.get({
+        // Read user's enabled stores + display order + custom providers
+        const defaultOrder = ["discogs", "qobuz", "amazon", "bandcamp", "ebay"];
+        const { enabledStores, storeOrder, customProviders } = await chrome.storage.sync.get({
           enabledStores: defaultOrder,
           storeOrder: defaultOrder,
+          customProviders: [],
         });
-        const result = await resolveStoreLinks(message.payload, enabledStores as string[]);
+        const providers = customProviders as CustomSearchProvider[];
+        const result = await resolveStoreLinks(
+          message.payload,
+          enabledStores as string[],
+          providers,
+        );
 
         // Sort links by user-defined order
         const order = storeOrder as string[];

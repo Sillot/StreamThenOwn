@@ -37,3 +37,27 @@ export interface ExternalUrls {
   qobuz?: string;
   bandcamp?: string;
 }
+
+/**
+ * A user-defined custom search provider.
+ *
+ * Custom providers always produce search-fallback URLs (never direct links).
+ * The `searchUrlTemplate` contains `{artist}` and `{album}` placeholders
+ * that are replaced at resolution time.
+ */
+export interface CustomSearchProvider {
+  /** Unique identifier, e.g. "custom_1709424000000" */
+  id: string;
+  /** User-defined display name, e.g. "eBay", "Boomkat" */
+  label: string;
+  /**
+   * Search URL template with `{artist}` and `{album}` placeholders.
+   * Example: `"https://boomkat.com/search?q={artist}+{album}"`
+   *
+   * Must use the `https:` protocol.
+   */
+  searchUrlTemplate: string;
+}
+
+/** Maximum number of custom providers a user can create. */
+export const MAX_CUSTOM_PROVIDERS = 10;

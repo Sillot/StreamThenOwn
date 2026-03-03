@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Ouve. Ama. Possui. — Encontra links de compra para a música que adoras no YouTube Music.",
+    "message": "Ouve. Ama. Possui. — Encontra links de compra para a música que adoras no YouTube Music, Spotify e Apple Music.",
     "description": "The description of the extension"
   },
   "buyOn": {
@@ -48,5 +48,41 @@
   "noLinks": {
     "message": "Nenhum link de compra encontrado",
     "description": "Shown when no store links are available"
+  },
+  "customSearch": {
+    "message": "Pesquisa personalizada",
+    "description": "Format label for user-defined custom search providers"
+  },
+  "vinylAndCD": {
+    "message": "Vinil, CD & colecionáveis",
+    "description": "eBay format label — vinyl, CD and collectibles"
+  },
+  "optionsSubtitle": {
+    "message": "Escolhe quais lojas mostrar e arrasta para reordenar.",
+    "description": "Subtitle text on the options page explaining store configuration"
+  },
+  "optionsCustomTitle": {
+    "message": "Fornecedores de pesquisa personalizados",
+    "description": "Heading for the custom search providers section on the options page"
+  },
+  "optionsCustomDesc": {
+    "message": "Adiciona os teus próprios fornecedores de pesquisa. Usa {artist} e {album} como marcadores no URL — serão substituídos pelo artista e álbum atuais.",
+    "description": "Description explaining how to add custom search providers with URL placeholders"
+  },
+  "aboutTitle": {
+    "message": "Sobre",
+    "description": "Heading for the about section on the options page"
+  },
+  "aboutDescription": {
+    "message": "O StreamThenOwn apresenta links de compra para a música que ouves em serviços de streaming. Apoia os artistas ao possuíres a música que adoras.",
+    "description": "General description of what the extension does, shown in the about section"
+  },
+  "aboutAffiliate": {
+    "message": "Alguns links para lojas contêm identificadores de afiliação que ajudam a apoiar o desenvolvimento desta extensão, sem qualquer custo adicional para ti.",
+    "description": "Affiliate disclosure notice shown in the about section"
+  },
+  "aboutPrivacyLink": {
+    "message": "Política de privacidade",
+    "description": "Link text for the privacy policy page"
   }
 }

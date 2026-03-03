@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Stream it. Love it. Own it. — Find purchase links for the music you love on YouTube Music.",
+    "message": "Stream it. Love it. Own it. — Find purchase links for the music you love on YouTube Music, Spotify, and Apple Music.",
     "description": "The description of the extension"
   },
   "buyOn": {
@@ -48,5 +48,41 @@
   "noLinks": {
     "message": "No purchase links found",
     "description": "Shown when no store links are available"
+  },
+  "customSearch": {
+    "message": "Custom search",
+    "description": "Format label for user-defined custom search providers"
+  },
+  "vinylAndCD": {
+    "message": "Vinyl, CD & collectibles",
+    "description": "eBay format label — vinyl, CD and collectibles"
+  },
+  "optionsSubtitle": {
+    "message": "Choose which stores to show and drag to reorder.",
+    "description": "Subtitle text on the options page explaining store configuration"
+  },
+  "optionsCustomTitle": {
+    "message": "Custom search providers",
+    "description": "Heading for the custom search providers section on the options page"
+  },
+  "optionsCustomDesc": {
+    "message": "Add your own search providers. Use {artist} and {album} as placeholders in the URL — they will be replaced with the current artist and album names.",
+    "description": "Description explaining how to add custom search providers with URL placeholders"
+  },
+  "aboutTitle": {
+    "message": "About",
+    "description": "Heading for the about section on the options page"
+  },
+  "aboutDescription": {
+    "message": "StreamThenOwn displays purchase links for music you listen to on streaming services. Support artists by owning the music you love.",
+    "description": "General description of what the extension does, shown in the about section"
+  },
+  "aboutAffiliate": {
+    "message": "Some links to stores contain affiliate identifiers that help support the development of this extension, at no extra cost to you.",
+    "description": "Affiliate disclosure notice shown in the about section"
+  },
+  "aboutPrivacyLink": {
+    "message": "Privacy policy",
+    "description": "Link text for the privacy policy page"
   }
 }

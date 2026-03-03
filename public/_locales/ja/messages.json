@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "聴こう。好きになろう。手に入れよう。— YouTube Musicで好きな音楽の購入リンクを見つけよう。",
+    "message": "聴こう。好きになろう。手に入れよう。— YouTube Music、Spotify、Apple Musicで好きな音楽の購入リンクを見つけよう。",
     "description": "The description of the extension"
   },
   "buyOn": {
@@ -48,5 +48,41 @@
   "noLinks": {
     "message": "購入リンクが見つかりませんでした",
     "description": "Shown when no store links are available"
+  },
+  "customSearch": {
+    "message": "カスタム検索",
+    "description": "Format label for user-defined custom search providers"
+  },
+  "vinylAndCD": {
+    "message": "レコード・CD・コレクターズ",
+    "description": "eBay format label — vinyl, CD and collectibles"
+  },
+  "optionsSubtitle": {
+    "message": "表示するストアを選択し、ドラッグして並べ替えてください。",
+    "description": "Subtitle text on the options page explaining store configuration"
+  },
+  "optionsCustomTitle": {
+    "message": "カスタム検索プロバイダー",
+    "description": "Heading for the custom search providers section on the options page"
+  },
+  "optionsCustomDesc": {
+    "message": "独自の検索プロバイダーを追加できます。URLに {artist} と {album} をプレースホルダーとして使用してください。現在のアーティスト名とアルバム名に置き換えられます。",
+    "description": "Description explaining how to add custom search providers with URL placeholders"
+  },
+  "aboutTitle": {
+    "message": "このアプリについて",
+    "description": "Heading for the about section on the options page"
+  },
+  "aboutDescription": {
+    "message": "StreamThenOwnは、ストリーミングサービスで聴いている音楽の購入リンクを表示します。好きな音楽を所有してアーティストを応援しましょう。",
+    "description": "General description of what the extension does, shown in the about section"
+  },
+  "aboutAffiliate": {
+    "message": "一部のストアへのリンクには、この拡張機能の開発を支援するアフィリエイト識別子が含まれています。追加料金は一切かかりません。",
+    "description": "Affiliate disclosure notice shown in the about section"
+  },
+  "aboutPrivacyLink": {
+    "message": "プライバシーポリシー",
+    "description": "Link text for the privacy policy page"
   }
 }
