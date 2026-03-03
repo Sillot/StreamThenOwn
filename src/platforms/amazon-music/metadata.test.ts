@@ -57,6 +57,20 @@ function setLocation(path: string, hostname = "music.amazon.com"): void {
   });
 }
 
+/**
+ * Build a `<music-detail-header>` element with the given attributes,
+ * mirroring Amazon Music's real structure where album and artist data
+ * are stored as attributes on the custom element.
+ */
+function buildDetailHeader(attrs: Record<string, string>): HTMLElement {
+  const el = document.createElement("music-detail-header");
+  el.classList.add("hydrated");
+  for (const [k, v] of Object.entries(attrs)) {
+    el.setAttribute(k, v);
+  }
+  return el;
+}
+
 /* ------------------------------------------------------------------ */
 /*  Tests                                                             */
 /* ------------------------------------------------------------------ */
@@ -70,43 +84,14 @@ describe("AmazonMusicMetadataExtractor", () => {
   });
 
   describe("album page", () => {
-    it("extracts album + artist from real Amazon Music DOM", () => {
+    it("extracts album + artist from music-detail-header attributes", () => {
       setLocation("/albums/B0XXXXXXXXX");
-      setDOM(
-        buildFragment([
-          {
-            tag: "div",
-            attrs: { id: "detailHeaderContainer" },
-            children: [
-              {
-                tag: "header",
-                children: [
-                  {
-                    tag: "h1",
-                    attrs: { title: "The Life of a Showgirl" },
-                    text: "The Life of a Showgirl",
-                  },
-                  {
-                    tag: "p",
-                    children: [
-                      {
-                        tag: "music-link",
-                        children: [
-                          {
-                            tag: "a",
-                            attrs: { href: "/artists/B00157GJ20/taylor-swift" },
-                            text: "Taylor Swift",
-                          },
-                        ],
-                      },
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-        ]),
-      );
+      const host = buildDetailHeader({
+        headline: "The Life of a Showgirl",
+        "primary-text": "Taylor Swift",
+        "primary-text-href": "/artists/B00157GJ20/taylor-swift",
+      });
+      document.body.replaceChildren(host);
 
       const meta = extractor.extract();
       expect(meta).toEqual({
@@ -116,19 +101,16 @@ describe("AmazonMusicMetadataExtractor", () => {
       });
     });
 
-    it("falls back to music-detail-header attributes", () => {
+    it("ignores music-detail-header without headline attribute", () => {
       setLocation("/albums/B0XXXXXXXXX");
-      setDOM(
-        buildFragment([
-          {
-            tag: "music-detail-header",
-            attrs: {
-              headline: "Random Access Memories",
-              "primary-text": "Daft Punk",
-            },
-          },
-        ]),
-      );
+      // First element without headline (should be skipped)
+      const empty = document.createElement("music-detail-header");
+      // Second element with headline (should be picked)
+      const real = buildDetailHeader({
+        headline: "Random Access Memories",
+        "primary-text": "Daft Punk",
+      });
+      document.body.replaceChildren(empty, real);
 
       const meta = extractor.extract();
       expect(meta).toEqual({
@@ -138,66 +120,21 @@ describe("AmazonMusicMetadataExtractor", () => {
       });
     });
 
-    it("falls back to any artist link on the page", () => {
+    it("returns null when headline present but primary-text missing", () => {
       setLocation("/albums/B0XXXXXXXXX");
-      setDOM(
-        buildFragment([
-          {
-            tag: "div",
-            attrs: { id: "detailHeaderContainer" },
-            children: [
-              {
-                tag: "header",
-                children: [
-                  {
-                    tag: "h1",
-                    attrs: { title: "Homework" },
-                    text: "Homework",
-                  },
-                ],
-              },
-            ],
-          },
-          { tag: "a", attrs: { href: "/artists/B001234" }, text: "Daft Punk" },
-        ]),
-      );
+      const host = buildDetailHeader({ headline: "Homework" });
+      document.body.replaceChildren(host);
 
-      const meta = extractor.extract();
-      expect(meta).toEqual({
-        album: "Homework",
-        artist: "Daft Punk",
-        source: "album",
-      });
+      expect(extractor.extract()).toBeNull();
     });
 
     it("includes locale from regional hostname (music.amazon.de)", () => {
       setLocation("/albums/B0XXXXXXXXX", "music.amazon.de");
-      setDOM(
-        buildFragment([
-          {
-            tag: "div",
-            attrs: { id: "detailHeaderContainer" },
-            children: [
-              {
-                tag: "header",
-                children: [
-                  { tag: "h1", text: "Random Access Memories" },
-                  {
-                    tag: "p",
-                    children: [
-                      {
-                        tag: "a",
-                        attrs: { href: "/artists/B001234" },
-                        text: "Daft Punk",
-                      },
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-        ]),
-      );
+      const host = buildDetailHeader({
+        headline: "Random Access Memories",
+        "primary-text": "Daft Punk",
+      });
+      document.body.replaceChildren(host);
 
       const meta = extractor.extract();
       expect(meta).toEqual({
@@ -210,32 +147,11 @@ describe("AmazonMusicMetadataExtractor", () => {
 
     it("includes locale from music.amazon.fr", () => {
       setLocation("/albums/B0XXXXXXXXX", "music.amazon.fr");
-      setDOM(
-        buildFragment([
-          {
-            tag: "div",
-            attrs: { id: "detailHeaderContainer" },
-            children: [
-              {
-                tag: "header",
-                children: [
-                  { tag: "h1", text: "Découverte" },
-                  {
-                    tag: "p",
-                    children: [
-                      {
-                        tag: "a",
-                        attrs: { href: "/artists/B001234" },
-                        text: "Daft Punk",
-                      },
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-        ]),
-      );
+      const host = buildDetailHeader({
+        headline: "Découverte",
+        "primary-text": "Daft Punk",
+      });
+      document.body.replaceChildren(host);
 
       const meta = extractor.extract();
       expect(meta).toEqual({
@@ -253,48 +169,11 @@ describe("AmazonMusicMetadataExtractor", () => {
       expect(extractor.extract()).toBeNull();
     });
 
-    it("returns null when no h1 title", () => {
+    it("returns null when no music-detail-header with headline", () => {
       setLocation("/albums/B0XXXXXXXXX");
-      setDOM(
-        buildFragment([
-          {
-            tag: "div",
-            attrs: { id: "detailHeaderContainer" },
-            children: [
-              {
-                tag: "header",
-                children: [
-                  {
-                    tag: "a",
-                    attrs: { href: "/artists/B001234" },
-                    text: "Daft Punk",
-                  },
-                ],
-              },
-            ],
-          },
-        ]),
-      );
-
-      expect(extractor.extract()).toBeNull();
-    });
-
-    it("returns null when no artist found", () => {
-      setLocation("/albums/B0XXXXXXXXX");
-      setDOM(
-        buildFragment([
-          {
-            tag: "div",
-            attrs: { id: "detailHeaderContainer" },
-            children: [
-              {
-                tag: "header",
-                children: [{ tag: "h1", text: "Some Album" }],
-              },
-            ],
-          },
-        ]),
-      );
+      // Element exists but without headline attribute
+      const el = document.createElement("music-detail-header");
+      document.body.replaceChildren(el);
 
       expect(extractor.extract()).toBeNull();
     });

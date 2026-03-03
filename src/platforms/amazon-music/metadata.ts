@@ -3,13 +3,13 @@
  *
  * Scrapes artist/album info from Amazon Music's web player DOM.
  *
- * Album page structure (`#detailHeaderContainer`):
- *   <div id="detailHeaderContainer">
- *     <header>
- *       <h1 title="Album Name">Album Name</h1>
- *       <p><music-link><a href="/artists/B…/artist-name">Artist</a></music-link></p>
- *     </header>
- *   </div>
+ * Album page structure — attributes on `<music-detail-header>`:
+ *   <music-detail-header
+ *     headline="Album Name"
+ *     primary-text="Artist Name"
+ *     primary-text-href="/artists/B…/artist-name"
+ *     …
+ *   >
  *
  * Now-playing bar (`music-horizontal-item` inside `#transport` / footer):
  *   primary-text  = track name
@@ -68,17 +68,16 @@ export class AmazonMusicMetadataExtractor implements MetadataExtractor {
   /* ---- Album page (/albums/:id) ---- */
 
   private extractAlbumPage(): MusicMetadata | null {
-    // The detail header container wraps a <header> with <h1> + artist <a>
-    const container =
-      document.querySelector("#detailHeaderContainer") ??
-      document.querySelector("music-detail-header");
-    if (!container) return null;
+    // Amazon Music may render several <music-detail-header> elements.
+    // The one carrying the album data has a `headline` attribute.
+    const header = document.querySelector<HTMLElement>("music-detail-header[headline]");
+    if (!header) return null;
 
-    const album = this.extractAlbumTitle(container);
-    if (!album) return null;
+    const album = header.getAttribute("headline")?.trim();
+    if (!album || album.length === 0 || album.length >= 200) return null;
 
-    const artist = this.extractArtistFromHeader(container);
-    if (!artist) return null;
+    const artist = header.getAttribute("primary-text")?.trim();
+    if (!artist || artist.length === 0 || artist.length >= 200) return null;
 
     const locale = extractLocale();
     return locale ? { album, artist, source: "album", locale } : { album, artist, source: "album" };
@@ -126,58 +125,5 @@ export class AmazonMusicMetadataExtractor implements MetadataExtractor {
     }
 
     return null;
-  }
-
-  /* ---- Shared helpers ---- */
-
-  /**
-   * Extract album title from the detail header.
-   * Real DOM: `<h1 title="…">Album Name</h1>` inside `#detailHeaderContainer header`.
-   * Fallback: `headline` attribute on `<music-detail-header>`.
-   */
-  private extractAlbumTitle(container: Element): string | undefined {
-    // Strategy 1: <h1> inside the header (real Amazon Music DOM)
-    const h1 = container.querySelector<HTMLElement>("h1");
-    const h1Text = h1?.textContent.trim();
-    if (h1Text && h1Text.length > 0 && h1Text.length < 200) {
-      return h1Text;
-    }
-
-    // Strategy 2: headline attribute on <music-detail-header> (legacy/fallback)
-    const headline = container.getAttribute("headline")?.trim();
-    if (headline && headline.length > 0 && headline.length < 200) {
-      return headline;
-    }
-
-    return undefined;
-  }
-
-  /**
-   * Extract artist name from the detail header.
-   * Real DOM: `<a href="/artists/…">Artist</a>` inside a `<music-link>`.
-   * Fallback: `primary-text` attribute on `<music-detail-header>`.
-   */
-  private extractArtistFromHeader(container: Element): string | undefined {
-    // Strategy 1: artist link inside the header
-    const artistLink = container.querySelector<HTMLAnchorElement>('a[href*="/artists/"]');
-    const linkText = artistLink?.textContent.trim();
-    if (linkText && linkText.length > 0 && linkText.length < 200) {
-      return linkText;
-    }
-
-    // Strategy 2: primary-text attribute (legacy/fallback)
-    const primaryText = container.getAttribute("primary-text")?.trim();
-    if (primaryText && primaryText.length > 0 && primaryText.length < 200) {
-      return primaryText;
-    }
-
-    // Strategy 3: any artist link on the page
-    const anyArtistLink = document.querySelector<HTMLAnchorElement>('a[href*="/artists/"]');
-    const anyText = anyArtistLink?.textContent.trim();
-    if (anyText && anyText.length > 0 && anyText.length < 200) {
-      return anyText;
-    }
-
-    return undefined;
   }
 }

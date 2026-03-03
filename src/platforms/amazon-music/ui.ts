@@ -47,6 +47,7 @@ export class AmazonMusicUIInjector implements UIInjector {
 
     // Wrap in a <span> like the native sibling buttons
     const wrapper = document.createElement("span");
+    wrapper.className = "sto-am-btn-wrapper";
 
     const btn = document.createElement("button");
     btn.id = BTN_ID;
@@ -54,7 +55,7 @@ export class AmazonMusicUIInjector implements UIInjector {
     btn.className = "sto-am-btn";
     btn.title = meta.source === "album" ? t("ownThisAlbum") : t("ownThisTrack");
     btn.setAttribute("aria-label", btn.title);
-    btn.appendChild(createButtonIcon(20, "sto-am-btn__icon"));
+    btn.appendChild(createButtonIcon(24, "sto-am-btn__icon"));
 
     btn.addEventListener("click", (e) => {
       e.stopPropagation();

@@ -11,8 +11,16 @@
  */
 
 /* ------------------------------------------------------------------ */
+
 /*  Action button — matches Amazon Music icon-only button (glass)      */
+
 /* ------------------------------------------------------------------ */
+
+.sto-am-btn-wrapper {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
 
 .sto-am-btn {
   display: inline-flex;
@@ -25,7 +33,7 @@
   border-radius: 50%;
   border: none;
   background-color: transparent;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgb(255 255 255 / 90%);
   cursor: pointer;
   padding: 0;
   margin: 0;
@@ -33,7 +41,6 @@
     color 0.15s ease,
     background-color 0.15s ease;
   appearance: none;
-  -webkit-appearance: none;
   box-shadow: none;
   vertical-align: middle;
   position: relative;
@@ -47,7 +54,7 @@
 }
 
 .sto-am-btn:active {
-  color: rgba(37, 209, 218, 0.3);
+  color: rgb(37 209 218 / 30%);
 }
 
 /* Teal when dropdown is open */
@@ -56,13 +63,16 @@
 }
 
 .sto-am-btn__icon {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
+  display: block;
   pointer-events: none;
 }
 
 /* ------------------------------------------------------------------ */
+
 /*  Dropdown menu — matches Amazon Music dark popover style            */
+
 /* ------------------------------------------------------------------ */
 
 .sto-am-menu {
@@ -72,8 +82,8 @@
   border-radius: 12px;
   padding: 8px 0;
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.5),
-    0 2px 8px rgba(0, 0, 0, 0.3);
+    0 8px 32px rgb(0 0 0 / 50%),
+    0 2px 8px rgb(0 0 0 / 30%);
   font-family:
     "Amazon Ember",
     system-ui,
@@ -91,6 +101,7 @@
     opacity: 0;
     transform: scale(0.96);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -98,7 +109,9 @@
 }
 
 /* ------------------------------------------------------------------ */
+
 /*  Menu items                                                         */
+
 /* ------------------------------------------------------------------ */
 
 .sto-am-menu__item {
@@ -109,20 +122,20 @@
   height: 44px;
   border-radius: 0;
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgb(255 255 255 / 90%);
   cursor: pointer;
   transition: background 0.12s ease;
   position: relative;
 }
 
 .sto-am-menu__item:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgb(255 255 255 / 10%);
   text-decoration: none;
   color: #fff;
 }
 
 .sto-am-menu__item:active {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgb(255 255 255 / 15%);
 }
 
 .sto-am-menu__item-icon {
@@ -149,7 +162,9 @@
 }
 
 /* ------------------------------------------------------------------ */
+
 /*  "Direct" badge — teal pill (Amazon Music accent)                   */
+
 /* ------------------------------------------------------------------ */
 
 .sto-am-menu__item-badge {
@@ -158,7 +173,7 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: #25d1da;
-  background: rgba(37, 209, 218, 0.15);
+  background: rgb(37 209 218 / 15%);
   border-radius: 6px;
   padding: 2px 8px;
   line-height: 14px;
@@ -166,12 +181,14 @@
 }
 
 /* ------------------------------------------------------------------ */
+
 /*  Empty state                                                        */
+
 /* ------------------------------------------------------------------ */
 
 .sto-am-menu__empty {
   padding: 20px;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgb(255 255 255 / 50%);
   text-align: center;
 }
