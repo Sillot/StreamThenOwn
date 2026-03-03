@@ -8,6 +8,7 @@
  */
 
 import type { MetadataExtractor, MusicMetadata } from "../types";
+import { countryCodeToLocale } from "../../utils/locale";
 
 /* ------------------------------------------------------------------ */
 /*  URL helpers                                                       */
@@ -17,6 +18,17 @@ import type { MetadataExtractor, MusicMetadata } from "../types";
  * Apple Music prefixes paths with a country code: /fr/album/…, /us/album/…
  * Strip it to get a canonical path like /album/…
  */
+/**
+ * Extract the locale from the Apple Music URL country-code prefix.
+ * Converts the bare country code to a BCP-47 locale string.
+ * e.g. \"/es/album/…\" → \"es-es\", \"/gb/album/…\" → \"en-gb\"
+ */
+function extractLocaleFromPath(): string | undefined {
+  const match = /^\/([a-z]{2})(?:\/|$)/i.exec(location.pathname);
+  const cc = match?.[1];
+  return cc ? countryCodeToLocale(cc) : undefined;
+}
+
 function pathWithoutLocale(): string {
   return location.pathname.replace(/^\/[a-z]{2}(-[a-z]{2})?/i, "");
 }
@@ -50,7 +62,8 @@ export class AppleMetadataExtractor implements MetadataExtractor {
     if (!artist) return null;
 
     const source = isSongOnAlbumPage() ? "song" : "album";
-    return { album, artist, source };
+    const locale = extractLocaleFromPath();
+    return locale ? { album, artist, source, locale } : { album, artist, source };
   }
 
   /* ---- Now-playing bar (bottom bar) ---- */
@@ -73,7 +86,9 @@ export class AppleMetadataExtractor implements MetadataExtractor {
     if (!artist) return null;
 
     const trackName = trackEl?.textContent.trim();
-    return { ...(trackName ? { album: trackName } : {}), artist, source: "song" };
+    const locale = extractLocaleFromPath();
+    const base = { ...(trackName ? { album: trackName } : {}), artist, source: "song" as const };
+    return locale ? { ...base, locale } : base;
   }
 
   /* ---- Shared helpers ---- */

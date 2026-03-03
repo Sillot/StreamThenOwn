@@ -1,0 +1,56 @@
+{
+  "extensionName": {
+    "message": "StreamThenOwn",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "聴こう。好きになろう。手に入れよう。— YouTube Musicで好きな音楽の購入リンクを見つけよう。",
+    "description": "The description of the extension"
+  },
+  "buyOn": {
+    "message": "$STORE$で購入",
+    "description": "Label for purchase link",
+    "placeholders": {
+      "store": {
+        "content": "$1",
+        "example": "Discogs"
+      }
+    }
+  },
+  "vinyl": {
+    "message": "レコード・フィジカル",
+    "description": "Discogs format label"
+  },
+  "hiResDigital": {
+    "message": "ハイレゾ・デジタル",
+    "description": "Qobuz format label"
+  },
+  "cdAndMore": {
+    "message": "CD・レコード 他",
+    "description": "Amazon format label"
+  },
+  "digitalAndPhysical": {
+    "message": "デジタル・フィジカル",
+    "description": "Bandcamp format label"
+  },
+  "cdAndVinyl": {
+    "message": "CD・レコード 他",
+    "description": "Fnac format label"
+  },
+  "ownThisAlbum": {
+    "message": "このアルバムを手に入れる",
+    "description": "Section header on album pages"
+  },
+  "ownThisTrack": {
+    "message": "この曲のアルバムを手に入れる",
+    "description": "Section header when viewing a song"
+  },
+  "poweredBy": {
+    "message": "Powered by StreamThenOwn",
+    "description": "Footer attribution"
+  },
+  "noLinks": {
+    "message": "購入リンクが見つかりませんでした",
+    "description": "Shown when no store links are available"
+  }
+}

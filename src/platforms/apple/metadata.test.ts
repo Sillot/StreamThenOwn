@@ -88,6 +88,7 @@ describe("AppleMetadataExtractor", () => {
         album: "Blackhole",
         artist: "Muse",
         source: "album",
+        locale: "fr-fr",
       });
     });
 
@@ -109,6 +110,29 @@ describe("AppleMetadataExtractor", () => {
         album: "Thriller",
         artist: "Michael Jackson",
         source: "album",
+        locale: "en-us",
+      });
+    });
+
+    it("extracts Spanish locale from /es/ URL prefix", () => {
+      setLocation("/es/album/el-dorado/12345");
+      setDOM(
+        buildFragment([
+          { tag: "h1", text: "El Dorado" },
+          {
+            tag: "a",
+            attrs: { href: "/es/artist/shakira/456" },
+            text: "Shakira",
+          },
+        ]),
+      );
+
+      const meta = extractor.extract();
+      expect(meta).toEqual({
+        album: "El Dorado",
+        artist: "Shakira",
+        source: "album",
+        locale: "es-es",
       });
     });
 
@@ -146,6 +170,7 @@ describe("AppleMetadataExtractor", () => {
         album: "Blackhole",
         artist: "Muse",
         source: "song",
+        locale: "fr-fr",
       });
     });
   });
@@ -224,6 +249,7 @@ describe("AppleMetadataExtractor", () => {
         album: "Supermassive Black Hole",
         artist: "Muse",
         source: "song",
+        locale: "fr-fr",
       });
     });
 

@@ -1,11 +1,12 @@
 /**
  * Locale utilities for adapting store URLs to the user's language/region.
  *
- * Uses navigator.language (e.g. "fr", "en-US", "de-DE") to derive
- * store-specific locale segments for fallback search URLs.
+ * Accepts either a BCP-47 language tag (e.g. "fr", "en-US") from
+ * `navigator.language`, or a plain ISO 3166-1 alpha-2 country code
+ * (e.g. "gb", "jp") extracted from a platform URL such as Apple Music.
  */
 
-/** Country code mappings derived from navigator.language → ISO country. */
+/** Language / locale → ISO 3166-1 alpha-2 country code. */
 const LANG_TO_COUNTRY: Record<string, string> = {
   en: "us",
   "en-us": "us",
@@ -53,7 +54,7 @@ const LANG_TO_COUNTRY: Record<string, string> = {
  */
 function getCountryCode(locale: string): string {
   const lower = locale.toLowerCase();
-  // Try exact match first (e.g. "en-gb")
+  // Try exact match first (e.g. "en-gb", "fr", "es")
   const exact = LANG_TO_COUNTRY[lower];
   if (exact) return exact;
 
@@ -65,6 +66,10 @@ function getCountryCode(locale: string): string {
   // If the locale has a region part, use it directly (e.g. "zh-TW" → "tw")
   const parts = lower.split("-");
   if (parts.length >= 2 && parts[1]) return parts[1];
+
+  // If it's a 2-letter code not in our language map, treat it as a
+  // country code (e.g. "gb", "jp", "br" from Apple Music URL prefixes).
+  if (lang.length === 2) return lang;
 
   return "us";
 }
@@ -113,4 +118,42 @@ export function getAmazonDomain(locale: string): string {
     ch: "www.amazon.de", // Switzerland → German Amazon
   };
   return COUNTRY_TO_DOMAIN[country] ?? "www.amazon.com";
+}
+
+/* ------------------------------------------------------------------ */
+/*  Country code → BCP-47 locale                                      */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Map from ISO 3166-1 alpha-2 country code to BCP-47 locale.
+ * Only entries where the primary language differs from the country code
+ * need to be listed; everything else maps to `{cc}-{CC}` automatically.
+ */
+const COUNTRY_TO_LANG: Record<string, string> = {
+  us: "en",
+  gb: "en",
+  au: "en",
+  ca: "en", // could be French, but English is the default
+  br: "pt",
+  jp: "ja",
+  kr: "ko",
+  se: "sv",
+  dk: "da",
+  no: "nb",
+  at: "de",
+  ch: "de",
+  mx: "es",
+  be: "nl",
+};
+
+/**
+ * Convert a bare country code (e.g. from an Apple Music URL prefix)
+ * to a BCP-47 locale string the rest of the locale module understands.
+ *
+ * Examples: "gb" → "en-gb", "jp" → "ja-jp", "fr" → "fr-fr", "es" → "es-es"
+ */
+export function countryCodeToLocale(cc: string): string {
+  const lower = cc.toLowerCase();
+  const lang = COUNTRY_TO_LANG[lower] ?? lower;
+  return `${lang}-${lower}`;
 }

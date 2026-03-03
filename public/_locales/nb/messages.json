@@ -1,0 +1,56 @@
+{
+  "extensionName": {
+    "message": "StreamThenOwn",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Strøm det. Elsk det. Eie det. — Finn kjøpslenker for musikken du elsker på YouTube Music.",
+    "description": "The description of the extension"
+  },
+  "buyOn": {
+    "message": "Kjøp på $STORE$",
+    "description": "Label for purchase link",
+    "placeholders": {
+      "store": {
+        "content": "$1",
+        "example": "Discogs"
+      }
+    }
+  },
+  "vinyl": {
+    "message": "Vinyl & Fysisk",
+    "description": "Discogs format label"
+  },
+  "hiResDigital": {
+    "message": "Hi-Res Digital",
+    "description": "Qobuz format label"
+  },
+  "cdAndMore": {
+    "message": "CD, Vinyl & mer",
+    "description": "Amazon format label"
+  },
+  "digitalAndPhysical": {
+    "message": "Digital & Fysisk",
+    "description": "Bandcamp format label"
+  },
+  "cdAndVinyl": {
+    "message": "CD, Vinyl & mer",
+    "description": "Fnac format label"
+  },
+  "ownThisAlbum": {
+    "message": "Eie dette albumet",
+    "description": "Section header on album pages"
+  },
+  "ownThisTrack": {
+    "message": "Eie albumet til dette sporet",
+    "description": "Section header when viewing a song"
+  },
+  "poweredBy": {
+    "message": "Drevet av StreamThenOwn",
+    "description": "Footer attribution"
+  },
+  "noLinks": {
+    "message": "Ingen kjøpslenker funnet",
+    "description": "Shown when no store links are available"
+  }
+}

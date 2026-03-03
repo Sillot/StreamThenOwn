@@ -120,6 +120,7 @@ describe("SpotifyMetadataExtractor", () => {
         album: "DEADLINE",
         artist: "BLACKPINK",
         source: "album",
+        locale: "fr",
       });
     });
 

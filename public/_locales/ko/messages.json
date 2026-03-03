@@ -1,0 +1,56 @@
+{
+  "extensionName": {
+    "message": "StreamThenOwn",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "듣고. 좋아하고. 소유하세요. — YouTube Music에서 좋아하는 음악의 구매 링크를 찾아보세요.",
+    "description": "The description of the extension"
+  },
+  "buyOn": {
+    "message": "$STORE$에서 구매",
+    "description": "Label for purchase link",
+    "placeholders": {
+      "store": {
+        "content": "$1",
+        "example": "Discogs"
+      }
+    }
+  },
+  "vinyl": {
+    "message": "바이닐 & 피지컬",
+    "description": "Discogs format label"
+  },
+  "hiResDigital": {
+    "message": "하이레즈 디지털",
+    "description": "Qobuz format label"
+  },
+  "cdAndMore": {
+    "message": "CD, 바이닐 외",
+    "description": "Amazon format label"
+  },
+  "digitalAndPhysical": {
+    "message": "디지털 & 피지컬",
+    "description": "Bandcamp format label"
+  },
+  "cdAndVinyl": {
+    "message": "CD, 바이닐 외",
+    "description": "Fnac format label"
+  },
+  "ownThisAlbum": {
+    "message": "이 앨범 소유하기",
+    "description": "Section header on album pages"
+  },
+  "ownThisTrack": {
+    "message": "이 트랙의 앨범 소유하기",
+    "description": "Section header when viewing a song"
+  },
+  "poweredBy": {
+    "message": "Powered by StreamThenOwn",
+    "description": "Footer attribution"
+  },
+  "noLinks": {
+    "message": "구매 링크를 찾을 수 없습니다",
+    "description": "Shown when no store links are available"
+  }
+}

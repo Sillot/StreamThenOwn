@@ -84,7 +84,7 @@ async function requestStoreLinks(meta: MusicMetadata): Promise<StoreLinksResult 
         payload: {
           artist: meta.artist,
           album: meta.album,
-          locale: navigator.language || document.documentElement.lang,
+          locale: chrome.i18n.getUILanguage(),
         },
       },
       (response: { success: boolean; data?: StoreLinksResult; error?: string } | undefined) => {

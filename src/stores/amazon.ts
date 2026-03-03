@@ -37,7 +37,7 @@ export function resolveAmazon(query: StoreQuery, mbUrl?: string): StoreLink {
   // Search URL fallback — locale-aware Amazon search
   const domain = getAmazonDomain(locale);
   const q = encodeURIComponent(query.album ? `${query.artist} ${query.album}` : query.artist);
-  return makeLink(appendAmazonTag(`https://${domain}/s?k=${q}&i=popular`), false);
+  return makeLink(appendAmazonTag(`https://${domain}/s?k=${q}&i=music`), false);
 }
 
 function makeLink(url: string, isDirect: boolean): StoreLink {

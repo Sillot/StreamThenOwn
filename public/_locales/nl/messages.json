@@ -1,0 +1,56 @@
+{
+  "extensionName": {
+    "message": "StreamThenOwn",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Stream het. Hou ervan. Bezit het. — Vind aankooplinks voor de muziek waar je van houdt op YouTube Music.",
+    "description": "The description of the extension"
+  },
+  "buyOn": {
+    "message": "Kopen op $STORE$",
+    "description": "Label for purchase link",
+    "placeholders": {
+      "store": {
+        "content": "$1",
+        "example": "Discogs"
+      }
+    }
+  },
+  "vinyl": {
+    "message": "Vinyl & Fysiek",
+    "description": "Discogs format label"
+  },
+  "hiResDigital": {
+    "message": "Hi-Res Digitaal",
+    "description": "Qobuz format label"
+  },
+  "cdAndMore": {
+    "message": "CD, Vinyl & meer",
+    "description": "Amazon format label"
+  },
+  "digitalAndPhysical": {
+    "message": "Digitaal & Fysiek",
+    "description": "Bandcamp format label"
+  },
+  "cdAndVinyl": {
+    "message": "CD, Vinyl & meer",
+    "description": "Fnac format label"
+  },
+  "ownThisAlbum": {
+    "message": "Dit album bezitten",
+    "description": "Section header on album pages"
+  },
+  "ownThisTrack": {
+    "message": "Het album van dit nummer bezitten",
+    "description": "Section header when viewing a song"
+  },
+  "poweredBy": {
+    "message": "Mogelijk gemaakt door StreamThenOwn",
+    "description": "Footer attribution"
+  },
+  "noLinks": {
+    "message": "Geen aankooplinks gevonden",
+    "description": "Shown when no store links are available"
+  }
+}

@@ -9,6 +9,7 @@
 
 import type { UIInjector, MusicMetadata } from "../types";
 import type { StoreLinksResult, StoreLink } from "../../stores/types";
+import { createStoreIcon, createButtonIcon } from "../../stores/icons";
 import { sanitizeUrl } from "../../utils/sanitize";
 import { t } from "../../i18n";
 import { waitForElement } from "../../utils/dom";
@@ -19,20 +20,6 @@ import { waitForElement } from "../../utils/dom";
 
 const BTN_ID = "sto-am-action-btn";
 const MENU_ID = "sto-am-dropdown-menu";
-
-/**
- * SVG icon paths for each store.
- */
-const STORE_ICON_PATHS: Record<string, string> = {
-  discogs:
-    "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm0-12.5c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 5.5c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z",
-  qobuz:
-    "M12 3c-4.97 0-9 4.03-9 9v7c0 1.1.9 2 2 2h4v-8H5v-1c0-3.87 3.13-7 7-7s7 3.13 7 7v1h-4v8h4c1.1 0 2-.9 2-2v-7c0-4.97-4.03-9-9-9z",
-  amazon:
-    "M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-2c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2zm6 16H6V8h2v2c0 .55.45 1 1 1s1-.45 1-1V8h4v2c0 .55.45 1 1 1s1-.45 1-1V8h2v12z",
-  bandcamp: "M22 6L13.2 18H2l8.8-12H22z",
-  fnac: "M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H8v-2h4v2zm4-4H8v-2h8v2zm0-4H8V7h8v2z",
-};
 
 /* ------------------------------------------------------------------ */
 /*  Implementation                                                    */
@@ -57,7 +44,7 @@ export class AppleUIInjector implements UIInjector {
     btn.className = "sto-am-btn";
     btn.title = meta.source === "album" ? t("ownThisAlbum") : t("ownThisTrack");
     btn.setAttribute("aria-label", btn.title);
-    btn.appendChild(createButtonIcon());
+    btn.appendChild(createButtonIcon(16, "sto-am-btn__icon"));
 
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -133,26 +120,6 @@ export class AppleUIInjector implements UIInjector {
 /*  Pure helpers (no state)                                           */
 /* ------------------------------------------------------------------ */
 
-/** Shopping bag icon — styled for Apple Music. */
-function createButtonIcon(): SVGSVGElement {
-  const NS = "http://www.w3.org/2000/svg";
-  const svg = document.createElementNS(NS, "svg");
-  svg.setAttribute("viewBox", "0 0 24 24");
-  svg.setAttribute("width", "24");
-  svg.setAttribute("height", "24");
-  svg.setAttribute("fill", "currentColor");
-  svg.classList.add("sto-am-btn__icon");
-
-  const path = document.createElementNS(NS, "path");
-  path.setAttribute(
-    "d",
-    "M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-2c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2zm6 16H6V8h2v2c0 .55.45 1 1 1s1-.45 1-1V8h4v2c0 .55.45 1 1 1s1-.45 1-1V8h2v12z",
-  );
-  svg.appendChild(path);
-
-  return svg;
-}
-
 function positionMenu(menu: HTMLElement, anchor: HTMLElement): void {
   const rect = anchor.getBoundingClientRect();
   const menuWidth = 280;
@@ -179,20 +146,7 @@ function createMenuItem(link: StoreLink): HTMLAnchorElement {
   a.rel = "noopener noreferrer";
   a.className = "sto-am-menu__item";
 
-  const svgPath = STORE_ICON_PATHS[link.store];
-  if (svgPath) {
-    const ns = "http://www.w3.org/2000/svg";
-    const svg = document.createElementNS(ns, "svg");
-    svg.setAttribute("viewBox", "0 0 24 24");
-    svg.setAttribute("width", "20");
-    svg.setAttribute("height", "20");
-    svg.setAttribute("fill", "currentColor");
-    svg.classList.add("sto-am-menu__item-icon");
-    const path = document.createElementNS(ns, "path");
-    path.setAttribute("d", svgPath);
-    svg.appendChild(path);
-    a.appendChild(svg);
-  }
+  a.appendChild(createStoreIcon(link.store, 20, "sto-am-menu__item-icon"));
 
   const label = document.createElement("span");
   label.className = "sto-am-menu__item-label";

@@ -8,7 +8,7 @@ Currently supported streaming platform: **YouTube Music**. The architecture is d
 
 - **Repository**: <https://github.com/Sillot/StreamThenOwn>
 - **Target browser**: Chromium-based (Chrome 116+)
-- **Locales**: English (`en`), French (`fr`) via `chrome.i18n`
+- **Locales**: `en`, `fr`, `es`, `de`, `it`, `pt_BR`, `pt_PT`, `ja`, `ko`, `nl`, `pl`, `sv`, `da`, `nb`, `fi` via `chrome.i18n`
 
 ## Tech Stack
 
@@ -165,5 +165,8 @@ Follow [Conventional Commits](https://www.conventionalcommits.org/). Allowed typ
 ## Internationalisation
 
 - Use `chrome.i18n.getMessage()` (wrapped by `t()` from `src/i18n/index.ts`) for all user-facing strings.
-- Message keys are defined in `public/_locales/{en,fr}/messages.json`.
-- Always add translations for **both** `en` and `fr` when adding new strings.
+- Message keys are defined in `public/_locales/<locale>/messages.json`.
+- **Supported locales** (15): `en`, `fr`, `es`, `de`, `it`, `pt_BR`, `pt_PT`, `ja`, `ko`, `nl`, `pl`, `sv`, `da`, `nb`, `fi`.
+- When **adding or modifying a message key**, update **all 15** locale files — not just `en` and `fr`.
+- When **adding a new locale**, create `public/_locales/<locale>/messages.json` with all existing keys translated, and add the locale to this list and to the project overview at the top of this file.
+- `en` is the `default_locale` in `manifest.json` — it acts as the fallback when Chrome's language has no matching locale file.

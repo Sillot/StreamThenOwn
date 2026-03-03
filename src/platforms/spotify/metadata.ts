@@ -16,6 +16,15 @@ function pathWithoutLocale(): string {
   return location.pathname.replace(/^\/intl-[a-z]{2}(-[a-z]{2})?/i, "");
 }
 
+/**
+ * Extract the locale from the Spotify URL path.
+ * e.g. "/intl-fr/album/…" → "fr"
+ */
+function extractLocaleFromPath(): string | undefined {
+  const match = /^\/intl-([a-z]{2})/i.exec(location.pathname);
+  return match?.[1]?.toLowerCase();
+}
+
 function isAlbumPage(): boolean {
   return pathWithoutLocale().startsWith("/album/");
 }
@@ -48,7 +57,8 @@ export class SpotifyMetadataExtractor implements MetadataExtractor {
     const artist = this.extractArtistFromHeader();
     if (!artist) return null;
 
-    return { album, artist, source: "album" };
+    const locale = extractLocaleFromPath();
+    return locale ? { album, artist, source: "album", locale } : { album, artist, source: "album" };
   }
 
   /* ---- Track page (/track/:id) ---- */
@@ -64,7 +74,9 @@ export class SpotifyMetadataExtractor implements MetadataExtractor {
     // Try to find the album name from the "appears on" or subtitle section
     const album = this.extractAlbumFromTrackPage();
 
-    return { ...(album ? { album } : {}), artist, source: "song" };
+    const locale = extractLocaleFromPath();
+    const base = { ...(album ? { album } : {}), artist, source: "song" as const };
+    return locale ? { ...base, locale } : base;
   }
 
   /* ---- Now-playing bar (bottom bar) ---- */
@@ -85,7 +97,9 @@ export class SpotifyMetadataExtractor implements MetadataExtractor {
     if (!artist) return null;
 
     const trackName = trackLink?.textContent.trim();
-    return { ...(trackName ? { album: trackName } : {}), artist, source: "song" };
+    const locale = extractLocaleFromPath();
+    const base = { ...(trackName ? { album: trackName } : {}), artist, source: "song" as const };
+    return locale ? { ...base, locale } : base;
   }
 
   /* ---- Shared helpers ---- */

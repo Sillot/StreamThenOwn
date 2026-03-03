@@ -1,0 +1,56 @@
+{
+  "extensionName": {
+    "message": "StreamThenOwn",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Streame es. Liebe es. Besitze es. — Finde Kauflinks für die Musik, die du liebst, auf YouTube Music.",
+    "description": "The description of the extension"
+  },
+  "buyOn": {
+    "message": "Kaufen auf $STORE$",
+    "description": "Label for purchase link",
+    "placeholders": {
+      "store": {
+        "content": "$1",
+        "example": "Discogs"
+      }
+    }
+  },
+  "vinyl": {
+    "message": "Vinyl & Physisch",
+    "description": "Discogs format label"
+  },
+  "hiResDigital": {
+    "message": "Hi-Res Digital",
+    "description": "Qobuz format label"
+  },
+  "cdAndMore": {
+    "message": "CD, Vinyl & mehr",
+    "description": "Amazon format label"
+  },
+  "digitalAndPhysical": {
+    "message": "Digital & Physisch",
+    "description": "Bandcamp format label"
+  },
+  "cdAndVinyl": {
+    "message": "CD, Vinyl & mehr",
+    "description": "Fnac format label"
+  },
+  "ownThisAlbum": {
+    "message": "Dieses Album besitzen",
+    "description": "Section header on album pages"
+  },
+  "ownThisTrack": {
+    "message": "Das Album dieses Titels besitzen",
+    "description": "Section header when viewing a song"
+  },
+  "poweredBy": {
+    "message": "Bereitgestellt von StreamThenOwn",
+    "description": "Footer attribution"
+  },
+  "noLinks": {
+    "message": "Keine Kauflinks gefunden",
+    "description": "Shown when no store links are available"
+  }
+}

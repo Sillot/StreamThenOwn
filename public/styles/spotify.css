@@ -117,11 +117,11 @@
   flex-shrink: 0;
   width: 20px;
   height: 20px;
-  color: rgba(255, 255, 255, 0.7);
+  filter: brightness(0) invert(0.7);
 }
 
 .sto-sp-menu__item:hover .sto-sp-menu__item-icon {
-  color: #fff;
+  filter: brightness(0) invert(1);
 }
 
 .sto-sp-menu__item-label {

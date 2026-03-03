@@ -19,6 +19,12 @@ export interface MusicMetadata {
   artist: string;
   /** The type of page the metadata was extracted from */
   source: "album" | "song";
+  /**
+   * Platform locale detected from the URL (e.g. "es" from Apple Music Spain,
+   * "fr" from Spotify /intl-fr/…). Used to localise store links.
+   * Falls back to `navigator.language` when absent.
+   */
+  locale?: string;
 }
 
 /** Extracts artist/album metadata from the current page DOM. */
