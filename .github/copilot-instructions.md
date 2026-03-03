@@ -17,6 +17,7 @@ Currently supported streaming platform: **YouTube Music**. The architecture is d
 | Language      | TypeScript (strict mode, ES2022 target)     |
 | Bundler       | esbuild (IIFE output for Chrome extensions) |
 | Linter        | ESLint 9 flat config + typescript-eslint    |
+| CSS linter    | Stylelint (standard config + BEM naming)    |
 | Formatter     | Prettier                                    |
 | Dead code     | Knip                                        |
 | Tests         | Vitest (jsdom environment)                  |
@@ -37,12 +38,14 @@ make watch          # Watch mode
 make typecheck      # tsc --noEmit
 make lint           # ESLint
 make lint-fix       # ESLint --fix
+make stylelint      # Stylelint (CSS)
+make stylelint-fix  # Stylelint --fix
 make format         # Prettier --write
 make format-check   # Prettier --check
 make knip           # Dead code detection
 make test           # Vitest run
 make test-watch     # Vitest watch
-make validate       # Full CI pipeline (typecheck + lint + format + knip + audit + test + build)
+make validate       # Full CI pipeline (typecheck + lint + stylelint + format + knip + audit + test + build)
 make audit          # npm audit
 make zip            # Package for Chrome Web Store
 make shell          # Interactive shell in container
@@ -113,7 +116,7 @@ Follow this pattern:
 3. **Create** `src/platforms/<platform>/index.ts` implementing `PlatformAdapter`.
 4. **Register** the hostname in `PLATFORM_MAP` in `src/platforms/index.ts`.
 5. **Add** the match pattern to `content_scripts.matches` in `public/manifest.json`.
-6. **Add** platform-specific CSS (either in `sto.css` or in a separate `<platform>.css`).
+6. **Add** platform-specific CSS in `public/styles/<platform>.css`. Follow BEM naming — see the [CSS instructions](.github/instructions/css.instructions.md).
 7. **Write tests** in `src/platforms/<platform>/*.test.ts`.
 
 ## Adding a New Store
@@ -148,6 +151,10 @@ This is a Chrome extension with content scripts running on streaming music servi
 ## TypeScript Guidelines
 
 See [`.github/instructions/typescript.instructions.md`](.github/instructions/typescript.instructions.md) for detailed TS/JS coding standards with examples. That file is auto-applied to all `*.{ts,js,mts,mjs}` files.
+
+## CSS Guidelines
+
+See [`.github/instructions/css.instructions.md`](.github/instructions/css.instructions.md) for CSS coding standards (BEM naming, specificity limits, no `!important`). That file is auto-applied to all `*.css` files.
 
 ## Testing
 

@@ -12,7 +12,9 @@
  */
 
 /* ------------------------------------------------------------------ */
+
 /*  Action button — matches Deezer Chakra UI icon-button row           */
+
 /* ------------------------------------------------------------------ */
 
 .sto-dz-btn {
@@ -39,7 +41,6 @@
     transform 0.2s ease;
   outline: solid 1.6px transparent;
   appearance: none;
-  -webkit-appearance: none;
   box-shadow: none;
   vertical-align: middle;
   line-height: 24px;
@@ -76,7 +77,9 @@
 }
 
 /* ------------------------------------------------------------------ */
+
 /*  Dropdown menu — matches Deezer's context menu / popover style      */
+
 /* ------------------------------------------------------------------ */
 
 .sto-dz-menu {
@@ -86,8 +89,8 @@
   border-radius: 16px;
   padding: 8px 0;
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.55),
-    0 2px 8px rgba(0, 0, 0, 0.35);
+    0 8px 32px rgb(0 0 0 / 55%),
+    0 2px 8px rgb(0 0 0 / 35%);
   font-family:
     system-ui,
     -apple-system,
@@ -103,6 +106,7 @@
     opacity: 0;
     transform: scale(0.96);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -110,7 +114,9 @@
 }
 
 /* ------------------------------------------------------------------ */
+
 /*  Menu items — matches Deezer context menu items                     */
+
 /* ------------------------------------------------------------------ */
 
 .sto-dz-menu__item {
@@ -121,20 +127,20 @@
   height: 56px;
   border-radius: 0;
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgb(255 255 255 / 90%);
   cursor: pointer;
   transition: background 0.12s ease;
   position: relative;
 }
 
 .sto-dz-menu__item:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgb(255 255 255 / 8%);
   text-decoration: none;
   color: #fff;
 }
 
 .sto-dz-menu__item:active {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgb(255 255 255 / 12%);
 }
 
 .sto-dz-menu__item-icon {
@@ -161,7 +167,9 @@
 }
 
 /* ------------------------------------------------------------------ */
+
 /*  "Direct" badge — small purple pill (Deezer accent)                 */
+
 /* ------------------------------------------------------------------ */
 
 .sto-dz-menu__item-badge {
@@ -170,7 +178,7 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: #a238ff;
-  background: rgba(162, 56, 255, 0.15);
+  background: rgb(162 56 255 / 15%);
   border-radius: 6px;
   padding: 2px 8px;
   line-height: 14px;
@@ -178,12 +186,14 @@
 }
 
 /* ------------------------------------------------------------------ */
+
 /*  Empty state                                                        */
+
 /* ------------------------------------------------------------------ */
 
 .sto-dz-menu__empty {
   padding: 20px;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgb(255 255 255 / 50%);
   text-align: center;
 }

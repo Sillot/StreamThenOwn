@@ -41,6 +41,15 @@ services:
     extends: dev
     command: npm run lint:fix
 
+  # ── Stylelint ────────────────────────────────────────────────────
+  stylelint:
+    extends: dev
+    command: npm run stylelint
+
+  stylelint-fix:
+    extends: dev
+    command: npm run stylelint:fix
+
   # ── Format ───────────────────────────────────────────────────────
   format:
     extends: dev

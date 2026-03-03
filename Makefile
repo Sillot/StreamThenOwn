@@ -1,4 +1,4 @@
-.PHONY: help install build watch typecheck lint lint-fix format format-check knip test test-watch validate audit zip clean shell
+.PHONY: help install build watch typecheck lint lint-fix stylelint stylelint-fix format format-check knip test test-watch validate audit zip clean shell
 
 COMPOSE = docker compose
 
@@ -22,6 +22,12 @@ lint: ## Run ESLint
 
 lint-fix: ## Run ESLint with auto-fix
 	$(COMPOSE) run --rm lint-fix
+
+stylelint: ## Run Stylelint on CSS files
+	$(COMPOSE) run --rm stylelint
+
+stylelint-fix: ## Run Stylelint with auto-fix
+	$(COMPOSE) run --rm stylelint-fix
 
 format: ## Format code with Prettier
 	$(COMPOSE) run --rm format

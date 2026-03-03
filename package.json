@@ -15,8 +15,10 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
+    "stylelint": "stylelint \"public/styles/**/*.css\"",
+    "stylelint:fix": "stylelint \"public/styles/**/*.css\" --fix",
     "audit": "npm audit --audit-level=moderate",
-    "validate": "npm run typecheck && npm run lint && npm run format:check && npm run knip && npm run audit && npm run test && npm run build",
+    "validate": "npm run typecheck && npm run lint && npm run stylelint && npm run format:check && npm run knip && npm run audit && npm run test && npm run build",
     "zip": "npm run build && sh scripts/zip.sh",
     "prepare": "git rev-parse --git-dir > /dev/null 2>&1 && git config core.hooksPath .githooks || true"
   },
@@ -49,6 +51,8 @@
     "knip": "^5.47.0",
     "lint-staged": "^16.0.0",
     "prettier": "^3.5.3",
+    "stylelint": "^17.4.0",
+    "stylelint-config-standard": "^40.0.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.28.0",
     "vitest": "^3.1.0"
@@ -58,7 +62,11 @@
       "eslint --fix",
       "prettier --write"
     ],
-    "*.{json,css,md,yml,yaml}": [
+    "*.css": [
+      "stylelint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
       "prettier --write"
     ]
   }
