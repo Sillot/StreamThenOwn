@@ -96,5 +96,13 @@
   "popupUnsupported": {
     "message": "Acesse YouTube Music, Spotify, Apple Music, Deezer ou Amazon Music para ver links de compra.",
     "description": "Shown in the popup when the current page is not a supported streaming service"
+  },
+  "popupAlbumSection": {
+    "message": "Álbum",
+    "description": "Section label in the popup shown above album-page purchase links when both album and now-playing contexts are displayed"
+  },
+  "popupNowPlayingSection": {
+    "message": "Tocando agora",
+    "description": "Section label in the popup shown above now-playing purchase links when both album and now-playing contexts are displayed"
   }
 }

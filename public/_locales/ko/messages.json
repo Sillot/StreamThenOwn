@@ -96,5 +96,13 @@
   "popupUnsupported": {
     "message": "YouTube Music, Spotify, Apple Music, Deezer 또는 Amazon Music을 방문하여 구매 링크를 확인하세요.",
     "description": "Shown in the popup when the current page is not a supported streaming service"
+  },
+  "popupAlbumSection": {
+    "message": "앨범",
+    "description": "Section label in the popup shown above album-page purchase links when both album and now-playing contexts are displayed"
+  },
+  "popupNowPlayingSection": {
+    "message": "재생 중",
+    "description": "Section label in the popup shown above now-playing purchase links when both album and now-playing contexts are displayed"
   }
 }

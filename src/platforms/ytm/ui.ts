@@ -1,8 +1,9 @@
 /**
  * YouTube Music UI injector.
  *
- * Injects the STO action button into YTM's `#action-buttons` row and
- * manages the dropdown purchase-links menu.
+ * Injects the STO action button into YTM's `#action-buttons` row (album pages)
+ * and into `#right-controls` in the player bar (always when music is playing).
+ * Manages the shared dropdown purchase-links menu.
  */
 
 import type { UIInjector, MusicMetadata } from "../types";
@@ -17,6 +18,7 @@ import { waitForElement } from "../../utils/dom";
 /* ------------------------------------------------------------------ */
 
 const BTN_ID = "sto-action-btn";
+const PLAYER_BTN_ID = "sto-player-btn";
 const MENU_ID = "sto-dropdown-menu";
 
 /* ------------------------------------------------------------------ */
@@ -25,35 +27,53 @@ const MENU_ID = "sto-dropdown-menu";
 
 export class YtmUIInjector implements UIInjector {
   private currentLinks: StoreLinksResult | null = null;
+  private currentPlayerLinks: StoreLinksResult | null = null;
 
   setLinks(links: StoreLinksResult | null): void {
     this.currentLinks = links;
   }
 
+  setPlayerLinks(links: StoreLinksResult | null): void {
+    this.currentPlayerLinks = links;
+  }
+
   async injectButton(meta: MusicMetadata): Promise<void> {
-    if (document.getElementById(BTN_ID)) return;
+    const tasks: Promise<void>[] = [];
 
-    const actionsRow = await waitForElement("#action-buttons");
-    if (!actionsRow) return;
+    // Album page button: inject into #action-buttons only when on an album page
+    if (meta.source === "album" && !document.getElementById(BTN_ID)) {
+      tasks.push(
+        waitForElement("#action-buttons").then((row) => {
+          if (row && !document.getElementById(BTN_ID)) {
+            row.appendChild(this.createButton(BTN_ID, t("ownThisAlbum"), () => this.currentLinks));
+          }
+        }),
+      );
+    }
 
-    const btn = document.createElement("button");
-    btn.id = BTN_ID;
-    btn.type = "button";
-    btn.className = "sto-action-btn";
-    btn.title = meta.source === "album" ? t("ownThisAlbum") : t("ownThisTrack");
-    btn.setAttribute("aria-label", btn.title);
-    btn.appendChild(createButtonIcon(24, "sto-action-btn__icon"));
+    // Player bar button: always inject into #right-controls when music is playing
+    if (!document.getElementById(PLAYER_BTN_ID)) {
+      tasks.push(
+        waitForElement("#right-controls").then((controls) => {
+          if (controls && !document.getElementById(PLAYER_BTN_ID)) {
+            controls.prepend(
+              this.createButton(
+                PLAYER_BTN_ID,
+                t("ownThisTrack"),
+                () => this.currentPlayerLinks ?? this.currentLinks,
+              ),
+            );
+          }
+        }),
+      );
+    }
 
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      this.toggleMenu(btn);
-    });
-
-    actionsRow.appendChild(btn);
+    await Promise.all(tasks);
   }
 
   cleanup(): void {
     document.getElementById(BTN_ID)?.remove();
+    document.getElementById(PLAYER_BTN_ID)?.remove();
     this.closeMenu();
   }
 
@@ -63,7 +83,28 @@ export class YtmUIInjector implements UIInjector {
 
   /* ---- Private ---- */
 
-  private toggleMenu(anchor: HTMLElement): void {
+  private createButton(
+    id: string,
+    title: string,
+    getLinks: () => StoreLinksResult | null,
+  ): HTMLButtonElement {
+    const btn = document.createElement("button");
+    btn.id = id;
+    btn.type = "button";
+    btn.className = "sto-action-btn";
+    btn.title = title;
+    btn.setAttribute("aria-label", title);
+    btn.appendChild(createButtonIcon(24, "sto-action-btn__icon"));
+
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      this.toggleMenu(btn, getLinks());
+    });
+
+    return btn;
+  }
+
+  private toggleMenu(anchor: HTMLElement, links: StoreLinksResult | null): void {
     const existing = document.getElementById(MENU_ID);
     if (existing) {
       existing.remove();
@@ -71,13 +112,13 @@ export class YtmUIInjector implements UIInjector {
       return;
     }
 
-    if (!this.currentLinks) return;
+    if (!links) return;
 
     const menu = document.createElement("div");
     menu.id = MENU_ID;
     menu.className = "sto-menu";
 
-    const availableLinks = this.currentLinks.links.filter((l) => l.url && l.url.length > 0);
+    const availableLinks = links.links.filter((l) => l.url && l.url.length > 0);
     for (const link of availableLinks) {
       menu.appendChild(createMenuItem(link));
     }

@@ -31,6 +31,13 @@ export interface MusicMetadata {
 export interface MetadataExtractor {
   /** Try to extract metadata. Returns `null` if the page has no relevant info. */
   extract(): MusicMetadata | null;
+
+  /**
+   * Extract the currently playing song from the player bar, independently of
+   * the page being browsed. Optional — only platforms with a persistent player
+   * bar (e.g. YouTube Music) implement this method.
+   */
+  extractSong?(): MusicMetadata | null;
 }
 
 /* ------------------------------------------------------------------ */
@@ -53,6 +60,13 @@ export interface UIInjector {
 
   /** Update the links data used by the dropdown. */
   setLinks(links: StoreLinksResult | null): void;
+
+  /**
+   * Update the links data used by the player bar button dropdown.
+   * Optional — only for platforms with a separate player bar button (e.g. YouTube Music).
+   * When not implemented, the player bar button falls back to the links set by `setLinks`.
+   */
+  setPlayerLinks?(links: StoreLinksResult | null): void;
 }
 
 /* ------------------------------------------------------------------ */

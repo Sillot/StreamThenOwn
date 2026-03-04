@@ -27,6 +27,9 @@ let remainingRetries = 0;
 /** Current state exposed to the popup via GET_CURRENT_LINKS message. */
 let currentMetadata: MusicMetadata | null = null;
 let currentLinks: StoreLinksResult | null = null;
+/** Now-playing context — only set when it differs from the album-page context. */
+let currentSongMetadata: MusicMetadata | null = null;
+let currentSongLinks: StoreLinksResult | null = null;
 
 /* ------------------------------------------------------------------ */
 /*  Core logic                                                        */
@@ -36,11 +39,18 @@ function metadataKey(meta: MusicMetadata): string {
   return `${meta.artist}||${meta.album ?? ""}||${meta.source}`;
 }
 
+/** Key using only artist + album (ignores source). Used to detect same-album contexts. */
+function artistAlbumKey(meta: MusicMetadata): string {
+  return `${meta.artist}||${meta.album ?? ""}`;
+}
+
 async function check(retries = 3): Promise<void> {
   if (!platform) return;
 
   const meta = platform.metadata.extract();
-  if (!meta) {
+  const songMeta = platform.metadata.extractSong?.() ?? null;
+
+  if (!meta && !songMeta) {
     // Retry: SPA frameworks (React) may not have rendered the DOM yet
     if (retries > 0) {
       console.log(LOG, `No metadata yet, retrying (${String(retries)} left)…`);
@@ -52,25 +62,50 @@ async function check(retries = 3): Promise<void> {
     lastMetadataKey = "";
     currentMetadata = null;
     currentLinks = null;
+    currentSongMetadata = null;
+    currentSongLinks = null;
     platform.ui.setLinks(null);
+    platform.ui.setPlayerLinks?.(null);
     return;
   }
 
-  const key = metadataKey(meta);
+  // At this point, either meta or songMeta is non-null (ensured by the early return above).
+  const primaryMeta = meta ?? songMeta;
+  if (!primaryMeta) return; // unreachable; satisfies TypeScript's null check
+  // Deduplication key combines both contexts so a track change is always detected
+  const key = `${metadataKey(primaryMeta)}|||${songMeta ? metadataKey(songMeta) : ""}`;
   if (key === lastMetadataKey) return;
   lastMetadataKey = key;
 
-  console.log(LOG, `${meta.artist} — ${meta.album ?? "(no album)"} [${meta.source}]`);
+  console.log(
+    LOG,
+    `${primaryMeta.artist} — ${primaryMeta.album ?? "(no album)"} [${primaryMeta.source}]`,
+  );
 
   platform.ui.cleanup();
 
-  const result = await requestStoreLinks(meta);
+  // Resolve primary (album-page, or song as fallback) links
+  const result = await requestStoreLinks(primaryMeta);
   if (!result) return;
 
-  currentMetadata = meta;
+  // Song context differs from album context when browsing one album while playing another
+  const songDiffers =
+    songMeta !== null && meta !== null && artistAlbumKey(songMeta) !== artistAlbumKey(meta);
+
+  // Resolve now-playing links independently only when they differ from album links.
+  let songResult: StoreLinksResult | null = null;
+  if (songDiffers && platform.ui.setPlayerLinks) {
+    songResult = await requestStoreLinks(songMeta);
+  }
+
+  currentMetadata = primaryMeta;
   currentLinks = result;
+  currentSongMetadata = songDiffers ? songMeta : null;
+  currentSongLinks = songResult;
 
   platform.ui.setLinks(result);
+  platform.ui.setPlayerLinks?.(songResult ?? result);
+
   const direct = result.links.filter((l) => l.isDirect).length;
   const total = result.links.length;
   console.log(
@@ -78,7 +113,7 @@ async function check(retries = 3): Promise<void> {
     `${String(total)} links (${String(direct)} direct, ${String(total - direct)} search)`,
   );
 
-  await platform.ui.injectButton(meta);
+  await platform.ui.injectButton(primaryMeta);
 }
 
 /* ------------------------------------------------------------------ */
@@ -131,6 +166,8 @@ function onNavigate(): void {
   remainingRetries = 3;
   currentMetadata = null;
   currentLinks = null;
+  currentSongMetadata = null;
+  currentSongLinks = null;
   platform?.ui.cleanup();
   scheduleCheck();
 }
@@ -162,7 +199,12 @@ function init(): void {
       sendResponse: (response: unknown) => void,
     ): boolean | undefined => {
       if (message.type === "GET_CURRENT_LINKS") {
-        sendResponse({ metadata: currentMetadata, links: currentLinks });
+        sendResponse({
+          metadata: currentMetadata,
+          links: currentLinks,
+          songMetadata: currentSongMetadata,
+          songLinks: currentSongLinks,
+        });
         return;
       }
       return;

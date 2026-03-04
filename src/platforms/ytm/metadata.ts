@@ -72,6 +72,11 @@ export class YtmMetadataExtractor implements MetadataExtractor {
     return this.extractAlbumPage() ?? this.extractCurrentSong();
   }
 
+  /** Extract the currently playing song from the player bar. */
+  extractSong(): MusicMetadata | null {
+    return this.extractCurrentSong();
+  }
+
   /* ---- Album page ---- */
 
   private extractAlbumPage(): MusicMetadata | null {

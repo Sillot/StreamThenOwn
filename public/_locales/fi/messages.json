@@ -96,5 +96,13 @@
   "popupUnsupported": {
     "message": "Käy YouTube Musicissa, Spotifyssa, Apple Musicissa, Deezerissä tai Amazon Musicissa nähdäksesi ostolinkit.",
     "description": "Shown in the popup when the current page is not a supported streaming service"
+  },
+  "popupAlbumSection": {
+    "message": "Albumi",
+    "description": "Section label in the popup shown above album-page purchase links when both album and now-playing contexts are displayed"
+  },
+  "popupNowPlayingSection": {
+    "message": "Soi nyt",
+    "description": "Section label in the popup shown above now-playing purchase links when both album and now-playing contexts are displayed"
   }
 }

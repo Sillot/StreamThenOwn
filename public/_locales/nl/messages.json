@@ -96,5 +96,13 @@
   "popupUnsupported": {
     "message": "Bezoek YouTube Music, Spotify, Apple Music, Deezer of Amazon Music om aankooplinks te zien.",
     "description": "Shown in the popup when the current page is not a supported streaming service"
+  },
+  "popupAlbumSection": {
+    "message": "Album",
+    "description": "Section label in the popup shown above album-page purchase links when both album and now-playing contexts are displayed"
+  },
+  "popupNowPlayingSection": {
+    "message": "Nu aan het spelen",
+    "description": "Section label in the popup shown above now-playing purchase links when both album and now-playing contexts are displayed"
   }
 }

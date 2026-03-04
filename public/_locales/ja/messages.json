@@ -96,5 +96,13 @@
   "popupUnsupported": {
     "message": "YouTube Music、Spotify、Apple Music、Deezer、Amazon Musicにアクセスして購入リンクを確認してください。",
     "description": "Shown in the popup when the current page is not a supported streaming service"
+  },
+  "popupAlbumSection": {
+    "message": "アルバム",
+    "description": "Section label in the popup shown above album-page purchase links when both album and now-playing contexts are displayed"
+  },
+  "popupNowPlayingSection": {
+    "message": "再生中",
+    "description": "Section label in the popup shown above now-playing purchase links when both album and now-playing contexts are displayed"
   }
 }

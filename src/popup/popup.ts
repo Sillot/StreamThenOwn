@@ -17,6 +17,8 @@ import type { StoreLink, StoreLinksResult } from "../stores/types";
 interface CurrentLinksResponse {
   metadata: MusicMetadata | null;
   links: StoreLinksResult | null;
+  songMetadata: MusicMetadata | null;
+  songLinks: StoreLinksResult | null;
 }
 
 /** Sentinel: content script is not available (unsupported page). */
@@ -127,6 +129,19 @@ function renderLinks(root: HTMLElement, links: StoreLink[]): void {
   root.appendChild(list);
 }
 
+function renderSeparator(root: HTMLElement): void {
+  const sep = document.createElement("div");
+  sep.className = "sto-popup__separator";
+  root.appendChild(sep);
+}
+
+function renderSectionLabel(root: HTMLElement, text: string): void {
+  const label = document.createElement("div");
+  label.className = "sto-popup__section-label";
+  label.textContent = text;
+  root.appendChild(label);
+}
+
 function renderEmpty(root: HTMLElement): void {
   const section = document.createElement("div");
   section.className = "sto-popup__empty";
@@ -217,11 +232,35 @@ async function init(): Promise<void> {
 
   if (response === UNSUPPORTED) {
     renderUnsupported(root);
-  } else if (response?.metadata && response.links && response.links.links.length > 0) {
-    renderNowPlaying(root, response.metadata);
-    renderLinks(root, response.links.links);
   } else {
-    renderEmpty(root);
+    const albumSection =
+      response?.metadata && response.links && response.links.links.length > 0
+        ? { meta: response.metadata, links: response.links.links }
+        : null;
+    const songSection =
+      response?.songMetadata && response.songLinks && response.songLinks.links.length > 0
+        ? { meta: response.songMetadata, links: response.songLinks.links }
+        : null;
+
+    if (!albumSection && !songSection) {
+      renderEmpty(root);
+    } else {
+      if (albumSection) {
+        if (songSection) {
+          renderSectionLabel(root, t("popupAlbumSection"));
+        }
+        renderNowPlaying(root, albumSection.meta);
+        renderLinks(root, albumSection.links);
+      }
+      if (songSection) {
+        if (albumSection) {
+          renderSeparator(root);
+          renderSectionLabel(root, t("popupNowPlayingSection"));
+        }
+        renderNowPlaying(root, songSection.meta);
+        renderLinks(root, songSection.links);
+      }
+    }
   }
 
   renderFooter(root);
