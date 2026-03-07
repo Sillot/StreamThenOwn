@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Kuuntele. Rakasta. Omista. — Löydä ostolinkkejä musiikkiin, josta pidät YouTube Musicissa, Spotifyssa, Apple Musicissa, Deezerissä ja Amazon Musicissa.",
+    "message": "Kuuntele. Rakasta. Omista. — Löydä ostolinkkejä musiikkiin YouTube Musicissa, Spotifyssa, Apple Musicissa ja muualla.",
     "description": "The description of the extension"
   },
   "buyOn": {
