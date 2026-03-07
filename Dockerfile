@@ -1,6 +1,6 @@
 FROM node:22-alpine AS base
 
-RUN apk add --no-cache git
+RUN apk add --no-cache git zip
 
 WORKDIR /app
 
