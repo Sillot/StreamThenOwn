@@ -1,0 +1,38 @@
+version: 2
+
+updates:
+  # npm dependencies
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 10
+    reviewers:
+      - Sillot
+    labels:
+      - dependencies
+      - security
+
+  # GitHub Actions
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 5
+    reviewers:
+      - Sillot
+    labels:
+      - dependencies
+      - ci
+
+  # Docker base image
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 3
+    reviewers:
+      - Sillot
+    labels:
+      - dependencies
+      - docker
