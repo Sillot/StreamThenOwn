@@ -4,3 +4,9 @@ package-lock.json
 *.png
 *.ico
 *.svg
+.github/instructions/
+.github/prompts/
+.github/skills/
+.github/copilot-instructions.md
+scripts/
+LICENSE

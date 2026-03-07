@@ -2,6 +2,8 @@
 
 **Stream it. Love it. Own it.**
 
+> 🤖 This project was built with the help of AI (GitHub Copilot).
+
 StreamThenOwn is a browser extension that adds purchase links (Discogs, Qobuz, Amazon, Bandcamp) next to albums and songs on music streaming services. Stop renting your music — own it.
 
 ## Supported platforms
