@@ -59,18 +59,9 @@ StreamThenOwn respects your privacy:
 - **No accounts or sign-up required**
 - **No tracking scripts or pixels**
 - **Metadata queries are anonymous** — the extension sends only artist and album names to [MusicBrainz](https://musicbrainz.org/) to resolve purchase links. No user-identifying information is included
-- **Some purchase links may contain affiliate identifiers** (Awin/Qobuz) that help support the development of this extension at no extra cost to you. These links may set third-party cookies on the store's website when you click them — the extension itself does not set any cookies
 - **All code is open-source** and auditable in this repository
 
 Full privacy policy: [PRIVACY_POLICY.md](PRIVACY_POLICY.md)
-
-## Affiliate disclosure
-
-Some links to stores may contain affiliate identifiers that allow us to earn a small commission on qualifying purchases, at no additional cost to you. This supports the continued development of StreamThenOwn.
-
-- **Qobuz**: links may be redirected through [Awin](https://www.awin.com/) (`awin1.com/cread.php?…`)
-
-You can verify this in the source code: [src/config/affiliate.ts](src/config/affiliate.ts).
 
 ## Permissions explained
 
