@@ -2,7 +2,7 @@
 
 [![Release](https://img.shields.io/github/v/release/Sillot/StreamThenOwn?label=release)](https://github.com/Sillot/StreamThenOwn/releases/latest)
 [![CI](https://img.shields.io/github/actions/workflow/status/Sillot/StreamThenOwn/release.yml?label=CI)](https://github.com/Sillot/StreamThenOwn/actions/workflows/release.yml)
-[![License: MIT](https://img.shields.io/github/license/Sillot/StreamThenOwn)](LICENSE)
+[![License: MIT](https://img.shields.io/github/license/Sillot/StreamThenOwn?cacheSeconds=3600)](LICENSE)
 [![Chrome MV3](https://img.shields.io/badge/chrome-MV3-4285F4?logo=googlechrome&logoColor=white)](https://developer.chrome.com/docs/extensions/develop/migrate/what-is-mv3)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](tsconfig.json)
 [![Locales](https://img.shields.io/badge/locales-15-blueviolet)](#features)
