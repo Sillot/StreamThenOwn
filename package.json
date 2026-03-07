@@ -1,6 +1,6 @@
 {
   "name": "streamthenown",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Stream, then own — find purchase links for music on YouTube Music.",
   "private": true,
   "scripts": {
