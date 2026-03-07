@@ -1,5 +1,5 @@
 ---
-name: "Add Locale"
+name: add-locale
 description: "Step-by-step guide to add a new translation locale to StreamThenOwn"
 ---
 

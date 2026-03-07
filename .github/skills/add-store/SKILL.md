@@ -1,5 +1,5 @@
 ---
-name: "Add Purchase Store"
+name: add-store
 description: "Step-by-step guide to add a new purchase store to StreamThenOwn"
 ---
 

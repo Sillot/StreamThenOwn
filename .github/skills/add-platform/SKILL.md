@@ -1,5 +1,5 @@
 ---
-name: "Add Streaming Platform"
+name: add-platform
 description: "Step-by-step guide to add a new streaming music platform to StreamThenOwn"
 ---
 

@@ -1,6 +1,6 @@
 ---
 description: "Prepare and publish a new release of StreamThenOwn"
-mode: "agent"
+agent: agent
 ---
 
 # Release StreamThenOwn
