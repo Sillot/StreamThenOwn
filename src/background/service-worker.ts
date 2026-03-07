@@ -94,5 +94,3 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
     void chrome.action.disable(tabId);
   }
 });
-
-console.log("[StreamThenOwn] Service worker loaded");

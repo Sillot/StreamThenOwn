@@ -53,7 +53,6 @@ async function check(retries = 3): Promise<void> {
   if (!meta && !songMeta) {
     // Retry: SPA frameworks (React) may not have rendered the DOM yet
     if (retries > 0) {
-      console.log(LOG, `No metadata yet, retrying (${String(retries)} left)…`);
       remainingRetries = retries - 1;
       scheduleCheck(1500);
       return;
@@ -76,11 +75,6 @@ async function check(retries = 3): Promise<void> {
   const key = `${metadataKey(primaryMeta)}|||${songMeta ? metadataKey(songMeta) : ""}`;
   if (key === lastMetadataKey) return;
   lastMetadataKey = key;
-
-  console.log(
-    LOG,
-    `${primaryMeta.artist} — ${primaryMeta.album ?? "(no album)"} [${primaryMeta.source}]`,
-  );
 
   platform.ui.cleanup();
 
@@ -105,13 +99,6 @@ async function check(retries = 3): Promise<void> {
 
   platform.ui.setLinks(result);
   platform.ui.setPlayerLinks?.(songResult ?? result);
-
-  const direct = result.links.filter((l) => l.isDirect).length;
-  const total = result.links.length;
-  console.log(
-    LOG,
-    `${String(total)} links (${String(direct)} direct, ${String(total - direct)} search)`,
-  );
 
   await platform.ui.injectButton(primaryMeta);
 }
@@ -179,11 +166,8 @@ function onNavigate(): void {
 function init(): void {
   platform = detectPlatform();
   if (!platform) {
-    console.warn(LOG, "Unsupported platform:", location.hostname);
     return;
   }
-
-  console.log(LOG, `Loaded on ${platform.name}:`, window.location.href);
 
   // Notify background so it enables the action icon for this tab.
   chrome.runtime.sendMessage({ type: "CONTENT_SCRIPT_READY" }, () => {

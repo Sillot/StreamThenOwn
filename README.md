@@ -11,6 +11,8 @@ StreamThenOwn is a browser extension that adds purchase links (Discogs, Qobuz, A
 | YouTube Music     | ✅ Supported |
 | Spotify           | ✅ Supported |
 | Apple Music       | ✅ Supported |
+| Deezer            | ✅ Supported |
+| Amazon Music      | ✅ Supported |
 
 ## How it works
 
@@ -33,14 +35,6 @@ Links are resolved via [MusicBrainz](https://musicbrainz.org/) when possible (di
 - **Privacy-first** — no personal data collected, no tracking, no accounts
 
 ## Install
-
-### Chrome Web Store
-
-_Coming soon_
-
-### Microsoft Edge Add-ons
-
-_Coming soon_
 
 ### Manual install (development)
 
@@ -71,6 +65,8 @@ Full privacy policy: [PRIVACY_POLICY.md](PRIVACY_POLICY.md)
 | Host: `music.youtube.com` | Inject the STO button on YouTube Music pages                          |
 | Host: `open.spotify.com`  | Inject the STO button on Spotify pages                                |
 | Host: `music.apple.com`   | Inject the STO button on Apple Music pages                            |
+| Host: `www.deezer.com`    | Inject the STO button on Deezer pages                                 |
+| Host: `music.amazon.*`    | Inject the STO button on Amazon Music pages (all regional domains)    |
 | Host: `musicbrainz.org`   | Query the MusicBrainz API to resolve purchase links                   |
 
 No other permissions are requested. The extension cannot read your browsing history, passwords, or any data outside of the listed streaming services.
