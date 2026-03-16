@@ -50,7 +50,7 @@
     "eslint": "^10.0.3",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-no-unsanitized": "^4.1.2",
-    "eslint-plugin-regexp": "^3.0.0",
+    "eslint-plugin-regexp": "^3.1.0",
     "jsdom": "^28.1.0",
     "knip": "^5.47.0",
     "lint-staged": "^16.0.0",
