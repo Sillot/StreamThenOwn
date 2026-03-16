@@ -23,5 +23,8 @@ USER sto
 RUN npm run build
 
 # ── Dev stage (default) ──────────────────────────────────────────────
+# NOTE: dev stage runs as root because docker-compose mounts the host
+# directory as a volume — file ownership must match the host user.
+# The CI pipeline also uses this stage with volume mounts.
+# Security is enforced at the build stage level instead.
 FROM base AS dev
-USER sto
