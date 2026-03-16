@@ -134,15 +134,17 @@ export async function getReleaseUrls(releaseId: string): Promise<ExternalUrls> {
 
   for (const rel of data.relations ?? []) {
     const href = rel.url?.resource;
-    if (!href) continue;
+    if (!href || !isAllowedStoreHost(href)) continue;
 
-    if (href.includes("discogs.com") && isAllowedStoreHost(href)) {
+    const hostname = new URL(href).hostname;
+
+    if (hostname === "discogs.com" || hostname.endsWith(".discogs.com")) {
       urls.discogs = href;
-    } else if (href.includes("amazon.") && isAllowedStoreHost(href)) {
+    } else if (/^(?:www\.)?amazon\./u.exec(hostname)) {
       urls.amazon = href;
-    } else if (href.includes("qobuz.com") && isAllowedStoreHost(href)) {
+    } else if (hostname === "qobuz.com" || hostname.endsWith(".qobuz.com")) {
       urls.qobuz = href;
-    } else if (href.includes("bandcamp.com") && isAllowedStoreHost(href)) {
+    } else if (hostname === "bandcamp.com" || hostname.endsWith(".bandcamp.com")) {
       urls.bandcamp = href;
     }
   }
