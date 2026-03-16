@@ -42,7 +42,7 @@
   "homepage": "https://github.com/Sillot/StreamThenOwn#readme",
   "devDependencies": {
     "@commitlint/cli": "^20.4.3",
-    "@commitlint/config-conventional": "^20.4.3",
+    "@commitlint/config-conventional": "^20.5.0",
     "@eslint/js": "^10.0.1",
     "@types/chrome": "^0.1.37",
     "@vitest/coverage-v8": "^4.0.18",
