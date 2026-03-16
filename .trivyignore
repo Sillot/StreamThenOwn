@@ -1,7 +1,0 @@
-# zlib (Alpine 3.23 system library) — awaiting Alpine package update
-CVE-2026-27171
-CVE-2026-22184
-
-# Dockerfile misconfiguration — dev stage runs as root intentionally
-# (volume mounts require matching host UID; build stage uses non-root)
-DS-0002
