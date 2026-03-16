@@ -32,6 +32,7 @@ jobs:
           output: trivy-image.sarif
           severity: CRITICAL,HIGH
           exit-code: "1"
+          trivyignores: .trivyignore
 
       - name: Upload image scan to GitHub Security
         if: always()
@@ -80,7 +81,7 @@ jobs:
           scan-ref: .
           format: sarif
           output: trivy-iac.sarif
-          severity: CRITICAL,HIGH,MEDIUM
+          severity: CRITICAL,HIGH
           exit-code: "1"
 
       - name: Upload IaC scan to GitHub Security

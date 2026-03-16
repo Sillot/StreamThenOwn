@@ -1,0 +1,26 @@
+# Upstream vulnerabilities in Node.js base image (npm bundled dependencies)
+# These are in /usr/local/lib/node_modules/npm/ — not in our code or deps.
+# Will be resolved when Node.js ships a patched npm version.
+
+# node-tar vulnerabilities (npm bundled)
+CVE-2026-31802
+CVE-2026-29786
+CVE-2026-26960
+CVE-2026-24842
+CVE-2026-23950
+CVE-2026-23745
+
+# minimatch vulnerabilities (npm bundled)
+CVE-2026-27904
+CVE-2026-27903
+CVE-2026-26996
+
+# glob vulnerability (npm bundled)
+CVE-2025-64756
+
+# diff vulnerability (npm bundled)
+CVE-2026-24001
+
+# zlib (Alpine system library) — awaiting Alpine package update
+CVE-2026-27171
+CVE-2026-22184
