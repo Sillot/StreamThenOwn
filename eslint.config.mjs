@@ -6,7 +6,7 @@ import regexpPlugin from "eslint-plugin-regexp";
 
 export default tseslint.config(
   // ── Global ignores ────────────────────────────────────────────────
-  { ignores: ["dist/**", "node_modules/**", "*.config.{js,mjs,cjs}", "*.config.ts"] },
+  { ignores: ["dist/**", "node_modules/**", "*.config.{js,mjs,cjs}", "*.config.ts", "scripts/**"] },
 
   // ── Base JS rules ─────────────────────────────────────────────────
   eslint.configs.recommended,
