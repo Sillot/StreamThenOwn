@@ -1,5 +1,7 @@
 # StreamThenOwn
 
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/gnddlnjdhiajlaobkihmlddfnicoledd?label=Chrome%20Web%20Store&logo=googlechrome&logoColor=white&color=4285F4)](https://chromewebstore.google.com/detail/streamthenown/gnddlnjdhiajlaobkihmlddfnicoledd)
+[![Microsoft Edge](https://img.shields.io/badge/Edge%20Add--ons-available-0078D7?logo=microsoftedge&logoColor=white)](https://microsoftedge.microsoft.com/addons/detail/igmcmjogngiaiemihcaokigepnhpfnam)
 [![Release](https://img.shields.io/github/v/release/Sillot/StreamThenOwn?label=release)](https://github.com/Sillot/StreamThenOwn/releases/latest)
 [![CI](https://img.shields.io/github/actions/workflow/status/Sillot/StreamThenOwn/release.yml?label=CI)](https://github.com/Sillot/StreamThenOwn/actions/workflows/release.yml)
 [![License: MIT](https://img.shields.io/github/license/Sillot/StreamThenOwn?cacheSeconds=3600)](LICENSE)
@@ -44,6 +46,13 @@ Links are resolved via [MusicBrainz](https://musicbrainz.org/) when possible (di
 - **Privacy-first** — no personal data collected, no tracking, no accounts
 
 ## Install
+
+### From the store
+
+| Browser         | Link                                                                                                                                                                                    |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Google Chrome   | [Chrome Web Store](https://chromewebstore.google.com/detail/streamthenown/gnddlnjdhiajlaobkihmlddfnicoledd)                                                                             |
+| Microsoft Edge  | [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/igmcmjogngiaiemihcaokigepnhpfnam)                                                                                      |
 
 ### Manual install (development)
 
